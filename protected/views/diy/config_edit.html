@@ -1,0 +1,129 @@
+<style>
+.js-adv { display:none; }
+#oper { margin-right:15px; }
+</style>
+
+<script id="temp_editlist" type="text/html">
+<%
+for (var key in fields) {
+    var data = fields[key];
+    data['map'] = map;
+    data['inputTypes'] = inputTypes;
+    include('temp_editlist_item', data);
+}
+%>
+</script>
+
+<script id="temp_editlist_item" type="text/html">
+<div class="list-group-item" fieldId="<%= fieldId %>" >
+    <div class="row">
+	    <p class="col-sm-2"><span style="display:inline-block;">
+	      <input class='form-control' name="fieldName" required placeholder="字段名" title="字段名" type='text' value="<%= fieldName %>" />
+	    </span></p>
+        <p class="col-sm-2">
+	      <input class='form-control' name="fieldCName" required placeholder="字段展现名称" title="字段展现名称" type='text' value="<%= fieldCName %>" />
+	    </p>
+
+	    <p class="col-sm-2">
+            <input type="hidden" name="orginType" value="<%= orginType %>" />
+	      	<select class='form-control' name="inputType" required >
+	        <% for (var key in inputTypes) { %>
+		        <option value='<%= key %>'  <%=  (inputType == key) ? 'selected="selected"' : '' %>><%= inputTypes[key] %></option>
+		    <% } %>
+	        </select>
+	    </p>
+
+        <p class="col-sm-4">
+			<label class="checkbox-inline">
+				<input name="isPrimaryKey" type='checkbox' <%= isPrimaryKey ? 'checked' : '' %> /> 主键
+			</label>
+			<label class="checkbox-inline">
+			   <input name="required" type='checkbox' <%= required & 1 ? 'checked' : '' %> /> 必填
+			</label>
+			<label class="checkbox-inline">
+			   <input name="showInAdd" type='checkbox' <%= showInAdd & 1 ? 'checked' : '' %> /> 添加
+			</label>
+			<label class="checkbox-inline">
+			   <input name="showInEdit" type='checkbox' <%= showInEdit & 1 ? 'checked' : '' %> /> 编辑
+			</label>
+            <label class="checkbox-inline">
+                <input name="easyEdit" type='checkbox' <%= easyEdit & 1 ? 'checked' : '' %> /> 直接编辑
+            </label>
+	    </p>
+
+        <span class="columns columns-right btn-group pull-right" id="oper">
+	        <button class="btn btn-default" type="button" name="advOption" title="高级选项">
+	            <i class="glyphicon glyphicon-chevron-down"></i>
+	        </button>
+            <button class="btn btn-default" type="button" name="delete" title="删除">
+                <i class="glyphicon glyphicon-remove"></i>
+            </button>
+        </span>
+    </div>
+    <div class="row js-adv" <%= showAdv ? 'style=display:block;' : '' %>>
+		<p class="col-sm-1">
+            <input class='form-control' name="labelColSpan" placeholder="标题宽度" title="标题宽度" type='number' value="<%= labelColSpan %>" />
+		</p>
+        <p class="col-sm-1">
+            <input class='form-control' name="inputColSpan" placeholder="输入框宽度" title="输入框宽度" type='number' value="<%= inputColSpan %>" />
+        </p>
+        <p class="col-sm-1">
+            <input class='form-control' name="postfixColSpan" placeholder="后缀文案宽度" title="后缀文案宽度" type='number' value="<%= postfixColSpan %>" />
+        </p>
+        <p class="col-sm-1">
+            <input class='form-control' name="inputHeight" placeholder="高度" title="输入框高度" type='number' value="<%= inputHeight %>" />
+        </p>
+		<p class="col-sm-2">
+			<input class='form-control' name="placeholder" placeholder="占位符" title="占位符" type='text' value="<%= placeholder %>" />
+		</p>
+	    <p class="col-sm-4">
+            <textarea class='form-control' name="inputTip" placeholder="提示说明" title="提示说明" ><%= inputTip %></textarea>
+	    </p>
+	    <!-- p class="col-sm-4">
+          <textarea class='form-control' name="fieldLength" placeholder="字段长度" title="字段长度" ><%= fieldLength %></textarea>
+	    </p -->
+    </div>
+    <div class="row js-adv" <%= showAdv ? 'style=display:block;' : '' %>>
+        <p class="col-sm-4">
+            <textarea class='form-control' name="postfixTip" placeholder="后缀文案" title="后缀文案" ><%= postfixTip %></textarea>
+        </p>
+        <p class="col-sm-4">
+            <textarea class='form-control' name="newlineTip" placeholder="换行文案" title="换行文案" ><%= newlineTip %></textarea>
+        </p>
+        <p class="col-sm-4">
+            <textarea class='form-control' name="editDefaultValue" placeholder="编辑模式默认值，::开头则是回调，变量:&$_row, $_val, $_oldRow" title="编辑模式默认值，::开头则是回调，变量:$_row, $_val" ><%= editDefaultValue %></textarea>
+        </p>
+    </div>
+
+</div>
+</script>
+
+<div class="list-group" id="editTable"></div>
+
+<script>
+
+(function() {
+	function init() {
+		seajs.use('css/bootstrap.min.css');
+		seajs.use('js/diy/config_edit.js', function(page) {
+			page.init(<?= json_encode($data) ?>);
+		});
+	}
+
+	if (window.seajs) {
+	    init();
+	} else {
+		var SITE_URL = "/";
+		var script = document.createElement("script");
+		script.src = SITE_URL + "static/js/libs/seajs.utils.js";
+		script.charset = "utf-8";
+		script.onload = init;
+
+		var header = document.getElementsByTagName("head")[0];
+		header.insertBefore(script, header.firstChild);
+	}
+})();
+
+</script>
+
+

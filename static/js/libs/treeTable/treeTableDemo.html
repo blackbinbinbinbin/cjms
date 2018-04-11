@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../jquery.js"></script>
+<script type="text/javascript" src="./jquery.treeTable.js"></script>
+<script type="text/javascript">
+$(function() {
+    var $treeTable = $('table').treeTable({expandLevel:3});
+    $('#addChilds').click(function() {
+        var html = '<tr id="7" pId="4"><td>4.2</td><td>内容</td></tr><tr id="8" pId="4" hasChild="true"><td>4.3</td><td>内容</td></tr>';
+        $treeTable.addChilds(html);
+    });
+});
+</script>
+</head>
+<body>
+<table style="width:100%">
+<tr><th>标题</th><th>内容</th></tr>
+<tr id="1"><td><span>1</span></td><td>内容</td></tr>
+<tr id="2" pId="1"><td>2</td><td>内容</td></tr>
+<tr id="3" pId="2"><td>3</td><td>内容</td></tr>
+<tr id="4" pId="2"><td>4</td><td>内容</td></tr>
+<tr id="5" pId="4"><td>4.1</td><td>内容</td></tr>
+<tr id="6" pId="1" hasChild="true"><td>5</td><td>内容</td></tr>
+<tr id="8"><td>8</td><td>内容</td></tr>
+</table>
+
+<input id="pId" type="text" value="4"/>
+<input id="addChilds" type="button" value="添加"/>
+</body>
+</html>

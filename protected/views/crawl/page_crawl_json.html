@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>JSON视图</title>
+
+</head>
+<body>
+<div id="main">
+</div>
+
+<script src="<?php echo SITE_URL ?>static/js/libs/jquery-1.10.2.js"></script>
+<script src="<?php echo SITE_URL ?>static/js/libs/jsonformat.js"></script>
+<script>
+    window.$el = <?= $json ?>;
+</script>
+<script>
+    var $main = $('#main');
+    $main.html(formatJson($el));
+</script>
+
+</body>
+</html>

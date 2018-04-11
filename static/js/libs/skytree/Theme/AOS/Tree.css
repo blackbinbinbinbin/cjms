@@ -1,0 +1,126 @@
+.AOS{
+    margin:10px 5px;
+}
+
+.AOS .TNode{
+    white-space: nowrap;
+}
+
+.AOS a.TCnt {
+    padding: 3px;
+    cursor: pointer;
+    cursor: hand;
+    color:#d7e9fd;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align:middle;
+}
+.AOS a:hover.TCnt {
+    color:#fffc00;
+}
+.AOS a:hover {
+    padding: 3px;
+    cursor: pointer;
+    cursor: hand;
+    color:#fff;
+}
+
+.AOS .TCntFocus{
+    padding: 2px 3px;
+    color: #fffc00;
+    font-weight:bold;
+    cursor: pointer;
+    cursor: hand;
+    text-decoration: none;
+}
+
+.AOS .Tag{
+    color: Gray;
+    margin-left: 3px;
+}
+
+.AOS .LoadTip{
+    border:1px solid #014E82;
+    background-color:#D1E2FE;
+    color:#014E82;
+    padding: 1px;
+    margin: 1px;
+}
+
+.AOS .EditText{
+    font-size: 8pt;
+    font-family:Tahoma;
+    border: 1px solid black;
+    line-height: 13px;
+}
+
+.AOS .Check{
+    margin: 0px 2px 0px 0px;
+    padding: 0px;
+    height: 14px;
+    width: 14px;
+}
+
+.AOS .Info{
+    position:absolute;
+    padding:4px 10px;
+    border:1px solid #014E82;
+    background-color:#D1E2FE;
+    color:#004499;
+    text-align:center;
+    font-weight:bold;
+    filter:alpha(opacity=90);
+    cursor:pointer;
+    z-index: 9999;
+}
+
+.AOS .ContextMenu{
+    position: absolute;
+    border: 1px solid black;
+    background: #f6f6f6 url(Icons/ItemBG.gif) repeat-y;
+    padding: 2px;
+    cursor: pointer;
+    cursor: hand;
+    z-index:10000000000;
+}
+
+.AOS .ContextMenu img{
+    margin-right: 10px;
+}
+
+.AOS .ContextMenuItem{
+    padding: 3px;
+    text-align:right;
+    line-height: 17px;
+}
+
+.AOS .ContextMenuItemOver{
+    padding: 2px;
+    border: 1px solid #824E01;
+    background-color: #FEEBCD;
+    color: #824E01;
+    text-align:right;
+    line-height: 17px;
+}
+
+.AOS .ContextMenuItem img,
+.AOS .ContextMenuItemOver img,
+.AOS .ContextMenuItem span,
+.AOS .ContextMenuItemOver span{
+    float:left;
+}
+
+.AOS .ContextMenuSeparator{
+    margin: 3px 2px 3px 28px;
+    border-top: 1px solid black;
+}
+
+.AOS .AccessKey{
+    text-decoration: underline;
+}
+
+.AOS .About{
+    padding: 2px 0px;
+    color: Gray;
+    font-size: 8pt;
+}

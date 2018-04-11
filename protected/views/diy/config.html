@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><?= SITE_NAME ?></title>
+
+    <!-- Bootstrap -->
+    <link href="<?= SITE_URL ?>static/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= SITE_URL ?>static/js/libs/CodeMirror/lib/codemirror.css">
+    <link href="/static/js/libs/select2/css/select2.min.css" rel="stylesheet" />
+
+<style>
+    .js-db {display: none;}
+    .hide_jscss { height: 50px; overflow-y: hidden; }
+</style>
+<body>
+
+<div id="temp_addOption" class="col-sm-3" style="display:none;">
+  <div class="input-group">
+    <input type="text" class="form-control" id="optionValue" >
+    <div class="input-group-btn">
+      <button id="add" type="button" class="btn btn-default">添加</button>
+      <button id="cancel" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div style="margin:10px;">
+<form  class="form-horizontal" id="tableForm">
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">页面地址</label>
+    <div class="col-sm-10">
+      <input class="form-control" id="tableId" type="hidden" title="页面地址" value="<?=$tableInfo['tableId']?>"/>
+      <p class="form-control-static"><a id="linkUrl" href="<?= $link ?>" target="_blank"><?= $link ?></a></p>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="tableCName" class="col-sm-2 control-label">页面标题</label>
+    <div class="col-sm-10">
+      <input class="form-control" id="tableCName" required type="text" title="页面标题" value="<?= $tableInfo['tableCName'] ? htmlspecialchars($tableInfo['tableCName']) : '' ?>" />
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="extraJsCss" class="col-sm-2 control-label">
+      管理员(用,隔开)
+    </label>
+    <div class="col-sm-10">
+      <textarea class="form-control" id="admins" required title="管理员"><?= $tableInfo['admins'] ? $tableInfo['admins'] : $_SESSION['username'] ?></textarea>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="pagination" class="col-sm-2 control-label">页面尺寸</label>
+    <div class="col-sm-2">
+      <select class="form-control" id="pagination">
+	  <? foreach ($pageSizes as $value) { ?>
+	      <? if ($value == $tableInfo['pagination']) { ?>
+	  	  <option selected><?= $value ?></option>
+	      <? } else { ?>
+	      <option><?= $value ?></option>
+	      <? } ?>
+	  <? } ?>
+	  </select>
+    </div>
+  </div>
+  
+  <!-- div class="form-group">
+    <label for="tableInfo" class="col-sm-2 control-label">页面说明</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" id="tableInfo" title="页面说明"><?=htmlspecialchars($tableInfo['tableInfo'])?></textarea>
+    </div>
+  </div -->
+  
+  <div class="form-group">
+    <label for="extraJsCss" class="col-sm-2 control-label">
+      内嵌Css或Js
+      <div><a href="javascript:void(0)" class="toggleDiy">展开/收起</a></div>
+    </label>
+    <div class="col-sm-10 <?= $tableInfo['extraJsCss'] ? '' : 'hide_jscss';  ?>">
+      <textarea class="form-control" id="extraJsCss" title="内嵌Css或Js"><?=htmlspecialchars($tableInfo['extraJsCss'])?></textarea>
+<code style="margin-top: 5px;padding: 5px;display: block;">可以写：<br/>＜script＞js代码＜script＞<br/>＜style type='text/css＞css代码＜/style＞</code>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="col-sm-2 control-label">数据操作</label>
+    <div class="col-sm-10">
+	    <label class="checkbox-inline">
+		  <input type="checkbox" id="editFlag" <?=$tableInfo['editFlag']?'checked':''?> /> 可编辑
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" id="excelFlag" <?=$tableInfo['excelFlag']?'checked':''?> /> 可导出
+		</label>
+		<!-- label class="checkbox-inline">
+		  <input type="checkbox" id="bookFlag" <?=$tableInfo['bookFlag']?'checked':''?> /> 可订阅
+		</label -->
+		<label class="checkbox-inline">
+		  <input type="checkbox" id="groupFlag" <?=$tableInfo['groupFlag']?'checked':''?> /> 可分组计算
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" id="chartFlag" <?=$tableInfo['chartFlag']?'checked':''?> /> 可展现图形
+		</label>
+
+        <label class="checkbox-inline">
+            <input type="checkbox" id="exportTemplateFlag" <?=$tableInfo['exportTemplateFlag']?'checked':''?> /> 可导出模板
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" id="importTemplateFlag" <?=$tableInfo['importTemplateFlag']?'checked':''?> /> 可导入模板
+        </label>
+
+	</div>
+  </div>
+    <section id="editFlagDiv" >
+        <div class="form-group">
+            <label class="col-sm-2 control-label">编辑选项</label>
+            <div class="col-sm-10">
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="safeEditFlag" <?=$tableInfo['safeEditFlag']?'checked':''?> > 安全编辑
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="hideEditFlag" <?=$tableInfo['hideEditFlag']?'checked':''?> > 隐藏编辑
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="addInPageFlag" <?=$tableInfo['addInPageFlag']?'checked':''?> > 在页面添加
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="editInPageFlag" <?=$tableInfo['editInPageFlag']?'checked':''?> > 在页面编辑
+                </label>
+                <input id="editDialogWidth" class="form-control" placeholder="编辑对话框宽度" title="编辑对话框宽度" value="<?= $tableInfo['editDialogWidth'] ?>"
+                       style="display: inline-block; width: 130px; margin-left:10px;"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="saveCallBack" class="col-sm-2 control-label">
+                保存回调
+                <div><a href="javascript:void(0)" class="toggleDiy">展开/收起</a></div>
+            </label>
+            <div class="col-sm-10 <?= $tableInfo['saveCallBack'] ? '' : 'hide_jscss';  ?>">
+                <textarea style="height: 150px;" class="form-control" id="saveCallBack"><?=htmlspecialchars($tableInfo['saveCallBack'])?></textarea>
+<pre style="margin-top: 3px;">保存回调用法：Diy_Table:on('eventName', function($args) {  });
+事件：
+    diy_edit_save:before 添加／保存／删除 前置事件，返回false会终止操作
+    diy_edit_save:after 添加／保存／删除 后置事件
+事件参数 $args：$_type(eg:add,edit,del), $_newData, $_oldData, $_where，记得要return true才会进一步保存
+
+    diy_edit_import:before 导入 前置事件，参数：&$rows
+    diy_edit_import:after 导入 后置事件，参数：&$rows
+</pre>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="groupFlagDiv">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">统计配置</label>
+            <div class="col-sm-10">
+                <label class="checkbox-inline">
+                    方式：
+                    <select id="staticMode" >
+                        <? foreach ($staticModes as $staticMode => $staticName) { ?>
+                        <option value="<?=$staticMode?>" <?= $staticMode == $tableInfo['staticMode'] ? 'selected="selected"' : ''?>><?= $staticName ?></option>
+                        <? } ?>
+                    </select>
+                </label>
+
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="pageStaticFlag" <?= $tableInfo['pageStaticFlag'] ? 'checked' : '' ?> /> 本页统计
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="totalStaticFlag" <?= $tableInfo['totalStaticFlag'] ? 'checked' : '' ?> /> 汇总统计
+                </label>
+            </div>
+        </div>
+    </section>
+
+    <div class="form-group">
+        <label for="sourceCallBack" class="col-sm-2 control-label">
+            模板字段(<a id="loadAllTemplateField" href="javascript:void(0)">载入全部</a>)
+        </label>
+        <div class="col-sm-10">
+            <textarea class="form-control" id="templateField"><?= $tableInfo['templateField'] ?></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="sourceHost" class="col-sm-2 control-label">名字服务数据库</label>
+        <div class="col-sm-4">
+            <select class="form-control" id="nameDb" >
+                <option value=""><=- 快速选择 -=></option>
+                <? foreach($nameDbs as $i => $nameDb) { ?>
+                <? $select = ($nameDb == $tableInfo['nameDb'] || !$_GET['tableId'] && empty($tableInfo['nameDb']) && $i == 0)?>
+                <option value="<?= $nameDb ?>" <?= $select ? 'selected="selected"' : ''?>><?= $nameDb ?></option>
+                <? } ?>
+            </select>
+        </div>
+        <div class="col-sm-4" style="line-height:34px;">
+            <!-- a href="javascript:void(0);" id="loadNameDb">刷新</a -->
+        </div>
+    </div>
+
+  <div class="form-group">
+      <label for="sourceHost" class="col-sm-2 control-label">数据库ID</label>
+      <div class="col-sm-4">
+          <select class="form-control" id="dbId" >
+              <option value=""><=- 快速选择数据库 -=></option>
+              <?foreach($dbs as $i => $db) {?>
+              <? $select = ($db['dbId'] == $tableInfo['dbId'] || empty($tableInfo['dbId']) && $i == 0)?>
+              <option value="<?= $db['dbId'] ?>" <?= $select ? 'selected="selected"' : ''?>><?= $db['sourceHost'] . ':' . $db['sourcePort'] . ' -> ' . $db['sourceDb']?></option>
+              <?}?>
+          </select>
+      </div>
+      <div class="col-sm-4" style="line-height:34px;">
+          <a href="javascript:void(0);" id="loadDbId">刷新</a>
+          <a href="/DiyData/DiyData/report?tableId=96013cfb-5982-be26-6411-104b7db8ac51" target="_blank">配置数据库</a>
+      </div>
+  </div>
+  <div class="js-db">
+      <div class="form-group">
+        <label for="sourceHost" class="col-sm-2 control-label">数据库IP</label>
+        <div class="col-sm-4">
+          <select class="form-control" id="sourceHost" >
+              <option value=""><=- 请选择 -=></option>
+          <?foreach($sourceHosts as $sourceHost) {?>
+              <option value="<?=$sourceHost?>" <?=$sourceHost == $tableInfo['sourceHost'] ? 'selected="selected"' : ''?>><?=$sourceHost?></option>
+          <?}?>
+          </select>
+        </div>
+        <div class="col-sm-4" style="line-height:34px;">
+          <a href="javascript:void(0);" class="addOption">手动添加IP</a>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="sourcePort" class="col-sm-2 control-label">端口</label>
+        <div class="col-sm-2">
+            <input class="form-control" id="sourcePort" type="text" title="端口" placeholder="端口" value="<?=$tableInfo['sourcePort']?$tableInfo['sourcePort']:'3306'?>" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="sourceUser" class="col-sm-2 control-label">
+          用户名
+        </label>
+        <div class="col-sm-4">
+          <input class="form-control" id="sourceUser" type="text" class="text" title="用户名" placeholder="用户名" value="<?=$tableInfo['sourceUser']?$tableInfo['sourceUser']:'root'?>" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="sourcePass" class="col-sm-2 control-label">
+          密码
+        </label>
+        <div class="col-sm-4">
+          <input class="form-control" id="sourcePass" type="password" class="text" title="密码" placeholder="密码" value="<?=$tableInfo['sourcePass']?$tableInfo['sourcePass']:''?>" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="sourceDb" class="col-sm-2 control-label">
+          数据源库名
+        </label>
+        <div class="col-sm-4">
+          <select class="form-control" id="sourceDb" title="数据源库名" >
+              <option value=""><=- 请选择 -=></option>
+              <option selected><?=$tableInfo['sourceDb']?></option>
+          </select>
+        </div>
+        <div class="col-sm-4" style="line-height:34px;">
+          <a href="javascript:void(0);" id="loadDb">刷新</a>
+          <a href="javascript:void(0);" class="addOption">手动添加</a>
+        </div>
+      </div>
+  </div>
+  <div class="form-group">
+    <label for="sourceDb" class="col-sm-2 control-label">
+      数据源表名
+    </label>
+    <div class="col-sm-4">
+      <select class="form-control" id="sourceTable" required title="数据源表名" >
+          <option><?=$tableInfo['sourceTable']?></option>
+      </select>
+    </div>
+    <div class="col-sm-4" style="line-height:34px;">
+      <a href="javascript:void(0);" id="loadTable">刷新</a>
+      <a href="javascript:void(0);" class="addOption">手动添加</a>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="sourceCallBack" class="col-sm-2 control-label">
+        数据源表名回调
+        <div><a href="javascript:void(0)" class="toggleDiy">展开/收起</a></div>
+    </label>
+    <div class="col-sm-10 <?= $tableInfo['sourceCallBack'] ? '' : 'hide_jscss';  ?>">
+      <textarea class="form-control" placeholder="关键字：$_conditions" id="sourceCallBack"><?=htmlspecialchars($tableInfo['sourceCallBack'])?></textarea>
+<pre style="margin-top: 3px;">关键字：&$_conditions，结构如下：
+{"rule_id":{"like":"1"},"create_time":{":":["2017-01-01","2018-01-01"]}}
+
+操作符：=，!=，>，>=，<，<=，like，like .%（开头类似于），like %（结尾类似于）.，in，not in，:（区间于）
+</pre>
+    </div>
+  </div>
+
+<?php if ($tableType != 2) { ?>
+  <div class="form-group">
+      <label for="supportR2M" class="col-sm-2 control-label">高级编辑</label>
+      <div class="col-sm-10">
+          <label class="checkbox-inline">
+              <input type="checkbox" id="supportR2M" <?= $tableInfo['supportR2M'] ? 'checked' : '' ?> /> 支持R2M
+          </label>
+      </div>
+  </div>
+  <div id="supportR2MDiv" <?php if (!$tableInfo['supportR2M']) { ?> style="display:none;" <?php } ?>>
+    <div class="form-group">
+        <label for="nameRedis" class="col-sm-2 control-label">名字服务Redis</label>
+        <div class="col-sm-4">
+            <select class="form-control" id="nameRedis" >
+                <option value=""><=- 快速选择 -=></option>
+                <? foreach($nameRedises as $i => $nameRedis) { ?>
+                <? $select = ($nameRedis == $tableInfo['nameRedis'] || !$_GET['tableId'] && empty($tableInfo['nameRedis']) && $i == 0)?>
+                <option value="<?= $nameRedis ?>" <?= $select ? 'selected="selected"' : ''?>><?= $nameRedis ?></option>
+                <? } ?>
+            </select>
+        </div>
+        <div class="col-sm-4" style="line-height:34px;">
+            <a href="javascript:void(0);" id="loadNameRedis">载入</a>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="nameRedisKey" class="col-sm-2 control-label">名字服务Redis Key</label>
+        <div class="col-sm-4">
+            <select class="form-control" id="nameRedisKey" data-width="320px" >
+                <option value=""><=- 快速选择 -=></option>
+                <? foreach($nameRedisKeys as $i => $nameRedisKey) { ?>
+                <? $select = ($nameRedisKey == $tableInfo['nameRedisKey'] || !$_GET['tableId'] && empty($tableInfo['nameRedisKey']) && $i == 0)?>
+                <option value="<?= $nameRedisKey ?>" <?= $select ? 'selected="selected"' : ''?>><?= $nameRedisKey ?></option>
+                <? } ?>
+            </select>
+        </div>
+        <div class="col-sm-4" style="line-height:34px;">
+            <a href="javascript:void(0);" id="loadNameRedisKey">载入</a>
+        </div>
+    </div>
+  </div>
+
+
+<div class="form-group">
+    <label for="supportPub" class="col-sm-2 control-label">Redis推送</label>
+    <div class="col-sm-10">
+        <label class="checkbox-inline">
+            <input type="checkbox" id="supportPub" <?= $tableInfo['supportPub'] ? 'checked' : '' ?> /> 支持推送
+        </label>
+    </div>
+</div>
+<div id="supportPubDiv" <?php if (!$tableInfo['supportPub']) { ?> style="display:none;" <?php } ?>>
+    <div class="form-group">
+        <label for="pubRedis" class="col-sm-2 control-label">推送Redis</label>
+        <div class="col-sm-4">
+            <select class="form-control" id="pubRedis" >
+                <option value=""><=- 快速选择 -=></option>
+                <? foreach($nameRedises as $i => $nameRedis) { ?>
+                <? $select = ($nameRedis == $tableInfo['pubRedis'] || !$_GET['tableId'] && empty($tableInfo['pubRedis']) && $i == 0)?>
+                <option value="<?= $nameRedis ?>" <?= $select ? 'selected="selected"' : ''?>><?= $nameRedis ?></option>
+                <? } ?>
+            </select>
+        </div>
+        <div class="col-sm-4" style="line-height:34px;">
+            <a href="javascript:void(0);" id="loadPubRedis">载入</a>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pubKey" class="col-sm-2 control-label">发布Channel</label>
+        <div class="col-sm-4">
+            <input class="form-control" id="pubKey" type="text" class="text" title="发布Key" placeholder="发布Key" value="<?= $tableInfo['pubKey'] ?>" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pubMsgCallback" class="col-sm-2 control-label">发布数据回调</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" id="pubMsgCallback" title="发布数据回调" placeholder="发布数据回调, 关键字 $args : type(add, update, delete), where, data, oldData(仅仅update出现) "><?= $tableInfo['pubMsgCallback'] ?></textarea>
+        </div>
+    </div>
+</div>
+
+
+<?php } ?>
+</form>
+<?php if ($tableType != 2) { ?>
+  <ul class="nav nav-tabs" style="margin-bottom:20px;">
+    <li role="presentation" class="active"><a href="#searchPart">查询功能</a></li>
+    <li role="presentation"><a href="#editPart">编辑功能</a></li>
+  </ul>
+<?php } ?>
+  <div>
+      <!-- 查询功能 -->
+	  <div id="searchPart" class="panel panel-default">
+	    <div class="panel-heading">
+	      <input loadType="1" type="button" class="btn btn-default loadField <?= $tableInfo ? '' : 'hide'?>" value="加载原字段" />
+		  <input loadType="2" type="button" class="btn btn-default loadField" value="加载数据库字段" />
+		  <input loadType="3" type="button" class="btn btn-default loadField <?= $tableInfo ? '' : 'hide'?>" value="原字段覆盖数据库字段" />
+		  <input id="addField" type="button" class="btn btn-default" value="添加新字段" />
+	    </div>
+	    <div class="panel-body"></div>
+	    <div class="panel-footer">
+	      <input class="btn btn-default" id="saveTable" type="button" value="提交">
+	    </div>
+	  </div>
+<?php if ($tableType != 2) { ?>
+	  <!-- 编辑功能 -->
+	  <div id="editPart" class="panel panel-default" style="display:none;">
+	    <div class="panel-heading">
+	      <input loadEditType="1" type="button" class="btn btn-default loadField <?= $tableInfo ? '' : 'hide'?>" value="加载原字段" />
+		  <input loadEditType="2" type="button" class="btn btn-default loadField" value="加载数据库字段" />
+		  <input loadEditType="3" type="button" class="btn btn-default loadField <?= $tableInfo ? '' : 'hide'?>" value="原字段覆盖数据库字段" />
+		  <input id="addEditField" type="button" class="btn btn-default" value="添加新字段" />
+	    </div>
+	    <div class="panel-body"></div>
+	    <div class="panel-footer">
+	      <input class="btn btn-default" id="saveEditTable" type="button" value="提交">
+	    </div>
+	  </div>
+<?php } ?>
+  </div>
+
+</div>
+
+<script src="<?= SITE_URL ?>static/js/libs/seajs.utils.js"></script>
+<script src="<?= SITE_URL ?>static/js/libs/jquery-1.10.2.js"></script>
+<script src="<?= SITE_URL ?>static/js/libs/bootstrap.min.js"></script>
+<script src="<?= SITE_URL ?>static/js/libs/CodeMirror/lib/codemirror.js"></script>
+<script src="<?= SITE_URL ?>static/js/libs/CodeMirror/mode/css/css.js"></script>
+<script src="<?= SITE_URL ?>static/js/libs/CodeMirror/mode/javascript/javascript.js"></script>
+<script src="<?= SITE_URL ?>static/js/libs/CodeMirror/mode/clike/clike.js"></script>
+<script src="<?= SITE_URL ?>static/js/libs/CodeMirror/mode/php/php.js"></script>
+<script src="<?= SITE_URL ?>static/js/libs/CodeMirror/mode/xml/xml.js"></script>
+<script src="<?= SITE_URL ?>static/js/libs/CodeMirror/mode/htmlmixed/htmlmixed.js"></script>
+
+<script>
+    // seajs.use('css/bootstrap.min.css');
+	seajs.use('js/diy/config.js', function(page) {
+        page.init(<?= json_encode($map) ?>);
+    });
+</script>
+
+</body>
+</html>
+

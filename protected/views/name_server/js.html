@@ -1,0 +1,45 @@
+// 常量
+<?php foreach ($configs['string'] as $k => $v):?>
+<?php !is_numeric($v) && $v = "'{$v}'"; ?>
+global["<?=$k;?>"] = <?=$v;?>;
+<?php endforeach;?>
+
+// 数组
+<?php 
+$_hash = []; 
+$_subHash = [];
+?>
+<?php foreach ($configs['hash'] as $k => $v):?>
+<?php
+$k = explode('][', $k);
+$subKey = '';
+$subKey2 = '';
+$m = [];
+
+if (count($k) > 1 && preg_match("/\'(.+)\'/i", $k[1], $m)) {
+    $subKey = $m[1];
+}
+
+if (count($k) > 2 && preg_match("/\'(.+)\'/i", $k[2], $m)) {
+    $subKey2 = $m[1];
+}
+
+$k = $k[0];
+if (!preg_match("/\'(.+)\'/i", $k, $m)) {
+    continue;
+}
+$k = $m[1];
+?> 
+<?php if (!$_hash[$k]): ?>
+<?php $_hash[$k] = 1; ?>
+var <?=$k?> = {};
+<?php endif;?>
+<?php if ($subKey2 && !$_subHash["{$k}_{$subKey}"]): ?>
+<?php $_subHash["{$k}_{$subKey}"] = 1; ?>
+<?=$k?>["<?=$subKey?>"] = {};
+<?php endif;?>
+<?=$k?><?php if ($subKey): ?>["<?=$subKey?>"]<?php endif; ?><?php if ($subKey2): ?>["<?=$subKey2?>"]<?php endif; ?> = <?= json_encode($v, JSON_UNESCAPED_UNICODE); ?>;<?php endforeach;?>
+
+<?php foreach ($_hash as $k => $v): ?>
+exports["<?=$k?>"] = <?=$k?>;
+<?php endforeach ?>

@@ -1,0 +1,187 @@
+<style>
+.js-adv { display:none; }
+#oper { margin-right:15px; }
+
+
+.list-group-item:nth-of-type(odd) {
+    background-color: #f9f9f9
+}
+
+.list-group-item_0 {
+    border: solid #5cb85c 1px;
+}
+.list-group-item_1 {
+    border: solid #5bc0de 1px;
+}
+.list-group-item_2 {
+    border: solid #f0ad4e 1px;
+}
+.list-group-item_3 {
+    border: solid #d9534f 1px;
+}
+.list-group-item_4 {
+    border: solid gray 1px;
+}
+
+</style>
+
+<script id="temp_list" type="text/html">
+<%
+var i = 0;
+for (var key in fields) { 
+    var data = fields[key];
+    data['map'] = map;
+    data['maps'] = maps;
+    data['fieldTypes'] = fieldTypes;
+    data['inputTypes'] = inputTypes;
+    data['index'] = i++;
+    include('temp_list_item', data);
+}
+
+%>
+</script>
+
+<script id="temp_list_item" type="text/html">
+<div class="list-group-item list-group-item_<%= index % 5 %>" fieldId="<%= fieldId %>" >
+    <div class="row">
+	    <p class="col-sm-2"><span style="display:inline-block;">
+	      <input class='form-control' name="fieldName" required placeholder="字段名" title="字段名" type='text' value="<%= fieldName %>" />
+	    </span></p>
+        <p class="col-sm-2">
+	      <input class='form-control' name="fieldCName" required placeholder="字段展现名称" title="字段展现名称" type='text' value="<%= fieldCName %>" />
+	    </p>
+	    <p class="col-sm-1">
+	      	<select class='form-control' name="fieldType" required >
+	        <% for (var key in fieldTypes) { %>
+		        <option value='<%= key %>'  <%=  (fieldType == key) ? 'selected="selected"' : '' %>><%= fieldTypes[key] %></option>
+		    <% } %>
+	        </select>
+	    </p>
+		<p class="col-sm-2">
+			<input type="hidden" name="orginType" value="<%= orginType %>" />
+			<select class='form-control' name="inputType" required >
+				<% for (var key in inputTypes) { %>
+				<option value='<%= key %>'  <%=  (inputType == key) ? 'selected="selected"' : '' %>><%= inputTypes[key] %></option>
+				<% } %>
+			</select>
+		</p>
+        <p class="col-sm-4">
+			<label class="checkbox-inline">
+				<input name="isPrimaryKey" type='checkbox' <%= isPrimaryKey ? 'checked' : '' %> /> 主键
+			</label>
+
+			<label class="checkbox-inline">
+			   <input name="fieldDisplay2" type='checkbox' <%= (fieldDisplay & 2) ? 'checked' : '' %> /> 纬度
+			</label>
+			<label class="checkbox-inline">
+			   <input name="fieldDisplay1" type='checkbox' <%= (fieldDisplay & 1) ? 'checked' : '' %> /> 指标
+			</label>
+            <label class="checkbox-inline">
+                <input name="fieldDisplay3" type='checkbox' <%= (fieldDisplay & 4) ? 'checked' : '' %> /> 隐藏
+            </label>
+			<label class="checkbox-inline">
+			   <input name='needMerge' type='checkbox' <%= (needMerge & 1) ? 'checked' : '' %> /> 合并
+			</label>
+			<label class="checkbox-inline">
+			   <input name='showInCondition' type='checkbox' <%= (showInCondition & 1) ? 'checked' : '' %> /> 条件
+			</label>
+	    </p>
+
+        <span class="columns columns-right btn-group pull-right" id="oper">
+	        <button class="btn btn-default" type="button" name="advOption" title="高级选项">
+	            <i class="glyphicon glyphicon-chevron-down"></i>
+	        </button>
+            <button class="btn btn-default" type="button" name="delete" title="删除">
+                <i class="glyphicon glyphicon-remove"></i>
+            </button>
+        </span>
+            
+    </div>
+    <div class="row js-adv" <%= showAdv ? 'style=display:block;' : '' %>>
+	    <p class="col-sm-4">
+			<textarea class='form-control' name="fieldVirtualValue"  placeholder="字段规则" title="字段规则"><%= fieldVirtualValue %></textarea>
+	    </p>
+		<p class="col-sm-4">
+			<textarea class='form-control' name="callBack"  placeholder="字段回调, 变量:$_row, $_val" title="字段回调, 变量:$_row, $_val"><%= callBack %></textarea>
+		</p>
+	    <p class="col-sm-2">
+	   	  <select class='form-control' name="defaultSortOrder" title="排序方向">
+		      <option value=''  <%=  defaultSortOrder == '' ? 'selected="selected"' : '' %>>不排序</option>
+		      <option value='ASC' <%=  defaultSortOrder == 'ASC' ? 'selected="selected"' : '' %>>顺序</option>
+		      <option value='DESC' <%=  defaultSortOrder == 'DESC' ? 'selected="selected"' : '' %>>逆序</option>
+	       </select>
+	    </p>
+    </div>
+    <div class="row js-adv" <%= showAdv ? 'style=display:block;' : '' %>>
+		<p class="col-sm-4">
+            <textarea class='form-control' name="defaultValue" placeholder="默认值，::开头则是回调" title="默认值，::开头则是回调"><%= defaultValue %></textarea>
+		</p>
+        <p class="col-sm-4">
+            <textarea class='form-control' name="fieldLength"  placeholder="字段枚举(json)，::开头则是回调" title="字段枚举(json)，::开头则是回调"><%= fieldLength %></textarea>
+	    </p>
+        <p class="col-sm-2">
+            <input class='form-control' name="fieldSortName" placeholder="排序字段名" title="排序字段名" type='text' value="<%= fieldSortName %>" />
+        </p>
+    </div>
+    <div class="row js-adv" <%= showAdv ? 'style=display:block;' : '' %>>
+        <p class="col-sm-2">
+            <select class='form-control' name="mapKey" data-width="220px">
+                <option value="">--新版字典--</option>
+                <% for (var i in maps) { %>
+                <%     var value = maps[i]; %>
+                <option value='<%= value['mapKey'] %>' <%= (mapKey == value['mapKey']) ? 'selected' : '' %>><%= value['title'] %></option>
+                <% } %>
+            </select>
+        </p>
+		<p class="col-sm-2">
+			<select class='form-control' name="enumMapKey" data-width="220px">
+				<option value="">--枚举值--</option>
+				<% for (var i in maps) { %>
+				<%     var value = maps[i]; %>
+				<option value='<%= value['mapKey'] %>' <%= (enumMapKey == value['mapKey']) ? 'selected' : '' %>><%= value['title'] %></option>
+				<% } %>
+			</select>
+		</p>
+		<p class="col-sm-1 control-label">
+			<a target="_blank" href="/DiyData/report?tableId=877840e8-9d2b-112c-1be4-156bc0b3c371">配置字典</a>
+		</p>
+		<p class="col-sm-1 control-label">
+			<label class="checkbox-inline">
+				<input name="needMap2" type='checkbox' <%= needMap2 == 1 ? 'checked' : '' %> /> 二次翻译
+			</label>
+		</p>
+	</div>
+</div>
+</script>
+
+<div class="list-group" id="searchTable">
+</div>
+    
+<script>
+
+(function() {
+	function init() {
+		seajs.use('css/bootstrap.min.css');
+
+		seajs.use('js/diy/config_table.js', function(page) {
+			page.init(<?= json_encode($data) ?>);
+		});
+	}
+	
+	if (window.seajs) {
+	    init();
+	} else {
+		var SITE_URL = "/";
+		var script = document.createElement("script");
+		script.src = SITE_URL + "static/js/libs/seajs.utils.js";
+		script.charset = "utf-8";
+		script.onload = init;
+
+		var header = document.getElementsByTagName("head")[0];
+		header.insertBefore(script, header.firstChild);
+	}
+})();
+
+</script>
+
+

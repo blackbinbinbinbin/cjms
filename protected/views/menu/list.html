@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><?= SITE_NAME ?></title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        ul {
+            list-style: none;
+            padding: 0px;
+            padding-right: 80px;
+            float: left;
+            margin: 0px;
+        }
+
+        li {
+            padding-top: 80px;
+            padding-left: 80px;
+            float: left;
+        }
+
+        li {
+            text-align: center;
+        }
+
+        li .glyphicon {
+            font-size: 120px;
+        }
+
+        li .glyphicon-class {
+            font-size: 20px;
+            display: block;
+        }
+
+        .parent a:link {
+            color:goldenrod;
+            text-decoration:none;
+        }
+
+        .parent a:visited {
+            color:goldenrod;
+            text-decoration:none;
+        }
+
+        .parent a:hover {
+            color:darkgoldenrod;
+            text-decoration:none;
+        }
+
+        .parent a:active {
+            color:darkgoldenrod;
+            text-decoration:none;
+        }
+
+    </style>
+</head>
+<body>
+
+	<ul>
+        <?php foreach($items as $value) { ?>
+        <?php     if ($value['data']['childNum'] > 0) { ?>
+        <li class="parent">
+            <a data-id="<?= $value['value'] ?>" href="<?= $value['data']['rightUrl'] ? $value['data']['rightUrl'] : 'default/menuList?nodeId=' . $value['value'] ?>">
+                <span class="glyphicon glyphicon-folder-close"></span>
+                <span class="glyphicon-class"><?= $value['text'] ?></span>
+            </a>
+        </li>
+        <?php     } else { ?>
+        <li class="child">
+            <a data-id="<?= $value['value'] ?>" href="<?= $value['data']['rightUrl'] ? $value['data']['rightUrl'] : 'default/menuList?nodeId=' . $value['value'] ?>">
+                <span class="glyphicon glyphicon-file"></span>
+                <span class="glyphicon-class"><?= $value['text'] ?></span>
+            </a>
+        </li>
+        <?php     } ?>
+        <?php } ?>
+        <li style="clear: both;"></li>
+    </ul>
+    <script>
+    var arr = document.querySelectorAll('a[data-id]');
+    for (var i in arr) {
+        arr[i].addEventListener && arr[i].addEventListener('click', function() {
+            var tree = parent.document.getElementById('tree');
+            if (tree && tree.src) {
+                tree.src = "/default/menuTree?nodeId=" + this.dataset['id'];
+            }
+        })
+    }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,18 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title>登录</title>
+<script type="text/javascript" src="<?= SITE_URL ?>/static/js/libs/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="http://www.duowan.com/public/assets/sys/js/udb.v1.0.js"></script>
+<script type="text/javascript">
+<?php
+    
+	$domain = $_SERVER['HTTP_HOST'];
+	$url = "http://{$domain}"; 
+?>
+	$(function(){Navbar.login("<?= $url?>");});
+</script>
+<body>
+</body>
+</html>

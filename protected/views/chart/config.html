@@ -1,0 +1,191 @@
+<!-- Modal -->
+<style type="text/css">
+    .CodeMirror {
+        border: 1px solid black;
+    }
+</style>
+<div class="modal fade" id="chartConfigModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:80%;max-width: 1024px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <? if ($chart['chartId']) { ?>
+                <h4 class="modal-title">保存图表</h4>
+                <? } else { ?>
+                <h4 class="modal-title">新增图表</h4>
+                <? } ?>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <input type="hidden" name="tableId" value="<?= $tableId ?>" />
+                    <input type="hidden" name="chartId" value="<?= $chart['chartId'] ?>" />
+                    <div class="form-group">
+                        <!-- label -->
+                        <label class="col-sm-2 control-label">
+                            标题:
+                        </label>
+                        <div class="col-sm-9">
+                            <input class="form-control" name="title" type="text" value="<?= $chart['title'] ?>" />
+                            <div style="color: darkgoldenrod;">当配置了"分割字段"时，标题可支持变量写法，如：标题_{$game_name}</div>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <!-- label -->
+                        <label class="col-sm-2 control-label">
+                            <span style="color:red;">*</span>类型:
+                        </label>
+                        <div class="col-sm-5">
+                            <? foreach ($types as $key => $name) { ?>
+                            <label class="radio-inline">
+                                <input type="radio" name="type" value="<?= $key ?>" <?= $key == $chart['type'] ? 'checked' : '' ?>> <?= $name ?>
+                            </label>
+                            <? } ?>
+                        </div>
+                        <label class="col-sm-1 control-label">
+                            <span style="color:red;">*</span>数据:
+                        </label>
+                        <div class="col-sm-3">
+                            <? foreach ($dataTypes as $key => $name) { ?>
+                            <label class="radio-inline">
+                                <input type="radio" name="dataType" value="<?= $key ?>" <?= $key == $chart['dataType'] ? 'checked' : '' ?>> <?= $name ?>
+                            </label>
+                            <? } ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- label -->
+                        <label class="col-sm-2 control-label">
+                            <span style="color:red;">*</span>宽度:
+                        </label>
+                        <div class="col-sm-2">
+                            <input class="form-control" required name="width" type="number" placeholder="栅格（1 ～ 12）" value="<?= $chart['width'] ?>" />
+                            <div style="color: darkgoldenrod;">栅格（1 ～ 12）</div>
+                        </div>
+                        <label class="col-sm-2 control-label">
+                            <span style="color:red;">*</span>高度:
+                        </label>
+                        <div class="col-sm-2">
+                            <input class="form-control" required name="height" type="number" placeholder="像素" value="<?= $chart['height'] ?>" />
+                            <div style="color: darkgoldenrod;">单位：像素</div>
+                        </div>
+                        <label class="col-sm-1 control-label">
+                            权重:
+                        </label>
+                        <div class="col-sm-2">
+                            <input class="form-control" name="weight" type="number" placeholder="从大到小" value="<?= $chart['weight'] ?>" />
+                            <div style="color: darkgoldenrod;">从大到小排序图形</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- label -->
+                        <label class="col-sm-2 control-label">
+                            <span style="color:red;">*</span>X轴字段:
+                        </label>
+                        <div class="col-sm-2">
+                            <input class="form-control" required name="xAxis" type="text" value="<?= $chart['xAxis'] ?>" />
+                        </div>
+                        <label class="col-sm-2 control-label">
+                            <span style="color:red;">*</span>Y轴字段:
+                        </label>
+                        <div class="col-sm-5">
+                            <input class="form-control" required name="yAxis" type="text" value="<?= $chart['yAxis'] ?>" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            表字段:
+                        </label>
+                        <div class="col-sm-9" style="color: darkgoldenrod;">
+                            维度字段：<?= join(', ', $weidu)?>
+                            <br/>
+                            指标字段：<?= join(', ', $target)?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            分割字段:
+                        </label>
+                        <div class="col-sm-2">
+                            <input class="form-control" name="splitField" type="text" value="<?= $chart['splitField'] ?>" />
+                        </div>
+                        <label class="col-sm-2 control-label">
+                            对比字段:
+                        </label>
+                        <div class="col-sm-3">
+                            <input class="form-control" name="compareField" type="text" value="<?= $chart['compareField'] ?>" />
+                            <div style="color: darkgoldenrod;">如果配置对比字段，建议Y轴字段只配置一个</div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="checkbox-inline" >
+                                <input type="checkbox" name="needCustom" value="1" <?= 1 == $chart['needCustom'] ? 'checked' : '' ?> />自定义配置
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            固定条件:
+                        </label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" id="fixedCondition" placeholder="key1=xx&key2[]=xx&key2[]=xx"><?=htmlspecialchars($chart['fixedCondition'])?></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group" id="customConfigDiv">
+                        <label class="control-label">
+                            自定义配置:
+                            <a href="/chart/sampleConf" target="_blank">（示例）</a>
+                        </label>
+                        <div class="col-sm-12">
+                            <textarea class="form-control" id="customConfig" placeholder="自定义配置"><?=htmlspecialchars($chart['customConfig'])?></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <? if ($chart['chartId']) { ?>
+                <button type="button" id="btn_saveas" class="btn btn-success" style="float: left;">
+                    <i class="glyphicon glyphicon-plus"></i>另存为
+                </button>
+                <? } ?>
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" id="btn_save" class="btn <?= $chart['chartId'] ? 'btn-primary' : 'btn-success' ?>">
+                <? if ($chart['chartId']) { ?>
+                    <i class="glyphicon glyphicon-floppy-save"></i>保存
+                </button>
+                <? } else { ?>
+                    <i class="glyphicon glyphicon-plus"></i>添加
+                <? } ?>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        function init() {
+            seajs.use('css/bootstrap.min.css');
+            seajs.use('js/libs/CodeMirror/lib/codemirror.css');
+            seajs.use('js/chart/config.js', function(page) {
+                page.init();
+            });
+        }
+
+        if (window.seajs) {
+            init();
+        } else {
+            var SITE_URL = "/";
+            var script = document.createElement("script");
+            script.src = SITE_URL + "static/js/libs/seajs.utils.js";
+            script.charset = "utf-8";
+            script.onload = init;
+
+            var header = document.getElementsByTagName("head")[0];
+            header.insertBefore(script, header.firstChild);
+        }
+    })();
+</script>
+
+

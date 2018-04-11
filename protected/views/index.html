@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta name="renderer" content="webkit">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="qc:admins" content="31303476336576346130732537" />
+
+	<title><?= SITE_NAME ?></title>
+
+	<!-- Bootstrap -->
+	<link href="static/css/bootstrap.min.css" rel="stylesheet">
+	<link href="static/css/bootstrap-submenu.css" rel="stylesheet">
+
+	<link href="static/css/index.css" rel="stylesheet">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+	<nav class="navbar navbar-default" id="navbar">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs_navbar_collapse">
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand"><?= SITE_NAME ?></a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs_navbar_collapse">
+				<ul class="nav navbar-nav">
+				<? foreach ($menus as $menu) { ?>
+				    <? if (!$menu['items']) { ?>
+					<li nodeId="<?= $menu['nodeId'] ?>" leftUrl='<?= $menu["leftUrl"] ?>' rightUrl='<?= $menu["rightUrl"] ?>' data-openNewWindow='<?= $menu["openNewWindow"] ?>'>
+						<a href="javascript:void(0)"><?= $menu['nodeName'] ?></a>
+					</li>
+					<? } else { ?>
+					<li class="dropdown" nodeId="<?= $menu['nodeId'] ?>" leftUrl='<?= $menu["leftUrl"] ?>' rightUrl='<?= $menu["rightUrl"] ?>' data-openNewWindow='<?= $menu["openNewWindow"] ?>'>
+						<a href="#">
+							<?= $menu['nodeName'] ?>
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+						<? foreach ($menu['items'] as $item) { ?>
+						    <? if (strpos($item['nodeName'], '---') === 0) { ?>
+						    <li class="divider"></li>
+						    <? } else if (!$item['items']) { ?>
+						    <li nodeId="<?= $item['nodeId'] ?>" leftUrl='<?= $item["leftUrl"] ?>' rightUrl='<?= $item["rightUrl"] ?>' data-openNewWindow='<?= $elem["openNewWindow"] ?>'>
+						    	<a href="javascript:void(0)"><?= $item['nodeName'] ?></a>
+					    	</li>
+						    <? } else {?>
+							<li class="dropdown-submenu" nodeId="<?= $item['nodeId'] ?>" leftUrl='<?= $item["leftUrl"] ?>' rightUrl='<?= $item["rightUrl"] ?>' data-openNewWindow='<?= $elem["openNewWindow"] ?>'>
+								<a href="javascript:void(0)">
+									<?= $item['nodeName'] ?>
+								</a>
+								<ul class="dropdown-menu">
+									<? foreach ($item['items'] as $elem) { ?>
+										<? if (strpos($elem['nodeName'], '---') === 0) { ?>
+										<li class="divider"></li>
+										<? } else  { ?>
+										<li nodeId="<?= $elem['nodeId'] ?>" leftUrl='<?= $elem["leftUrl"] ?>' rightUrl='<?= $elem["rightUrl"] ?>' data-openNewWindow='<?= $elem["openNewWindow"] ?>'>
+											<a href="javascript:void(0)"><?= $elem['nodeName'] ?></a>
+										</li>
+										<? } ?>
+									<? } ?>
+								</ul>
+							</li>
+							<? } ?>
+						<? } ?>
+						</ul>
+					</li>
+					<? } ?>
+				<? } ?>
+				</ul>
+				
+				<ul class="nav navbar-nav navbar-right">
+					<li><a id="user"><?= '您好，' . $_SESSION['showname'] ?></a></li>
+					<li><a id="logout" href="<?= SITE_URL ?>user/logout">注销</a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+	<div class="clearfix" id="container">
+	    <div id="treeDiv">
+	        <iframe style="width: 100%; height: 100%;" id="tree" src="about:blank" frameborder="0"></iframe>
+		</div>
+		<div id="bar" title="按下左键拖动可调宽度" data-toggle="tooltip">
+			<div id="midBar" title="单击隐藏/显示侧边栏" data-toggle="tooltip">
+		    	<img id="barImg" src="static/images/bar.gif" style=""/>
+		    </div>
+		</div>
+		
+	    <div id="mainDiv"> 
+	        <script type="text/html" id="temp_breadcrumb">
+            <% for (var i = 0; i < data.length; i++) { %>
+            <%     var node = data[i]; %>
+            <%     if (i < data.length -1) { %>
+                <li nodeId="<%= node['nodeId'] %>" title='<%= node["rightUrl"] %>' leftUrl='<%= node["leftUrl"] %>' rightUrl='<%= node["rightUrl"] %>' data-openNewWindow='<%= node["openNewWindow"] %>'>
+                    <a href="javascript:void(0);"><%= node['nodeName'] %></a>
+                </li>
+            <%     } else { %>
+                <li nodeId="<%= node['nodeId'] %>" class="active" title='<%= node["rightUrl"] %>' leftUrl='<%= node["leftUrl"] %>' rightUrl='<%= node["rightUrl"] %>' data-openNewWindow='<%= node["openNewWindow"] %>' >
+                    <%= node['nodeName'] %>
+                </li>
+            <%     }  %>
+            <% } %>
+	        </script>
+	        <div id="breadcrumbDiv">
+				<ol class="breadcrumb" id="breadcrumb">
+					<li class="active">首页</li>
+				</ol>
+				<div id="copyUrlDiv">
+				    <a href="javascript:void(0)" id="copyUrl">复制URL</a>
+				</div>
+	        </div>
+            
+		    <iframe style="width: 100%; height: 100%;" id="main" name="main" src="about:blank"  frameborder="0"></iframe>
+	    </div>
+
+	</div>
+
+	<script src="<?= SITE_URL ?>static/js/libs/seajs.utils.js"></script>
+	<script>
+		seajs.use('js/index.js', function(page) {
+			page.init();
+		});
+	</script>
+</body>
+</html>
+

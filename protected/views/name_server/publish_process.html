@@ -1,0 +1,14 @@
+<div data-flag="<?= $totalFlag ?>">
+    <? if ($finish < $total) { ?>
+    <div style="color:goldenrod">整体进度：<?= $finish ?> ／<?= $total ?></div>
+    <? } else { ?>
+    <div style="color:green">整体进度：全部发布成功</div>
+    <? } ?>
+
+    <? foreach ($datas as $data) { ?>
+    <div style="color:<?= $data['result'] ? 'green' : 'gray'?>">
+        <?= $data['result'] ? '已发布' : '待发布'?>：
+        <?= $data['server_ip'] ?>版本（<?= $data['last_version_id'] ?>）
+    </div>
+    <? } ?>
+</div>

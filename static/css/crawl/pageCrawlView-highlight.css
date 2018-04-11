@@ -1,0 +1,137 @@
+.hicms_ul {
+    right: 0px;
+    bottom: 0px;
+    position: fixed;
+    display: none;
+    z-index: 999999;
+}
+
+.hicms_ul li {
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.hicms_none {
+    display: none;
+}
+
+.hicms_green {
+    background-color: green;
+}
+
+.hicms_green:before {
+    content: '进入';
+}
+
+.hicms_orangered {
+    background-color: orangered;
+}
+
+.hicms_orangered:before {
+    content: '退出';
+}
+.seo-btn.hicms_edit{
+    min-height: 20px;
+}
+.hicms_edit {
+    /*display: block;*/
+    position: relative;
+    min-height: 40px;
+    overflow: hidden;
+}
+
+.hicms_edit.hicms_bg0,.hicms_edit.hicms_bg0:after {
+    border:1px solid #5cb85c;
+}
+
+.hicms_edit.hicms_bg1,.hicms_edit.hicms_bg1:after  {
+    border:1px solid #5bc0de;
+}
+
+.hicms_edit.hicms_bg2,.hicms_edit.hicms_bg2:after  {
+    border:1px solid #f0ad4e;
+}
+
+.hicms_edit.hicms_bg3,.hicms_edit.hicms_bg3:after  {
+    border:1px solid #d9534f;
+}
+
+.hicms_edit.hicms_bg4,.hicms_edit.hicms_bg4:after  {
+    border:1px solid gray;
+}
+
+.seo-btn.hicms_edit:after{
+    content: "";
+    padding: 0;
+}
+.hicms_edit {
+    background-image: linear-gradient( 45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    cursor: pointer;
+}
+
+.hicms_edit:after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 1;
+    /*content: "可编辑";*/
+    color: darkred;
+    padding: 10px;
+}
+
+.hicms_edit>* {
+    opacity: 0.75;
+}
+
+.hicms_current {
+    border:1px solid red!important;
+}
+
+.ul-selector li {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-left: -30px;
+    cursor: pointer;
+}
+
+.ul-selector>li {
+    margin-left: -40px;
+    margin-bottom: 5px;
+}
+
+.ul-selector .selected {
+    background: red;
+}
+
+.ul-value em {
+    display:block;
+    color:#aaa;
+}
+
+/* 定义keyframe动画，命名为blink */
+
+@-webkit-keyframes twinkling{ /*透明度由0到1*/
+    0%{
+        opacity:0.2; /*透明度为0*/
+    }
+    100%{
+        opacity:1; /*透明度为1*/
+
+    }
+}
+
+.hicms_blink {
+    -webkit-animation:twinkling 2s infinite ease-in-out;
+    background: gold!important;
+}
+
+
+iframe,frame {
+    padding: 15px;
+    border: 5px solid gainsboro;
+}

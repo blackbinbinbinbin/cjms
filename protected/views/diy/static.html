@@ -1,0 +1,22 @@
+<tr class="warning">
+    <? $i = 0; ?>
+    <? foreach ($fieldNames as $fieldName => $sortKey) {
+        $field = $other['fields'][$fieldName];
+        if (!$field) { continue; }
+        if ($other['hideNoGroupBy'] && $other['showGroupBy'] && !$field['cal'] && !$field['groupby']) { continue; }
+    ?>
+        <? $default = $i++ == 0 ? '汇总统计' : ''; ?>
+        <? if ($field['cal']) { ?>
+        <th <?= !$field || $field['isHidden'] ? 'style="display:none;"' : '' ?>>
+        <?= isset($data[$fieldName]) ? $data[$fieldName] : $default ?>
+        </th>
+        <? } else { ?>
+        <th><?= $default ?></th>
+        <? } ?>
+    <? } ?>
+</tr>
+<script>
+    seajs.use('js/diy/static.js', function(page) {
+        page.init();
+    });
+</script>

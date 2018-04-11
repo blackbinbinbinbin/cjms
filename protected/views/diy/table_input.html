@@ -1,0 +1,56 @@
+<? if ($row['__' . $fieldName] === false) { ?>
+    <?= $row[$fieldName] ?>
+    <? return; ?>
+<? } ?>
+
+<? if ($field['inputType'] == 'textarea') { ?>
+<!-- textarea类型 -->
+<textarea class="form-control" <?= $field['attr'] ?>><?= $row[$fieldName] ?></textarea>
+<? } else if ($field['inputType'] == 'json') { ?>
+<!-- json类型 -->
+<textarea class="form-control" data-type="json" <?= $field['attr'] ?>><?= $row[$fieldName] ?></textarea>
+<? } else if ($field['inputType'] == 'rich_textarea') { ?>
+<!-- rich_textarea类型 -->
+<textarea class="form-control js-rich-textarea" style="width:500px;height:300px;visibility: hidden;" <?= $field['attr'] ?>><?= $row[$fieldName] ?></textarea>
+<? } else if ($field['inputType'] == 'select') { ?>
+<!-- select类型 -->
+<select class="form-control" <?= $field['attr'] ?>>
+<? if (!$field['required']) { ?>
+<option value=""></option>
+<? } ?>
+<? foreach ($field['fieldLength'] as $key => $value) { ?>
+<? if ($row[$fieldName] == $value) { ?>
+<option value="<?= $key ?>" selected><?= $value ?></option>
+<? } else { ?>
+<option value="<?= $key ?>"><?= $value ?></option>
+<? } ?>
+<? } ?>
+</select>
+<? } else if ($field['inputType'] == 'radio') { ?>
+<!-- radio类型 -->
+    <? foreach ($field['fieldLength'] as $key => $value) { ?>
+        <? $status = $row[$fieldName] == $value ? 'checked' : '' ?>
+        <label class="radio-inline">
+            <input type="radio" data-name="<?= $fieldName ?>" name="<?= $fieldName ?>_<?= $rowNum ?>" value="<?= $key ?>" <?= $status ?> > <nobr><?= $value ?></nobr>
+        </label>
+    <? } ?>
+<? } else if ($field['inputType'] == 'image' || $field['inputType'] == 'audio' || $field['inputType'] == 'video') { ?>
+<!-- image类型 -->
+<!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+<div class="js-upload js-upload-<?= $field['inputType'] ?> row fileupload-buttonbar" data-result='<?= json_encode($row[$fieldName]) ?>' <?= $field['attr'] ?>>
+<!-- The fileinput-button span is used to style the file input field as button -->
+<span class="btn btn-success fileinput-button">
+            <i class="glyphicon glyphicon-plus"></i>
+            <span>添加文件</span>
+            <input type="file" name="files[]">
+        </span>
+<!-- The global file processing state -->
+<table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+</div>
+<!-- The table listing the files available for upload/download -->
+<? } else { ?>
+<!-- 默认类型 -->
+<?php  $field['inputType'] = $field['inputType'] == 'date' ? 'text' : $field['inputType']; ?>
+<?php  $field['inputType'] = $field['inputType'] == 'datetime' ? 'text' : $field['inputType']; ?>
+<input class="form-control" <?= $field['attr'] ?> type="<?= $field['inputType'] ?>" value="<?= $row[$fieldName] ?>" />
+<? } ?>

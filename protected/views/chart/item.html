@@ -1,0 +1,61 @@
+<script type="text/javascript">
+seajs.use('jquery', function() {
+    var chartId = "<?= $args['chartId'] ?>";
+
+    // 基于准备好的dom，初始化echarts实例
+    window.echartsIns = window.echartsIns || {};
+    if (echartsIns[chartId]) {
+        if (echartsIns[chartId]) {
+            echartsIns[chartId].dispose();
+            echartsIns[chartId] = null;
+        }
+    }
+
+    var $elem = $("[data-chartId='" + chartId + "']");
+    if (!$elem.length) {
+        console.error("can not find:data-chartId='" + chartId + "']");
+        return;
+    }
+
+    echartsIns[chartId] = echarts.init($elem[0]);
+    var myChart = echartsIns[chartId];
+
+    // 指定图表的配置项和数据
+    var option = {
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data:<?= json_encode($legendData) ?>
+        },
+        grid: {
+            left: '0%',
+            right: '2%',
+            bottom: '0%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            data: <?= json_encode($xAxisData) ?>
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+        <? foreach ($legendData as $i => $legend) { ?>
+            {
+                name:'<?= $legend ?>',
+                type:"<?= $chart['type'] ?>",
+                <? if ($chart['dataType'] == 'heap') { ?>
+                stack: '总量',
+                <? } ?>
+                data:<?= json_encode($seriesData[$i]) ?>
+            },
+        <? } ?>
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+});
+</script>

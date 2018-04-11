@@ -1,0 +1,89 @@
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:666px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">快速生成视频爬虫</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="form">
+                    <input type="hidden" name="tableId" value="5b0e5aca-cf49-e443-a7ef-67aa2625a63b" />
+                    <div class="form-group">
+                        <!-- label -->
+                        <label class="col-sm-3 control-label">
+                            <span style="color:red;">*</span>
+                            视频类型:
+                        </label>
+                        <div class="col-sm-8">
+                            <!-- radio类型 -->
+                            <label class="radio-inline">
+                                <input type="radio" name="type" value="qq" checked > <nobr>腾讯</nobr>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="type" value="youku" > <nobr>优酷</nobr>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- label -->
+                        <label class="col-sm-3 control-label">
+                            <span style="color:red;">*</span>
+                            游戏id:
+                        </label>
+                        <div class="col-sm-8">
+                            <!-- 默认类型 -->
+                            <input class="form-control" required name='game_id' title='游戏id' placeholder='游戏id'  type="number" value="" />
+                        </div>
+                    </div>
+                    <!--<div class="form-group">-->
+                        <!--&lt;!&ndash; label &ndash;&gt;-->
+                        <!--<label class="col-sm-3 control-label">-->
+                            <!--<span style="color:red;">*</span>-->
+                            <!--爬虫地址:-->
+                        <!--</label>-->
+                        <!--<div class="col-sm-8">-->
+                            <!--&lt;!&ndash; textarea类型 &ndash;&gt;-->
+                            <!--<textarea class="form-control" required name='url' title='爬虫地址' placeholder='爬虫地址' ></textarea>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </form>
+                <script>
+                    (function () {
+                        function init() {
+                            seajs.use('css/bootstrap.min.css');
+                            seajs.use('css/bootstrap-datetimepicker.min.css');
+                            seajs.use(['js/crawl/zq_video_view.js', 'jquery'], function (page) {
+                                page.init();
+                            });
+                        }
+
+                        if (window.seajs) {
+                            init();
+                        } else {
+                            var SITE_URL = "http://admin.duowan.com/";
+                            var script = document.createElement("script");
+                            script.src = SITE_URL + "static/js/libs/seajs.utils.js";
+                            script.charset = "utf-8";
+                            script.onload = init;
+
+                            var header = document.getElementsByTagName("head")[0];
+                            header.insertBefore(script, header.firstChild);
+                        }
+                    })();
+
+                </script>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" id="btn_save" class="btn btn-success">
+                    <i class="glyphicon glyphicon-plus"></i>生成爬虫
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .modal-title { cursor: move; }
+</style>

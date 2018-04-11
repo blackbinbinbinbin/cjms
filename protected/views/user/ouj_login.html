@@ -1,0 +1,18 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>偶家账号登录</title>
+
+    <script type="text/javascript" src="<?= SITE_URL ?>/static/js/libs/jquery-1.10.2.js"></script>
+    <script src="http://www.ouj.com/static/js/libs/seajs.utils.js?6d60d19650b07be121212"></script>
+
+    <script type="text/javascript">
+        seajs.use('ouj_sdk', function(sdk) {
+            $(document).ready(sdk.login("<?= $refer ?>"));
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>

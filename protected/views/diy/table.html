@@ -1,0 +1,260 @@
+<div style="margin: 0 10px 10px 10px;" class="<?= $other['showGroupBy'] ? 'showGroupBy' : '' ?>">
+    <style>
+        #oper a { margin-left: 5px; }
+        .table thead th { white-space: nowrap; cursor:pointer; }
+        #table caption > span { line-height: 28px; }
+
+        .table th a.text:hover { color:#000; }
+        .table th a.icon { display:inline-block; vertical-align: middle; margin-right:5px; }
+        .table th a.cal:after { content:"[指标]"; color: gray; }
+
+        .table th a._noGroupby:after { content:"[纬度]"; color: gray; }
+        .table th a._groupby:after { content:"[分组]"; color:orangered; }
+        .table th a._save:after { content:"[保留]"; color: red; }
+
+        .table th a._min:after { content:"[最小]"; color: red; }
+        .table th a._max:after { content:"[最大]"; color: red; }
+        .table th a._avg:after { content:"[平均]"; color: red; }
+        .table th a._sum:after { content:"[总和]"; color: red; }
+        .table th a._count:after { content:"[计数]"; color: red; }
+        .table th a._distinctCount:after { content:"[去重计数]"; color: red; }
+        .table th a._distinct:after { content:"[去重]"; color: red; }
+        .table td.lightGray { background-color: lightGray; }
+
+        .hideNoGroupBy th a.icon { display: none!important; }
+        .table .colorTip{ top:40px; }
+    </style>
+    <div>
+        <!-- 表头 -->
+        <span id="reportTitle" style="line-height:34px;"><?= $other['tableInfo']['tableCName'] ?></span>
+        <? if ($other['tableInfo']['editFlag'] && !$other['tableInfo']['hideEditFlag']) { ?>
+        <button type="button" class="btn btn-success btn-sm" id="btn_add">
+            <i class="glyphicon glyphicon-plus"></i>增加
+        </button>
+        <? } ?>
+
+        <? if ($other['tableInfo']['importTemplateFlag']) { ?>
+        <button type="button" class="btn btn-warning btn-sm" id="btn_import_template">
+            <i class="glyphicon glyphicon-cloud-upload"></i>导入模板
+        </button>
+        <? } ?>
+
+        <? if ($other['tableInfo']['exportTemplateFlag']) { ?>
+        <button type="button" class="btn btn-info btn-sm" id="btn_export_template">
+            <i class="glyphicon glyphicon-cloud-download"></i>导出模板
+        </button>
+        <? } ?>
+
+        <!-- 悬浮按钮 -->
+        <span class="columns columns-right btn-group pull-right" id="oper">
+                <? if ($other['tableInfo']['excelFlag'] || $other['tableInfo']['groupFlag']) { ?>
+            <button class="btn btn-default" type="button" name="refresh" title="刷新">
+                    <i class="glyphicon glyphicon-refresh icon-refresh"></i>
+                </button>
+            <? } ?>
+            <!-- button class="btn btn-default" type="button" name="copy" title="复制">
+                <i class="glyphicon glyphicon-copy icon-list-alt"></i>
+            </button -->
+            <? if ($other['tableInfo']['excelFlag']) { ?>
+            <button class="btn btn-default" type="button" name="export" title="导出">
+                    <i class="glyphicon glyphicon-export"></i>
+                </button>
+            <? } ?>
+            <? if ($other['tableInfo']['groupFlag']) { ?>
+            <button class="btn btn-default <?= $other['showGroupBy'] ? 'active' : '' ?>" type="button" name="cal" title="分组计算">
+                    <i class="glyphicon glyphicon-list-alt"></i>
+                </button>
+                <button class="btn btn-default <?= $other['hideNoGroupBy'] ? 'active' : '' ?>" type="button" name="hideNoGroupBy" title="隐藏非统计字段">
+                    <i class="glyphicon glyphicon-eye-close"></i>
+                </button>
+            <? } ?>
+            <? if ($other['tableInfo']['chartFlag']) { ?>
+            <button class="btn btn-default" type="button" name="chart" title="增加图表">
+                    <i class="glyphicon glyphicon-picture"></i>
+                </button>
+            <? } ?>
+            <? if ($other['tableInfo']['editFlag']) { ?>
+            <a class="btn btn-default" title="日志列表" target="_blank" style="margin-left: -1px;"
+               href='/DiyData/report?tableId=a23a7321-60de-42be-c061-21d4ac081734#!where=[["tableId","=","<?= $other['tableInfo']['tableId'] ?>"]]'>
+                    <i class="glyphicon glyphicon glyphicon-copy"></i>
+            </a>
+            <? } ?>
+
+        </span>
+    </div>
+    <div class="table-responsive ">
+        <table class="table table-hover table-striped <?= $other['hideNoGroupBy'] ? 'hideNoGroupBy' : '' ?>" style="margin-bottom: 0;"
+               data-addInPageFlag="<?= $other['tableInfo']['addInPageFlag'] ?>"
+               data-editInPageFlag="<?= $other['tableInfo']['editInPageFlag'] ?>">
+
+
+          <thead style="text-align:center;">
+            <tr>
+                <? if ($showDel) { ?>
+                <!--<th></th>-->
+                <? } ?>
+              <? foreach ($fieldNames as $fieldName => $sortKey) {
+                         $field = $other['fields'][$fieldName];
+                         if ($other['hideNoGroupBy'] && $other['showGroupBy'] && !$field['cal'] && !$field['groupby']) { continue; }
+              ?>
+                <th fieldName="<?=$field['fieldName']?>" <?=$field['th_attr']?>
+                <?= $sortKey ? 'sortKey="' . $sortKey . '"' : '' ?>
+                <?= !$field || $field['isHidden'] ? 'style="display:none;"' : '' ?>
+                >
+                    <?=$field['fieldCName']?>
+                    <?=$field['icon']?>
+
+                    <? if ($other['keyWord']['_sortKey'] === $sortKey) { ?>
+                    <?     if ($other['keyWord']['_sortDir'] == 'DESC') { ?>
+                    <span class="glyphicon glyphicon-triangle-bottom" id="arrow"></span>
+                    <?     } else { ?>
+                    <span class="glyphicon glyphicon-triangle-top" id="arrow"></span>
+                    <?     } ?>
+                    <? } ?>
+                </th>
+              <? } ?>
+              <? if ($other['tableInfo']['editFlag'] && !$other['tableInfo']['hideEditFlag']) { ?>
+                <th>操作</th>
+              <? } ?>
+            </tr>
+          </thead>
+          <tbody>
+          <? if ($datas) { ?>
+          <!--  数据的内容 -->
+           <?
+                foreach ($datas as $rowNum => $row) {
+                   $colNum = 0;
+           ?>
+
+            <tr>
+                <? if ($other['priKeys'][$rowNum]) { ?>
+                    <? foreach ($other['priKeys'][$rowNum] as $k => $v) { ?>
+                <input type="hidden" class="js-pri" name="<?= $k ?>" value="<?= $v ?>" />
+                    <? } ?>
+                <? } ?>
+
+                <? if ($showDel) { ?>
+                <!--<th>-->
+                    <!--<input type="checkbox" />-->
+                <!--</th>-->
+                <? } ?>
+
+                <? foreach ($row as $fieldName => $value) { ?>
+                <?
+                         $field = $other['fields'][$fieldName];
+                         if (!$field || $field['isHidden']) {
+                             continue;
+                         }
+
+                         $className =  $colNum++ ? '' : (($rowNum & 1) ? 'td_spec1' : 'td_spec2');
+                         if ($other['showGroupBy']) {
+                             if (!$field['cal'] && !$field['groupby']) {
+                                 //对于邮件和hideNoGroupBy的表格，不显示groupby字段
+                                 if ($other['hideNoGroupBy']) { continue; }
+                                 $className .= " lightGray";
+                             }
+                         }
+
+                         //合并某一列相同的行
+                         if ($mergeFieldData[$fieldName][$rowNum] === 0 ) { continue;  }
+                         $rowSpan = $mergeFieldData[$fieldName][$rowNum] ? "rowSpan='{$mergeFieldData[$fieldName][$rowNum]}'" : '';
+                ?>
+                <td <?=$rowSpan?> <?= $field['td_attr'] ?>>
+                    <? if ($field['easyEdit']) { ?>
+                        <? require(ROOT_PATH . 'views' . DIRECTORY_SEPARATOR . $path . 'diy/table_input.html') ?>
+                    <? } else { ?>
+                        <?= $value ?>
+                    <? } ?>
+                </td>
+                <? } ?>
+
+                <? if ($other['tableInfo']['editFlag'] && !$other['tableInfo']['hideEditFlag']) { ?>
+                <td>
+                <button type="button" class="btn btn-warning btn-sm" id="btn_edit">
+                    <i class="glyphicon glyphicon-edit"></i>
+                    修改
+                </button>
+                    <? if (!$other['tableInfo']['safeEditFlag']) { ?>
+                <button type="button" class="btn btn-danger btn-sm" id="btn_del">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    删除
+                </button>
+                    <? } ?>
+                </td>
+                <? } ?>
+
+            </tr>
+            <? } ?>
+        <? } else { ?>
+            <!--  没数据的情况 -->
+            <tr>
+                <td>没有数据</td>
+            </tr>
+        <? } ?>
+
+          <? if ($other['pageStatic']) { ?>
+            <tr class="info page-static">
+                <? $i = 0; ?>
+                <? foreach ($fieldNames as $fieldName => $sortKey) {
+                $field = $other['fields'][$fieldName];
+                if (!$field) { continue; }
+                if ($other['hideNoGroupBy'] && $other['showGroupBy'] && !$field['cal'] && !$field['groupby']) { continue; }
+                ?>
+                <th <?= $field['isHidden'] ? 'style="display:none;"' : '' ?>>
+                <? $default = $i++ == 0 ? '本页统计' : ''; ?>
+                <?= isset($other['pageStatic'][$fieldName]) ? $other['pageStatic'][$fieldName] : $default ?>
+                </th>
+                <? } ?>
+            </tr>
+          <? } ?>
+
+          </tbody>
+            <? if ($tableInfo['totalStaticFlag']) { ?>
+            <tfoot id="staticDiv">
+            </tfoot>
+            <? } ?>
+        </table>
+        <? if ($showDel) { ?>
+        <!--<div>-->
+            <!--<img src="/static/images/arrow_ltr.png"/>-->
+            <!--<label>-->
+                <!--<input type="checkbox" id="checkall" class="checkall_box">-->
+                <!--全选-->
+            <!--</label>-->
+            <!--<button type="button" class="btn btn-danger btn-sm" style="margin-left: 20px;" id="btn_del_select">-->
+                <!--<i class="glyphicon glyphicon-trash"></i>-->
+                <!--删除选中-->
+            <!--</button>-->
+        <!--</div>-->
+        <? } ?>
+    </div>
+	<?= $pagerHtml ?>
+	<div id="operDiv"></div>
+    <script>
+    (function() {
+        function init() {
+            seajs.use('css/jquery.ui.css');
+            seajs.use('css/bootstrap.min.css');
+            seajs.use('js/diy/table.js', function(page) {
+                page.init();
+            });
+        }
+
+        if (window.seajs) {
+            init();
+        } else {
+            var SITE_URL = "<?= SITE_URL ?>";
+            var script = document.createElement("script");
+            script.src = SITE_URL + "static/js/libs/seajs.utils.js";
+            script.charset = "utf-8";
+            script.onload = init;
+
+            var header = document.getElementsByTagName("head")[0];
+            header.insertBefore(script, header.firstChild);
+        }
+    })();
+    </script>
+</div>
+
+
+

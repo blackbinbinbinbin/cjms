@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><?= $task ? '编辑离线任务' : '添加离线任务' ?></title>
+    <link>
+    <link href="<?= SITE_URL ?>static/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div style="margin: 10px;">
+    <form class="form-horizontal" id="form">
+        <input name='taskId' type="hidden" value="<?= $task['taskId'] ?>" />
+        <div class="form-group">
+            <!-- label -->
+            <label class="col-sm-3 control-label">
+                <span style="color:red;">*</span>
+                任务名称:
+            </label>
+            <div class="col-sm-8">
+                <!-- 默认类型 -->
+                <input class="form-control" name='taskName' title='任务名称' placeholder='任务名称' required  type="text" value="<?= $task['taskName'] ?>" />
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- label -->
+            <label class="col-sm-3 control-label">
+                <span style="color:red;">*</span>
+                源数据:
+            </label>
+            <div class="col-sm-8">
+                <!-- textarea类型 -->
+                <textarea class="form-control" name='sourceUrl' title='源数据' placeholder='源数据' required ><?= $task['sourceUrl'] ?></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- label -->
+            <label class="col-sm-3 control-label">
+                <span style="color:red;">*</span>
+                统计方式:
+            </label>
+            <div class="col-sm-8">
+                <!-- select类型 -->
+                <select class="form-control" name='staticType' title='统计方式' placeholder='统计方式' required >
+                    <? foreach ($staticTypes as $id => $staticType) { ?>
+                    <? $select = $task['staticType'] == $id ? 'selected' : ''; ?>
+                    <option value="<?= $id ?>" <?= $select ?> ><?= $staticType ?></option>
+                    <? } ?>
+                </select>
+            </div>
+            <div class="col-sm-0 control-label" style="text-align: left;">
+                <span></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- label -->
+            <label class="col-sm-3 control-label">
+                <span style="color:red;">*</span>
+                插入方式:
+            </label>
+            <div class="col-sm-8">
+                <!-- select类型 -->
+                <select class="form-control" name='insertType' title='插入方式' placeholder='插入方式' required >
+                    <? foreach ($insertTypes as $insertType) { ?>
+                    <? $select = $task['insertType'] == $insertType ? 'selected' : ''; ?>
+                    <option value="<?= $insertType ?>" <?= $select ?> ><?= $insertType ?></option>
+                    <? } ?>
+                </select>
+            </div>
+            <div class="col-sm-0 control-label" style="text-align: left;">
+                <span></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- label -->
+            <label class="col-sm-3 control-label">
+                <span style="color:red;">*</span>
+                目标数据库:
+            </label>
+            <div class="col-sm-8">
+                <!-- select类型 -->
+                <select class="form-control" name='toNameDb' title='目标数据库' placeholder='目标数据库' required >
+                    <? foreach($nameDbs as $i => $nameDb) { ?>
+                    <? $select = $task['toNameDb'] == $nameDb ? 'selected' : ''; ?>
+                    <option value="<?= $nameDb ?>" <?= $select ?> ><?= $nameDb ?></option>
+                    <? } ?>
+                </select>
+            </div>
+            <div class="col-sm-0 control-label" style="text-align: left;">
+                <span></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- label -->
+            <label class="col-sm-3 control-label">
+                <span style="color:red;">*</span>
+                目标数据表:
+            </label>
+            <div class="col-sm-8">
+                <!-- 默认类型 -->
+                <input class="form-control" name='toTable' title='目标数据表' placeholder='目标数据表' required  type="text" value="<?= $task['toTable'] ?>" />
+            </div>
+            <div class="col-sm-0 control-label" style="text-align: left;">
+                <span></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- label -->
+            <label class="col-sm-3 control-label">
+                目标数据表回调:
+            </label>
+            <div class="col-sm-8">
+                <!-- textarea类型 -->
+                <textarea class="form-control" name='toTableCallback' title='目标数据表回调' placeholder='目标数据表回调' ><?= $task['toTableCallback'] ?></textarea>
+            </div>
+            <div class="col-sm-0 control-label" style="text-align: left;">
+                <span></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- label -->
+            <label class="col-sm-3 control-label">
+                目标数据表Sql:
+            </label>
+            <div class="col-sm-8">
+                <!-- textarea类型 -->
+                <textarea class="form-control" name='toTableSql' title='目标数据表Sql' placeholder='目标数据表Sql' ><?= $task['toTableSql'] ?></textarea>
+            </div>
+            <div class="col-sm-0 control-label" style="text-align: left;">
+                <span></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- label -->
+            <label class="col-sm-3 control-label">
+                数据时间字段:
+            </label>
+            <div class="col-sm-8">
+                <!-- textarea类型 -->
+                <textarea class="form-control" name='timeField' title='时间字段' placeholder='时间字段' ><?= $task['timeField'] ?></textarea>
+            </div>
+            <div class="col-sm-0 control-label" style="text-align: left;">
+                <span></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- label -->
+            <label class="col-sm-3 control-label">
+                <span style="color:red;">*</span>
+                数据时间间隔:
+            </label>
+            <div class="col-sm-7">
+                <!-- 默认类型 -->
+                <input class="form-control" name='timeInterval' title='时间间隔(秒)' placeholder='时间间隔(秒)' required  type="number" value="<?= $task['timeInterval'] ?>" />
+            </div>
+            <div class="col-sm-1 control-label" style="text-align: left;">
+                <span>(秒)</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- label -->
+            <label class="col-sm-3 control-label">
+                <span style="color:red;">*</span>
+                执行间隔:
+            </label>
+            <div class="col-sm-7">
+                <!-- 默认类型 -->
+                <input class="form-control" name='execInterval' title='执行间隔' placeholder='执行间隔' required  type="number" value="<?= $task['execInterval'] ?>" />
+            </div>
+            <div class="col-sm-1 control-label" style="text-align: left;">
+                <span>(秒)</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- label -->
+            <label class="col-sm-3 control-label">
+                <span style="color:red;">*</span>
+                延迟执行时间:
+            </label>
+            <div class="col-sm-7">
+                <!-- 默认类型 -->
+                <input class="form-control" name='execDelay' title='延迟执行时间' placeholder='延迟执行时间' required  type="number" value="<?= $task['execDelay'] ?>" />
+            </div>
+            <div class="col-sm-1 control-label" style="text-align: left;">
+                <span>(秒)</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- label -->
+            <label class="col-sm-3 control-label">
+                <span style="color:red;">*</span>
+                字段映射(json):
+            </label>
+            <div class="col-sm-8">
+                <!-- json类型 -->
+                <textarea class="form-control" data-type="json" name='fieldMap' title='字段映射' placeholder='字段映射' required ><?= $task['fieldMap'] ?></textarea>
+            </div>
+            <div class="col-sm-0 control-label" style="text-align: left;">
+                <span></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- label -->
+            <label class="col-sm-3 control-label">
+                <span style="color:red;">*</span>
+                是否有效:
+            </label>
+            <div class="col-sm-8">
+                <!-- radio类型 -->
+                <label class="radio-inline">
+                    <input type="radio" name="enable" value="1" <?= $task['enable'] == 1 ? 'checked' : '' ?> > <nobr>有效</nobr>
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="enable" value="0" <?= $task['enable'] == 0 ? 'checked' : '' ?> > <nobr>无效</nobr>
+                </label>
+            </div>
+            <div class="col-sm-0 control-label" style="text-align: left;">
+                <span></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- label -->
+            <label class="col-sm-3 control-label">
+                重算配置(json):
+            </label>
+            <div class="col-sm-8">
+                <!-- json类型 -->
+                <textarea class="form-control" data-type="json" name='redoConfig' title='重算配置(json)' placeholder='重算配置(json)' ><?= $task['redoConfig'] ?></textarea>
+            </div>
+            <div class="col-sm-0 control-label" style="text-align: left;">
+                <span></span>
+            </div>
+        </div>
+        <div class="form-group" style="margin-top: -15px;">
+            <label class="col-sm-3 control-label"></label>
+            <div class="col-sm-8 control-label" style="text-align: left;word-break: break-word;white-space: pre-wrap;"><span>{"hour":{"delay":xxx,"interval":xxx}}，例如：{"10:12":{"delay":"122400", "interval":"86400"}}</span></div>
+        </div>
+    </form>
+    <div>
+        <button type="button" id="btn_saveas" class="btn btn-success" style="margin-left: 15%;">
+            <i class="glyphicon glyphicon-plus"></i>另存为
+        </button>
+        <button type="button" id="btn_save" class="btn btn-primary" style="margin-left: 5.5%;">
+            <i class="glyphicon glyphicon-floppy-save"></i>保存
+        </button>
+    </div>
+</div>
+
+<script src="<?= SITE_URL ?>static/js/libs/seajs.utils.js"></script>
+<script src="<?= SITE_URL ?>static/js/libs/jquery-1.10.2.js"></script>
+<script src="<?= SITE_URL ?>static/js/libs/jquery-ui.min.js"></script>
+<script>
+
+    (function () {
+        function init() {
+            seajs.use(['js/offline/editTaskView.js', 'jquery'], function (page) {
+                page.init();
+            });
+        }
+
+        if (window.seajs) {
+            init();
+        } else {
+            var SITE_URL = "http://admin.ouj.com/";
+            var script = document.createElement("script");
+            script.src = SITE_URL + "static/js/libs/seajs.utils.js";
+            script.charset = "utf-8";
+            script.onload = init;
+
+            var header = document.getElementsByTagName("head")[0];
+            header.insertBefore(script, header.firstChild);
+        }
+    })();
+
+</script>
+</body>
+</html>

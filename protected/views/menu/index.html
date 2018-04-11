@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><?= SITE_NAME ?></title>
+
+<!-- Bootstrap -->
+<link href="<?= SITE_URL ?>static/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+    .container {
+      padding:10px;
+      margin:0;
+    }
+    .nav_tree {
+      float:left;
+      min-width:200px;
+      margin-right:10px;
+    }
+    .nav_tree .panel-body {
+      min-height:200px;
+    }
+    .nav_node {
+      float:left;
+      width:650px;
+    }
+    .nav_node .panel-body {
+      min-height:250px;
+    }
+
+    #allUserIds {
+        word-wrap: break-word;
+    }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <div class="panel panel-primary nav_tree">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">导航树</h3>
+	  </div>
+	  <div class="panel-body">
+	    <div id="tree"></div>
+	  </div>
+	  <div class="panel-footer">
+        <input class="btn btn-default center-block" id="syncPos" type="button" value="保存节点位置">
+      </div>
+	</div>
+	
+	<div class="panel panel-info nav_node">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">节点内容</h3>
+	  </div>
+	  <div class="panel-body">
+	    <form class="form-horizontal">
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">节点id</label>
+		    <div class="col-sm-10">
+                <input type="hidden" class="form-control" id="oldNodeId" value="0">
+                <input type="text" class="form-control" id="nodeId" value="0" placeholder="节点id">
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="node_name" class="col-sm-2 control-label">节点名称</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="node_name" placeholder="名称">
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="leftUrl" class="col-sm-2 control-label">左边的URL</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="leftUrl" placeholder="左边导航的URL">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="rightUrl" class="col-sm-2 control-label">右边的URL</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="rightUrl" placeholder="右边内容区的URL">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="moduleName" class="col-sm-2 control-label">模块名</label>
+		    <div class="col-sm-5">
+		      <input type="text" class="form-control" id="moduleName" placeholder="模块名">
+		    </div>
+		    <label for="appid" class="col-sm-1 control-label">appid</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="appid" placeholder="区分各后台管理系统">
+		    </div>
+		  </div>
+          <div class="form-group">
+		    <label for="userIds" class="col-sm-2 control-label">授权人员(用;隔开)</label>
+		    <div class="col-sm-10">
+		      <textarea class="form-control" id="userIds" rows="6"></textarea>
+		    </div>
+		  </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">二次密码</label>
+                <div class="col-sm-3">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary">
+                            <input type="radio" name="needAnotherPwd" value="1"> 开启
+                        </label>
+                        <label class="btn btn-primary active">
+                            <input type="radio" name="needAnotherPwd" value="0" checked> 关闭
+                        </label>
+                    </div>
+                </div>
+                <label for="domain" class="col-sm-2 control-label">所属域名</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="domain" name="domain" placeholder="域名，如:duowan.com">
+                </div>
+            </div>
+          <div class="form-group">
+                <label class="col-sm-2 control-label">是否展现</label>
+                <div class="col-sm-3">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary">
+                            <input type="radio" name="display" value="1"> 展现
+                        </label>
+                        <label class="btn btn-primary active">
+                            <input type="radio" name="display" value="0" checked> 隐藏
+                        </label>
+                    </div>
+                </div>
+				<label class="col-sm-2 control-label">新窗口</label>
+				<div class="col-sm-3">
+					<div class="btn-group" data-toggle="buttons">
+						<label class="btn btn-primary">
+							<input type="radio" name="openNewWindow" value="1"> 是
+						</label>
+						<label class="btn btn-primary active">
+							<input type="radio" name="openNewWindow" value="0" checked> 否
+						</label>
+					</div>
+				</div>
+			</div>
+            <div class="form-group">
+                <label for="allUserIds" class="col-sm-2 control-label">有权限人员</label>
+                <div class="col-sm-10">
+                    <span id="allUserIds"></span>
+                </div>
+            </div>
+		  <div class="form-group">
+		    <div class="col-sm-offset-2 col-sm-10">
+		      <button type="button" class="btn btn-default" id="saveNode">保存</button>
+		      <button type="button" class="btn btn-default" id="syncToProduct">同步到正式环境</button>
+		    </div>
+		  </div>
+
+		</form>
+	  </div>
+	</div>
+
+  </div>
+
+  	<script src="<?=SITE_URL?>/static/js/libs/seajs.utils.js"></script>
+	<script src="<?=SITE_URL?>/static/js/libs/jquery-1.10.2.js"></script>
+	<script src="<?=SITE_URL?>/static/js/libs/skytree/Script/SkyTree.js"></script>
+	<script src="<?=SITE_URL?>/static/js/libs/skytree/Script/Lang/cn.js"></script>
+
+	<script>
+		seajs.use('js/menu/index.js', function(page) {
+			page.init(<?= json_encode($tree)?>);
+		});
+	</script>
+</body>
+</html>
+

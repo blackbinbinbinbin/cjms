@@ -1,0 +1,61 @@
+@CHARSET "UTF-8";
+
+body {
+    overflow-y: hidden;	
+}
+
+#navbar {
+	margin-bottom: 1px;
+}
+
+#treeDiv {
+	width: 250px;
+	float: left;
+}
+
+#mainDiv {
+	float: left;
+}
+
+#breadcrumb {
+	margin-bottom: 1px;
+}
+
+#breadcrumbDiv {
+	position: relative;
+}
+
+#copyUrlDiv {
+	position: absolute;
+	right: 0px;
+	top: 8px;
+}
+
+#copyUrl {
+	padding: 8px 15px;
+}
+
+/*全屏切换条 s*/
+#bar {
+	float: left;
+	width: 8px;
+	border-left: 1px #dddddd solid;
+	border-right: 1px #dddddd solid;
+	z-index: 1;
+	cursor: ew-resize;
+}
+
+#midBar {
+	position: absolute;
+	cursor: pointer;
+	top: 50%;
+	margin-top: -52px;
+}
+
+#barImg {
+	position: absolute;
+	left: 2px;
+	z-index: 100;
+	width: 3px;
+	height: 105px;
+}

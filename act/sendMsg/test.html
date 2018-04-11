@@ -1,0 +1,114 @@
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="center sliding">发送消息 － 测试环境</div>
+    <div class="right"><a href="#" data-panel="left" class="link open-panel icon-only"><i class="icon icon-bars"></i></a></div>
+  </div>
+</div>
+<!-- Pages-->
+<div class="pages">
+  <!-- Page, data-page contains page name-->
+  <div data-page="index-1" class="page">
+    <!-- Scrollable page content-->
+    <div class="page-content">
+      <div class="content-block-title">你好，管理员...</div>
+      <div class="wrap-msg">
+            <form name="frmTest" target="_blank" action="http://test.api.oxzj.net/userMessage/add.do">                        
+            <input type="hidden" value="" name="">
+            <input type="hidden" value="" name="">
+            <input type="hidden" value="" name="">
+            <input type="hidden" value="" name="">
+            <input type="hidden" value="" name="">
+            <input type="hidden" value="" name="">
+              <div class="list-block">
+                <ul>
+                    <!-- Text inputs -->
+                    <li style="display:none;">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title label">AppID</div>
+                          <div class="item-input">
+                            <input type="text" placeholder="" value="2" name="appId">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li style="display:none;">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title label">AppKey</div>
+                          <div class="item-input">
+                            <input type="text" placeholder="" value="Kvg!F:#X80r5.p9F" name="appKey">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li style="display:none;">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title label">消息创建者ID</div>
+                          <div class="item-input">
+                            <input type="text" placeholder="" value="10" name="createUserId">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li style="display:none;">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title label">消息创建时间</div>
+                          <div class="item-input">
+                            <input type="text" placeholder="选择时间" readonly id="createTime" name="createTime">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title label">用户ID</div>
+                          <div class="item-input">
+                            <input type="text" placeholder="请输入用户ID，例如：100023" name="userId" required>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title label">消息标题</div>
+                          <div class="item-input">
+                            <input type="text" placeholder="请输入消息标题" name="title" required>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title label">消息链接</div>
+                          <div class="item-input">
+                            <input type="text" placeholder="请输入消息的链接，例如：http://m.ouj.com/" name="uri">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title label"><span>消息内容</span></div>
+                          <div class="item-input">
+                            <textarea name="content" placeholder="请输入消息内容" style="height:200px;" required></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                </ul>
+              </div>
+              <div class="content-block" style="width:30%;margin:0 auto;">
+                  <p><input type="submit" class="button submit-msg" value="确定发送"/></p>
+              </div>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>

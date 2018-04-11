@@ -1,0 +1,429 @@
+.MEIQIA-ICON {
+    background-size: 40px auto !important;
+    background-repeat: no-repeat !important;
+    background-image: url("https://static.meiqia.com/dist/images/icon-mq.png?v=1glsigfjthi4fgvi") !important;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
+    .MEIQIA-ICON {
+        background-image: url("https://static.meiqia.com/dist/images/icon-mq@2x.png?v=1glsigfjthi4fgvi") !important;
+    }
+}
+
+.MEIQIA-ICON-CHAT1 {
+    background-position: 0 0 !important;
+}
+
+.MEIQIA-ICON-CHAT2 {
+    background-position: 0 -20px !important;
+}
+
+.MEIQIA-ICON-CHAT3 {
+    background-position: 0 -40px !important;
+}
+
+.MEIQIA-ICON-CHAT4 {
+    background-position: 0 -60px !important;
+}
+
+.MEIQIA-ICON-CHAT5 {
+    background-position: 0 -80px !important;
+}
+
+.MEIQIA-ICON-CHAT6 {
+    background-position: 0 -100px !important;
+}
+
+.MEIQIA-ICON-CHAT7 {
+    background-position: 0 -120px !important;
+}
+
+.MEIQIA-ICON-CHAT8 {
+    background-position: 0 -140px !important;
+}
+
+.MEIQIA-ICON-CHAT9 {
+    background-position: 0 -160px !important;
+}
+
+.MEIQIA-ICON-CHAT10 {
+    background-position: 0 -180px !important;
+}
+
+.MEIQIA-ICON-CHAT11 {
+    background-position: 0 -200px !important;
+}
+
+.MEIQIA-ICON-CHAT12 {
+    background-position: 0 -220px !important;
+}
+
+.MEIQIA-ICON-TICKET1 {
+    background-position: -20px 0 !important;
+}
+
+.MEIQIA-ICON-TICKET2 {
+    background-position: -20px -20px !important;
+}
+
+.MEIQIA-ICON-TICKET3 {
+    background-position: -20px -40px !important;
+}
+
+.MEIQIA-ICON-TICKET4 {
+    background-position: -20px -60px !important;
+}
+
+.MEIQIA-ICON-TICKET5 {
+    background-position: -20px -80px !important;
+}
+
+.MEIQIA-ICON-TICKET6 {
+    background-position: -20px -100px !important;
+}
+
+.MEIQIA-ICON-TICKET7 {
+    background-position: -20px -120px !important;
+}
+
+.MEIQIA-ICON-TICKET8 {
+    background-position: -20px -140px !important;
+}
+
+.MEIQIA-ICON-TICKET9 {
+    background-position: -20px -160px !important;
+}
+
+.MEIQIA-ICON-TICKET10 {
+    background-position: -20px -180px !important;
+}
+
+.MEIQIA-ICON-TICKET11 {
+    background-position: -20px -200px !important;
+}
+
+.MEIQIA-ICON-TICKET12 {
+    background-position: -20px -220px !important;
+}
+
+
+#MEIQIA-FULL-HEIGHT {
+    height: 100% !important;
+}
+
+#MEIQIA-PANEL-HOLDER {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    width: 320px;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    visibility: hidden;
+    background-color: transparent;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, .15);
+    border-left: 1px solid #eee \0;
+    *border-left: 1px solid #eee;
+}
+
+#MEIQIA-IFRAME {
+    display: none;
+    float: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: none;
+}
+
+#MEIQIA-BTN-HOLDER {
+    display: none;
+    position: fixed;
+    bottom: 320px;
+    right: 0;
+    z-index: 2147483647;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    background-color: transparent;
+}
+
+#MEIQIA-BTN, #MEIQIA-BTN span, #MEIQIA-BTN div, #MEIQIA-BTN img {
+    float: none;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: none;
+}
+
+#MEIQIA-BTN {
+    display: block;
+    width: 40px;
+    height: auto;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    box-shadow: 0 0 14px 0 rgba(0, 0, 0, .16);
+    cursor: pointer;
+    text-decoration: none;
+    background-color: #4285f4;
+}
+
+#MEIQIA-BTN #MEIQIA-BTN-ICON {
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin: 0 10px 10px;
+}
+
+#MEIQIA-BTN #MEIQIA-BTN-LINE {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(0, 0, 0, .08);
+    background-color: #000 \9;
+    opacity: .1 \9;
+    filter: alpha(opacity=10) \9;
+    vertical-align: middle;
+}
+
+#MEIQIA-BTN #MEIQIA-BTN-TEXT {
+    display: block;
+    box-sizing: content-box;
+    width: 40px;
+    padding: 0 10px;
+    margin-top: 10px;
+    text-align: center;
+    overflow-x: hidden;
+    line-height: 1.428571429;
+    font-size: 16px;
+    color: #fff;
+    word-break: break-all;
+    word-wrap: break-word;
+    letter-spacing: 24px;
+    *width: 16px;
+    *letter-spacing: 5px;
+}
+
+#MEIQIA-BTN #MEIQIA-CIRCLE {
+    position: absolute;
+    display: none;
+    width: 26px;
+    height: 26px;
+    text-align: center;
+    line-height: 26px;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 15px;
+    background-color: #ff3b30;
+}
+
+#MEIQIA-BTN #MEIQIA-BUBBLE {
+    position: absolute;
+    bottom: 40%;
+    display: none;
+    width: 260px;
+    border: 1px solid #f7f7f7;
+    border-radius: 4px;
+    color: #000;
+    text-align: left;
+    box-shadow: 0 0 14px 0 rgba(0, 0, 0, .16);
+    line-height: 1.428571429;
+    background-color: #fff;
+}
+
+#MEIQIA-BTN #MEIQIA-BUBBLE-ARROW1 {
+    position: absolute;
+    z-index: 2;
+    font-size: 0;
+    line-height: 0;
+}
+
+#MEIQIA-BTN #MEIQIA-BUBBLE-ARROW2 {
+    position: absolute;
+    z-index: 1;
+    font-size: 0;
+    line-height: 0;
+}
+
+#MEIQIA-BTN {
+    border-left: 1px solid rgba(0, 0, 0, .1);
+}
+
+#MEIQIA-BTN #MEIQIA-CIRCLE {
+    top: -13px;
+    left: -13px;
+}
+
+#MEIQIA-BTN #MEIQIA-BUBBLE {
+    right: 60px;
+}
+
+#MEIQIA-BTN #MEIQIA-BUBBLE-ARROW1 {
+    right: -8px;
+    top: 20px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 8px solid #fff;
+}
+
+#MEIQIA-BTN #MEIQIA-BUBBLE-ARROW2 {
+    right: -10px;
+    top: 19px;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 9px solid #f7f7f7;
+}
+
+#MEIQIA-BTN #MEIQIA-BUBBLE-CLOSE {
+    position: absolute;
+    display: none;
+    top: 12px;
+    right: 12px;
+    width: 10px;
+    height: 10px;
+    background-position: -5px -245px;
+    cursor: pointer;
+}
+
+#MEIQIA-BTN #MEIQIA-BUBBLE:hover #MEIQIA-BUBBLE-CLOSE {
+    display: block;
+}
+
+#MEIQIA-BTN #MEIQIA-BUBBLE-INSIDE {
+    margin: 12px 18px;
+}
+
+#MEIQIA-BTN #MEIQIA-BUBBLE-AVATAR {
+    width: 26px;
+    height: 26px;
+    border-radius: 13px;
+    margin-right: 6px;
+    vertical-align: top;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, .15);
+}
+
+#MEIQIA-BTN #MEIQIA-BUBBLE-NAME {
+    display: inline-block;
+    margin-top: 3px;
+    font-size: 16px;
+    color: #000;
+}
+
+#MEIQIA-BTN #MEIQIA-BUBBLE-MSG {
+    *height: 40px;
+    max-height: 40px;
+    margin-top: 5px;
+    font-size: 14px;
+    overflow: hidden;
+    color: #000;
+}
+
+#MEIQIA-BTN #MEIQIA-BUBBLE-MSG img {
+    width: 16px;
+    height: 16px;
+}
+
+
+#MEIQIA-INVITE, #MEIQIA-INVITE div, #MEIQIA-INVITE span {
+    float: none;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: none;
+}
+
+#MEIQIA-INVITE {
+    position: fixed;
+    z-index: 2147483647;
+    display: none;
+    width: 340px;
+    height: 130px;
+    margin-bottom: 64px;
+    border: 1px solid #f7f7f7;
+    border-radius: 4px;
+    box-shadow: 0 0 14px 0 rgba(0, 0, 0, .16);
+    text-align: left;
+    cursor: pointer;
+    color: #000;
+    line-height: 1.428571429;
+    background-color: #fff;
+}
+
+#MEIQIA-INVITE #MEIQIA-INVITE-ARROW1, #MEIQIA-INVITE #MEIQIA-INVITE-ARROW2 {
+    position: absolute;
+    font-size: 0;
+    line-height: 0;
+}
+
+#MEIQIA-INVITE #MEIQIA-INVITE-ARROW1 {
+    z-index: 2;
+}
+
+#MEIQIA-INVITE #MEIQIA-INVITE-ARROW2 {
+    z-index: 1;
+}
+
+#MEIQIA-INVITE {
+    right: 60px;
+    bottom: 320px;
+}
+
+#MEIQIA-INVITE #MEIQIA-INVITE-ARROW1 {
+    right: -8px;
+    top: 60px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 8px solid #fff;
+}
+
+#MEIQIA-INVITE #MEIQIA-INVITE-ARROW2 {
+    right: -9px;
+    top: 59px;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 9px solid #f7f7f7;
+}
+
+#MEIQIA-INVITE #MEIQIA-INVITE-CLOSE {
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    background-position: 0 -260px;
+}
+
+#MEIQIA-INVITE #MEIQIA-INVITE-CLOSE:hover {
+    background-position: 0 -300px;
+}
+
+#MEIQIA-INVITE #MEIQIA-INVITE-INSIDE {
+    width: 300px;
+    height: 44px;
+    margin: 46px 20px 0;
+    text-align: left;
+    font-size: 14px;
+    line-height: 22px;
+    overflow: hidden;
+    color: #000; /*word-break: break-all;*/
+}

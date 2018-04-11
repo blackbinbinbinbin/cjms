@@ -1,0 +1,75 @@
+<nav class="clearfix">
+  <span class="pagination pull-left" style="font-size:16px;">
+  一共<?= $rowNum ?>条记录，每页显示
+  <select onchange="_pageChange(this);">
+  <? foreach ($options as $option) { ?>
+      <? if ($option == $pageSize) { ?>
+  	  <option selected><?= $option ?></option>
+      <? } else { ?>
+      <option><?= $option ?></option>
+      <? } ?>
+  <? } ?>
+  </select>
+  条记录
+    <? if ($timeSpan) { ?>
+      (耗时：<?= round($timeSpan, 3) ?>秒, 最高内存占用：<?=  round(memory_get_peak_usage() / 1024 /1024, 3) ?>MB)
+    <? } ?>
+
+  <? if ($needProcess) { ?>
+  (PHP统计)
+  <? } ?>
+
+  </span>
+  <ul class="pagination pull-right">
+<? if ($page == 1) { ?>
+    <li class="disabled"><a href="javascript:void(0);" aria-label="Previous"><span aria-hidden="true">&lt;&lt;</span></a></li>
+    <li class="disabled"><a href="javascript:void(0);" aria-label="Previous"><span aria-hidden="true">&lt;</span></a></li>
+<? } else { ?>
+    <li><a href="javascript:void(0);" onclick="_pageClick(1)" aria-label="Previous"><span aria-hidden="true">&lt;&lt;</span></a></li>
+    <li><a href="javascript:void(0);" onclick="_pageClick(<?= $page - 1 ?>)" aria-label="Previous"><span aria-hidden="true">&lt;</span></a></li>
+<? } ?>
+
+<? $num = 4; ?>
+<? $start = $page > $num ? $page - $num : 1; ?>
+<? $end = $page > $total - $num ? $total : $page + $num; ?>
+
+<? if ($start > 1) { ?>
+    <li><a href="javascript:void(0)">...</a></li>
+<? } ?>
+
+<? for ($i = $start; $i <= $end; $i++) { ?>
+	<? if ($page == $i) { ?>
+    <li class="active"><a href="javascript:void(0);"><?= $i?></a></li>
+	<? } else { ?>
+    <li><a href="javascript:void(0);" onclick="_pageClick(<?= $i?>)"><?= $i?></a></li>
+	<? } ?> 
+<? } ?>
+
+<? if ($end < $total) { ?>
+    <li><a href="javascript:void(0)">...</a></li>
+<? } ?>
+
+<? if ($page == $total) { ?>
+    <li class="disabled"><a href="javascript:void(0);" aria-label="Next"><span aria-hidden="true">&gt;</span></a></li>
+    <li class="disabled"><a href="javascript:void(0);" aria-label="Next"><span aria-hidden="true">&gt;&gt;</span></a></li>
+<? } else { ?>
+    <li><a href="javascript:void(0);" onclick="_pageClick(<?= $page + 1 ?>)" aria-label="Next"><span aria-hidden="true">&gt;</span></a></li>
+    <li><a href="javascript:void(0);" onclick="_pageClick(<?= $total ?>)" aria-label="Next"><span aria-hidden="true">&gt;&gt;</span></a></li>
+<? } ?>
+  </ul>
+</nav>
+<script>
+function _pageClick(page) {
+	seajs.use('lib', function(lib) {
+		lib.setParam('_page', page);
+		$(document).trigger('pager_change', <?= $rowNum ?>);
+	});
+};
+
+function _pageChange(input) {
+	seajs.use('lib', function(lib) {
+		lib.setParam('_pageSize', input.value);
+		$(document).trigger('pager_change', <?= $rowNum ?>);
+	});
+};
+</script>

@@ -1,0 +1,141 @@
+.Default{
+
+}
+
+.Default .TNode{
+    white-space: nowrap;
+}
+
+.Default a.TCnt {
+    padding: 3px;
+    cursor: pointer;
+    cursor: hand;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align:middle;
+}
+.Default a.TCntRed {
+    cursor: pointer;
+    cursor: hand;
+    white-space: nowrap;
+    text-decoration: none;
+    background-color:yellow;
+    zoom:1;
+    vertical-align:middle;
+}
+.Default a:hover.TCnt {
+    text-decoration: underline;
+}
+.Default a:hover {
+    cursor: pointer;
+    cursor: hand;
+    text-decoration: underline;
+}
+
+.Default .TCnt{
+	cursor: pointer;
+	cursor: hand;
+	color: black;
+	zoom:1;
+    vertical-align:middle;
+}
+
+.Default .TCntFocus{
+	padding: 2px 3px;
+	color: white;
+	background: #888888;
+	cursor: pointer;
+	cursor: hand;
+}
+
+.Default .Tag{
+	color: Gray;
+	margin-left: 3px;
+}
+
+.Default .LoadTip{
+	border:1px solid #014E82;
+	background-color:#D1E2FE;
+	color:#014E82;
+	padding: 1px;
+	margin: 1px;
+}
+
+.Default .EditText{
+	font-size: 8pt;
+	font-family:Tahoma;
+	border: 1px solid black;
+	line-height: 13px;
+}
+
+.Default .Check{
+	margin: 0px 2px 0px 0px;
+	padding: 0px;
+	height: 14px;
+	width: 14px;
+	vertical-align:middle;
+}
+
+.Default .Info{
+	position:absolute;
+	padding:4px 10px;
+	border:1px solid #014E82;
+	background-color:#D1E2FE;
+	color:#004499;
+	text-align:center;
+	font-weight:bold;
+	filter:alpha(opacity=90);
+	cursor:pointer;
+	z-index: 9999;
+}
+
+.Default .ContextMenu{
+	position: absolute;
+	border: 1px solid black;
+	background: #f6f6f6 url(Icons/ItemBG.gif) repeat-y;
+	padding: 2px;
+	cursor: pointer;
+	cursor: hand;
+    z-index:1000;
+}
+
+.Default .ContextMenu img{
+	margin-right: 10px;
+}
+
+.Default .ContextMenuItem{
+	padding: 3px;
+	text-align:right;
+	line-height: 17px;
+}
+
+.Default .ContextMenuItemOver{
+	padding: 2px;
+	border: 1px solid #824E01;
+	background-color: #FEEBCD;
+	color: #824E01;
+	text-align:right;
+	line-height: 17px;
+}
+
+.Default .ContextMenuItem img,
+.Default .ContextMenuItemOver img,
+.Default .ContextMenuItem span,
+.Default .ContextMenuItemOver span{
+	float:left;
+}
+
+.Default .ContextMenuSeparator{
+	margin: 3px 2px 3px 28px;
+	border-top: 1px solid black;
+}
+
+.Default .AccessKey{
+	text-decoration: underline;
+}
+
+.Default .About{
+	padding: 2px 0px;
+	color: Gray;
+	font-size: 8pt;
+}

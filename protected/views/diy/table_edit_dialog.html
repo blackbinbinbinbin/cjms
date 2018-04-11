@@ -1,0 +1,43 @@
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<?php
+$width = $tableInfo['editDialogWidth'];
+if (!$width) {
+    $width = 640;
+    foreach ($fields as $datas) {
+        foreach ($datas as $fieldName => $field) {
+            if ($field['inputType'] == 'image') {
+                $width = max($width, 800);
+            } else if ($field['inputType'] == 'rich_textarea') {
+                $width = max($width, 1024);
+            }
+        }
+    }
+}
+?>
+    <div class="modal-dialog" style="width:<?= $width ?>px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">修改</h4>
+            </div>
+            <div class="modal-body">
+                <?php require(ROOT_PATH . 'views' . DIRECTORY_SEPARATOR . $path . 'diy/table_edit_form.html') ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btn_saveas" class="btn btn-success" style="float: left;">
+                    <i class="glyphicon glyphicon-plus"></i>另存为
+                </button>
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" id="btn_save" class="btn btn-primary">
+                    <i class="glyphicon glyphicon-floppy-save"></i>保存
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .modal-title { cursor: move; }
+</style>

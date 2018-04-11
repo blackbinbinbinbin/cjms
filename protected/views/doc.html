@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>文档中心</title>
+    <link rel="stylesheet" href="<?php echo SITE_URL ?>static/css/bootstrap.min.css">
+    <style>
+        .red {color:red;}
+        .result div { display:none; padding:10px; }
+        .result div:nth-child(1) { display:block; }
+        .return_val {
+            font-weight: bold;
+            margin-top: -25px;
+            padding: 5px 0px;
+        }
+        .comment { color: gray; }
+        .comment-line:after { content:"-------------"; padding: 0 10px; }
+
+        .btn_edit:before { content:"编辑"; }
+        .edit .btn_edit:before { content:"退出编辑"; }
+        .comment-btn_save {
+            display: inline-block;
+            padding:10px;
+        }
+        .comment-btn_save, .comment-textarea { display: none; }
+        .edit .comment-btn_save, .edit .comment-textarea { display: inline-block; }
+        .edit .comment-text { display: none; }
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <table id="class_list" class='table'>
+        <thead>
+        <tr>
+            <th class="th">接口名</th>
+            <th class="th">作者</th>
+            <th class="th">注释</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+     foreach($classInfos as $name => $classInfo) {
+        $id = str_replace('.', '_', $name);
+        $id = str_replace('/', '_', $name);
+        ?>
+        <tr id="<?php echo $id;?>">
+            <th><span controller="true" style="font-size:16px;"><?php echo $name ?></span></th>
+            <td><?php echo $classInfo['author'] ?></td>
+            <td class="td"><?php echo $classInfo['desc'] ?></td>
+        </tr>
+        <?php
+         $classInfo['funcs'] = (array) $classInfo['funcs'];
+         foreach($classInfo['funcs'] as $funcName => $func) {
+        $subId = $id . '_' . str_replace('/', '_', $funcName);
+        ?>
+        <tr id="<?php echo $subId ?>" style="background-color:#eee" pId="<?php echo $id ?>" hasChild="true">
+            <th>
+              <span controller="true" style="font-size:16px;">
+                <?php echo "{$name}/{$funcName}" ?>
+              </span>
+                <a style="margin-left: 20px;" href='<?php echo "/doc/call?action={$name}/{$funcName}&code=0" ?>' target="_blank">调用</a>
+                <!-- [<a href="javascript:debugInterface('<?php echo $name . '.' . $funcName ?>')">调试</a>] -->
+            </th>
+            <td class="td"><?php echo $func['author'] ?></td>
+            <td class="td"><?php echo $func['desc'] ?></td>
+        </tr>
+        <?php     } ?>
+        <?php } ?>
+        </tbody>
+    </table>
+</div>
+<script id="table_tr" type="text/html">
+    <% for (var funcName in params) { %>
+    <tr pId="<%= pid %>" style="background-color:#FFFFEE">
+        <th>
+            <%= funcName %>
+        </th>
+        <td class="td">
+            <%= params[funcName]['type'] %>
+        </td>
+        <td class="td">
+            <% var desc = rules[funcName]['desc'] || params[funcName]['desc']; %>
+            <% if (desc) { %>
+            <span style="margin-right:20px;"><%= desc %></span>
+            <% } %>
+            <span class="red"><%= params[funcName]['rule'] %></span>
+        </td>
+    </tr>
+    <% } %>
+    <tr pId="<%= pid %>" style="background-color:#eef;">
+        <td class="td" colspan="3">
+            <div class="return_val">返回值：</div>
+            <ul class="nav nav-tabs">
+                <% for (var i in ret) { %>
+                <% if (i == 0) { %>
+                <li code_id="<%= i %>" role="presentation" class="active"><a href="javascript:void(0)"><%= i %></a></li>
+                <% } else { %>
+                <li code_id="<%= i %>" role="presentation"><a href="javascript:void(0)"><%= i %></a></li>
+                <% } %>
+                <% } %>
+            </ul>
+            <div class="result">
+                <% for (var i in ret) { %>
+                <div id="<%= i %>" code_id="<%= i %>" style="position:relative;">
+                    <textarea data-role="ret"><%== ret[i]['ret'] %></textarea>
+                    <textarea data-role="comments"><%== ret[i]['comments'] %></textarea>
+                    <span style="margin-top:10px;"></span>
+                    <a class="btn_edit" editIndex="<%= i %>" style="position:absolute;right:80px;top:7px;" href="javascript:void(0);"></a>
+                    <a style="position:absolute;right:35px;top:7px;"  target="_blank" href="/doc/call?action=<%= actionName %>&code=<%= i %>">调用</a>
+                    <a xIndex="<%= i %>" style="position:absolute;right:10px;top:7px;" href="javascript:void(0);">X</a>
+                </div>
+                <% } %>
+            </div>
+        </td>
+    </tr>
+</script>
+
+<script src="<?php echo SITE_URL ?>static/js/libs/seajs.utils.js"></script>
+<script src="<?php echo SITE_URL ?>static/js/libs/jquery-1.10.2.js"></script>
+<script src="<?php echo SITE_URL ?>static/js/libs/bootstrap.min.js"></script>
+<script src="<?php echo SITE_URL ?>static/js/libs/jsonformat.js"></script>
+
+<script>
+    BDY.url = "/";
+    seajs.use("js/libs/doc.js", function(page) {
+        page.init(<?= $g_comments ?>);
+    });
+</script>
+
+</body>
+</html>

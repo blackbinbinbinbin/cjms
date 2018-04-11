@@ -1,0 +1,27 @@
+
+window['__crawPage'] = {};
+
+__crawPage['__rulePreProcess'] = function($html, $, page) {
+
+<?= $rule['preprocess'] ?: $parent_rule['preprocess'] ?>
+
+}
+
+<? foreach ($arr as $i => $items) { ?>
+    <? if (!$items) continue; ?>
+    <? foreach ($items as $item) { ?>
+
+__crawPage['<?= $item['field_name'] ?>'] = function($el, $, _task) {
+    <?= $item['fetch_value'] ?>
+
+}
+        <? if ($item['new_task_key']) { ?>
+
+__crawPage['<?= $item['field_name'] . '-new_task_key' ?>'] = function($el, $, _task) {
+    <?= $item['new_task_key'] ?>
+
+}
+        <? } ?>
+    <? } ?>
+<? } ?>
+

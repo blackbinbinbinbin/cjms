@@ -1,0 +1,70 @@
+<? if ($field['inputType'] == 'textarea') { ?>
+  <!-- textarea类型 -->
+  <textarea class="form-control" <?= $field['attr'] ?>><?= $field['defaultValue'] ?></textarea>
+<? } else if ($field['inputType'] == 'json') { ?>
+  <!-- json类型 -->
+  <textarea class="form-control" data-type="json" <?= $field['attr'] ?>><?= $field['defaultValue'] ?></textarea>
+<? } else if ($field['inputType'] == 'rich_textarea') { ?>
+  <!-- rich_textarea类型 -->
+  <textarea class="form-control js-<?= $field['inputType'] ?>" style="width:500px;height:<?= $field['inputHeight'] ?: 300 ?>px;visibility: hidden;" <?= $field['attr'] ?>><?= $field['defaultValue'] ?></textarea>
+<? } else if (substr($field['inputType'], 0, 5) == 'code_') { ?>
+  <!-- code_textarea类型 -->
+  <textarea class="form-control js-<?= $field['inputType'] ?>" style="height:<?= $field['inputHeight'] ?: 300 ?>px;visibility: hidden;" <?= $field['attr'] ?>><?= $field['defaultValue'] ?></textarea>
+<? } else if ($field['inputType'] == 'auto_complete') { ?>
+  <!-- auto_complete类型 -->
+  <input class="form-control js-auto_complete" <?= $field['attr'] ?> data-enum='<?= json_encode(array_keys($field['fieldLength'])) ?>' type="text" value="<?= $field['defaultValue'] ?>" />
+<? } else if ($field['inputType'] == 'select') { ?>
+  <!-- select类型 -->
+  <select class="form-control" <?= $field['attr'] ?>>
+  <? // $field['defaultValue'] || ($field['defaultValue'] = array_keys($field['fieldLength'])[0] ) ?>
+  <? if (!$field['required']) { ?>
+    <option value=""></option>
+  <? } ?>
+  <? foreach ($field['fieldLength'] as $key => $value) { ?>
+    <? if ($field['defaultValue'] == $key) { ?>
+    <option value="<?= $key ?>" selected><?= $value ?></option>
+    <? } else { ?>
+    <option value="<?= $key ?>"><?= $value ?></option>
+    <? } ?>
+  <? } ?>
+  </select>
+<? } else if ($field['inputType'] == 'radio') { ?>
+  <!-- radio类型 -->
+    <? if (!$field['defaultValue'] && $field['defaultValue'] != '0') { ?>
+    <?     $field['defaultValue'] = array_keys($field['fieldLength'])[0]; ?>
+    <? } ?>
+    <? foreach ($field['fieldLength'] as $key => $value) { ?>
+        <? $status = $field['defaultValue'] == $key ? 'checked' : '' ?>
+        <label class="radio-inline">
+            <input type="radio" name="<?= $fieldName ?>" value="<?= $key ?>" <?= $status ?> > <nobr><?= $value ?></nobr>
+        </label>
+    <? } ?>
+<? } else if ($field['inputType'] == 'checkbox') { ?>
+    <!-- checkbox类型 -->
+    <? foreach ($field['fieldLength'] as $key => $value) { ?>
+        <? $status = $row[$fieldName][$key] ? 'checked' : '' ?>
+        <label class="checkbox-inline">
+            <input type="checkbox" name="<?= $fieldName ?>" value="<?= $key ?>" <?= $status ?> > <nobr><?= $value ?></nobr>
+        </label>
+    <? } ?>
+<? } else if ($field['inputType'] == 'image' || $field['inputType'] == 'audio' || $field['inputType'] == 'video') { ?>
+    <!-- image类型 -->
+    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+    <div class="js-upload js-upload-<?= $field['inputType'] ?> row fileupload-buttonbar" data-realname="<?= $fieldName ?>" <?= $field['attr'] ?>>
+        <!-- The fileinput-button span is used to style the file input field as button -->
+        <span class="btn btn-success fileinput-button">
+            <i class="glyphicon glyphicon-plus"></i>
+            <span>添加文件</span>
+            <input type="file" name="files[]" >
+        </span>
+            <!-- The global file processing state -->
+        <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+    </div>
+    <!-- The table listing the files available for upload/download -->
+<? } else { ?>
+  <!-- 默认类型 -->
+  <?php  $field['inputType'] = $field['inputType'] == 'date' ? 'text' : $field['inputType']; ?>
+  <?php  $field['inputType'] = $field['inputType'] == 'datetime' ? 'text' : $field['inputType']; ?>
+  <?php  $field['inputType'] = $field['inputType'] == 'time' ? 'text' : $field['inputType']; ?>
+  <input class="form-control" <?= $field['attr'] ?> type="<?= $field['inputType'] ?>" value="<?= $field['defaultValue'] ?>" />
+<? } ?>
