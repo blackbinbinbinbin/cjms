@@ -1,0 +1,99 @@
+<div class="mod-page">
+
+    <?php if ($page > 1): ?>
+    <a href="<?= sprintf($pageTpl, $page - 1) ?>" onclick="_pageClick('prev')" rel="prev" title="上一页">上一页</a>
+    <?php endif; ?>
+    <?php
+        $start = $page - 5;
+        $end = $page + 5;
+        $start < 1 && $start = 1;
+        $end > $total && $end = $total;
+    ?>
+    <?php if (1 < $start): ?>
+    <a href="<?= sprintf($pageTpl, 1) ?>" title="第1页" onclick="_pageClick('num', 1)">1</a>
+    <?php if ($start != 2): ?><span>...</span><?php endif;?>
+    <?php endif;?>
+
+    <?php for ($i = $start; $i <= $end; $i++):?>
+    <a href="<?= sprintf($pageTpl, $i) ?>" <?php if ($page == $i):?> title="已经是当前页" class="current"<?php else:?>title="第<?=$i?>页"<?php endif;?> onclick="_pageClick('num', <?=$i?>)"><?=$i?></a>
+    <?php endfor;?>
+    <?php if ($end < $total): ?>
+    <?php if ($end != $total - 1): ?><span>...</span><?php endif;?>
+    <a href="<?= sprintf($pageTpl, $total) ?>" title="第<?=$total?>页" onclick="_pageClick('num', <?= $total ?>)"><?=$total?></a>
+    <?php endif;?>
+    <?php if ($total > $page): ?>
+        <a href="<?= sprintf($pageTpl, $page + 1) ?>" onclick="_pageClick('next')" rel="next" title="下一页">下一页</a>
+    <?php endif; ?>
+    <ins>
+        <span>共<?=$total?>页</span>
+        <span>跳到第</span>
+        <input type="text" id="jumpto">
+        <span>页</span>
+        <button onclick="_pageClick('jump')">确定</button>
+    </ins>
+</div>
+
+
+<script>
+function parseQuery(qstr) {
+    var query = {};
+    var a = qstr.split('&');
+    for (var i in a) {
+        var b = a[i].split('=');
+        query[decodeURIComponent(b[0])] = decodeURIComponent(b[1]);
+    }
+
+    return query;
+}
+
+function serialize(obj, prefix) {
+  var str = [];
+  for(var p in obj) {
+    if (obj.hasOwnProperty(p)) {
+      var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
+      str.push(typeof v == "object" ?
+        serialize(v, k) :
+        encodeURIComponent(k) + "=" + encodeURIComponent(v));
+    }
+  }
+  return str.join("&");
+}
+
+function _pageClick(act, num) {
+<?php if ($jsClick) { ?>
+    var search = location.search.substring(1);
+    objSearch = search == '' ? {} : parseQuery(search);
+    var maxPage = '<?= $total; ?>';
+    maxPage = parseInt(maxPage);
+    var page = objSearch.page || 1;
+
+    page = parseInt(page);
+    if (act === 'prev') {
+        page -= 1;
+    } else if (act === 'next') {
+        page += 1;
+    } else if (act === 'jump') {
+        page = document.getElementById('jumpto').value;
+    } else if (act === 'num') {
+        page = num;
+    }
+    if (page < 1) {
+        page = 1;
+    } else if (page > maxPage) {
+        page = maxPage;
+    }
+    objSearch.page = page;
+    var params = serialize(objSearch);
+
+    var pathname = '<?=$pathname;?>';
+    if (pathname && location.pathname == '/') {
+        location.href = pathname + '?' + params;
+    } else {
+        location.href = location.pathname + '?' + params;
+    }
+
+    return false;
+<?php } ?>
+}
+
+</script>

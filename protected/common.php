@@ -57,7 +57,7 @@ if (strpos($fileName, '/data/webapps/') === 0 ) {
 } else {
     // 本地环境
     define('CONF_PATH', realpath(dirname(__FILE__)) . '/conf/conf_ns/');
-    define('FRAMEWORK_PATH', BASE_DIR . '/../phpbase2/');
+    define('FRAMEWORK_PATH', BASE_DIR . '/phpbase2/');
     //define('SPIDER_ROOT_PATH', BASE_DIR . '../crawl/');
 
     $env = ENV_DEV;

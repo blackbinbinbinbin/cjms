@@ -1,0 +1,14 @@
+<?= "<?" ?>php
+
+//常量
+<?php foreach ($configs['string'] as $k => $v):?>
+<?php !is_numeric($v) && $v = "'{$v}'"; ?>
+defined('<?=$k;?>') || define('<?=$k;?>', <?=$v;?>);
+<?php endforeach;?>
+
+//数组
+<?php foreach ($configs['hash'] as $k => $v):?>
+$GLOBALS<?=$k;?> = isset($GLOBALS<?=$k;?>) ? $GLOBALS<?=$k;?> : [];
+$GLOBALS<?=$k;?> += <?=var_export($v, true);?>;
+
+<?php endforeach;?>

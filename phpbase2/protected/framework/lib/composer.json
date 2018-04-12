@@ -1,0 +1,7 @@
+{
+    "require": {
+        "flexihash/flexihash": "^2.0",
+        "elasticsearch/elasticsearch": "^1.4.1",
+        "smi2/phpclickhouse": "0.17.12.1"
+    }
+}
