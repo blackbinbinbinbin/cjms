@@ -13,7 +13,7 @@ class BaseController extends Controller {
 
         // 如果是需要登录态的action
         if (defined('ACTION_NAME') && !in_array(ACTION_NAME, $this->noLoginActions)) {
-            //Login::checkLogin();
+            Login::checkLogin();
         }
     }
 

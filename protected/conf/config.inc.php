@@ -5,27 +5,33 @@ define("APP_ID", 4);
 define("APP_SECRET", 'X80r5.p9F');
 
 $prefix = ENV != ENV_FORMAL ? ucfirst(ENV) . '_' : '';
-$isOuj = $isDuowan = $isHiyd = false;
-if (strpos(COOKIE_DOMAIN, 'ouj.com') !== false) {
-    define('COOKIE_DOMAIN2', 'ouj.com');
-    define('COOKIE_DOMAIN_ADMIN', 'admin.ouj.com');
-    $isOuj = true;
-    define('SITE_NAME', $prefix . '偶家后台');
-} else if (strpos(COOKIE_DOMAIN, 'duowan.com') !== false) {
-    define('COOKIE_DOMAIN2', 'duowan.com');
-    define('COOKIE_DOMAIN_ADMIN', 'admin.duowan.com');
-    $isDuowan = true;
-    define('SITE_NAME', $prefix . '多玩后台');
-} else if (strpos(COOKIE_DOMAIN, 'hiyd.com') !== false) {
-    define('COOKIE_DOMAIN2', 'hiyd.com');
-    define('COOKIE_DOMAIN_ADMIN', 'admin.hiyd.com');
-    $isHiyd = true;
-    define('SITE_NAME', $prefix . '偶家');
-}
+// $isOuj = $isDuowan = $isHiyd = false;
+// if (strpos(COOKIE_DOMAIN, 'ouj.com') !== false) {
+//     define('COOKIE_DOMAIN2', 'ouj.com');
+//     define('COOKIE_DOMAIN_ADMIN', 'admin.ouj.com');
+//     $isOuj = true;
+//     define('SITE_NAME', $prefix . '偶家后台');
+// } else if (strpos(COOKIE_DOMAIN, 'duowan.com') !== false) {
+//     define('COOKIE_DOMAIN2', 'duowan.com');
+//     define('COOKIE_DOMAIN_ADMIN', 'admin.duowan.com');
+//     $isDuowan = true;
+//     define('SITE_NAME', $prefix . '多玩后台');
+// } else if (strpos(COOKIE_DOMAIN, 'hiyd.com') !== false) {
+//     define('COOKIE_DOMAIN2', 'hiyd.com');
+//     define('COOKIE_DOMAIN_ADMIN', 'admin.hiyd.com');
+//     $isHiyd = true;
+//     define('SITE_NAME', $prefix . '偶家');
+// }
 
-define('IS_OUJ', $isOuj);
-define('IS_DUOWAN', $isDuowan);
-define('IS_HIYD', $isHiyd);
+// define('IS_OUJ', $isOuj);
+// define('IS_DUOWAN', $isDuowan);
+// define('IS_HIYD', $isHiyd);
+//域名 cookie 路径, 可以根据不同的域名进行兼容修改
+$isCjms = true;
+define('SITE_NAME', $prefix . '后台管理');
+define('COOKIE_DOMAIN2', 'funkstyle.com');
+define('COOKIE_DOMAIN_ADMIN', 'funkstyle.com');
+define('IS_CJMS', $isCjms);
 
 $GLOBALS['nameServ_php'] = [
   'globals',
