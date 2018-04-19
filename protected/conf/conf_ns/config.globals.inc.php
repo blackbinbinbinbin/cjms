@@ -70,6 +70,7 @@ defined('SNS_TEST_UID') || define('SNS_TEST_UID', 1);
 defined('STEAM_PC_USER_MESSAGE_PREKEY') || define('STEAM_PC_USER_MESSAGE_PREKEY', 'globals:steam-pc:new:');
 defined('URL_ADMIN_DUOWAN') || define('URL_ADMIN_DUOWAN', 'http://test.admin.duowan.com/');
 defined('URL_ADMIN_OUJ') || define('URL_ADMIN_OUJ', 'http://test.admin.ouj.com/');
+defined('URL_AIBNX') || define('URL_AIBNX', 'http://aibnx.duowan.com/');
 defined('URL_DW_RECHARGE_CALLBACK') || define('URL_DW_RECHARGE_CALLBACK', 'http://test.plus.duowan.com/recharge/callback');
 defined('URL_FOOD_HIYD') || define('URL_FOOD_HIYD', 'http://test.food.hiyd.com/');
 defined('URL_H5GAME') || define('URL_H5GAME', 'http://test.h5game.5253.com/');
@@ -79,12 +80,14 @@ defined('URL_KA_HOST') || define('URL_KA_HOST', 'test.ka.duowan.com');
 defined('URL_KA_HOST_M') || define('URL_KA_HOST_M', 'test.mka.duowan.com');
 defined('URL_KA_M') || define('URL_KA_M', 'http://test.mka.duowan.com/');
 defined('URL_KU_HIYD') || define('URL_KU_HIYD', 'http://test.ku.hiyd.com/');
+defined('URL_MBNX') || define('URL_MBNX', 'http://test-mbnx.duowan.com/');
 defined('URL_MOBILE_SHOP') || define('URL_MOBILE_SHOP', 'http://test.m.meals.hiyd.com/');
 defined('URL_M_FOOD_HIYD') || define('URL_M_FOOD_HIYD', 'http://test.m.food.hiyd.com/');
 defined('URL_M_HIYD') || define('URL_M_HIYD', 'http://test.m.hiyd.com/');
 defined('URL_M_OUJ') || define('URL_M_OUJ', 'http://test.m.ouj.com/');
 defined('URL_PAY_API') || define('URL_PAY_API', 'http://test.pay.api.oxzj.net/');
 defined('URL_PC_H5') || define('URL_PC_H5', 'http://test-pc.duowan.cn/');
+defined('URL_SDK_USER_API') || define('URL_SDK_USER_API', 'http://test-hades-cloud.duowan.com');
 defined('URL_SHOP_API') || define('URL_SHOP_API', 'http://test.m.meals.hiyd.com/');
 defined('URL_SHOP_API2') || define('URL_SHOP_API2', 'http://test.m.shop.hiyd.com/');
 defined('URL_SHOP_API3') || define('URL_SHOP_API3', 'http://test.m.fit.hiyd.com/');
@@ -204,6 +207,36 @@ if (!isset($GLOBALS['dbInfo']['default'])) { $GLOBALS['dbInfo']['default'] = [];
 $GLOBALS['dbInfo']['default'] += array (
   'dbHost' => '61.160.36.225',
   'dbName' => 'Web',
+  'dbPass' => 'ojia305',
+  'dbPort' => '3306',
+  'dbType' => 'mysqli',
+  'dbUser' => 'ojiatest',
+  'enable' => 'true',
+);
+if (!isset($GLOBALS['dbInfo']['dw_bnx'])) { $GLOBALS['dbInfo']['dw_bnx'] = []; }
+$GLOBALS['dbInfo']['dw_bnx'] += array (
+  'dbHost' => '61.160.36.225',
+  'dbName' => 'dw_bnx',
+  'dbPass' => 'ojia305',
+  'dbPort' => '3306',
+  'dbType' => 'mysqli',
+  'dbUser' => 'ojiatest',
+  'enable' => 'true',
+);
+if (!isset($GLOBALS['dbInfo']['dw_bnx_data'])) { $GLOBALS['dbInfo']['dw_bnx_data'] = []; }
+$GLOBALS['dbInfo']['dw_bnx_data'] += array (
+  'dbHost' => '61.160.36.225',
+  'dbName' => 'dw_bnx_data',
+  'dbPass' => 'ojia305',
+  'dbPort' => '3306',
+  'dbType' => 'mysqli',
+  'dbUser' => 'ojiatest',
+  'enable' => 'true',
+);
+if (!isset($GLOBALS['dbInfo']['dw_bnx_pack'])) { $GLOBALS['dbInfo']['dw_bnx_pack'] = []; }
+$GLOBALS['dbInfo']['dw_bnx_pack'] += array (
+  'dbHost' => '61.160.36.225',
+  'dbName' => 'dw_bnx_pack',
   'dbPass' => 'ojia305',
   'dbPort' => '3306',
   'dbType' => 'mysqli',
@@ -370,6 +403,36 @@ $GLOBALS['dbInfo']['dw_sy'] += array (
   'dbUser' => 'ojiatest',
   'enable' => 'true',
 );
+if (!isset($GLOBALS['dbInfo']['dw_sysdk'])) { $GLOBALS['dbInfo']['dw_sysdk'] = []; }
+$GLOBALS['dbInfo']['dw_sysdk'] += array (
+  'dbHost' => '61.160.36.225',
+  'dbName' => 'dw_sysdk',
+  'dbPass' => 'ojia305',
+  'dbPort' => '3306',
+  'dbType' => 'mysqli',
+  'dbUser' => 'ojiatest',
+  'enable' => 'true',
+);
+if (!isset($GLOBALS['dbInfo']['dw_sysdk_data'])) { $GLOBALS['dbInfo']['dw_sysdk_data'] = []; }
+$GLOBALS['dbInfo']['dw_sysdk_data'] += array (
+  'dbHost' => '61.160.36.225',
+  'dbName' => 'dw_sysdk_data',
+  'dbPass' => 'ojia305',
+  'dbPort' => '3306',
+  'dbType' => 'mysqli',
+  'dbUser' => 'ojiatest',
+  'enable' => 'true',
+);
+if (!isset($GLOBALS['dbInfo']['dw_sysdk_fx'])) { $GLOBALS['dbInfo']['dw_sysdk_fx'] = []; }
+$GLOBALS['dbInfo']['dw_sysdk_fx'] += array (
+  'dbHost' => '61.160.36.225',
+  'dbName' => 'dw_sysdk_fx',
+  'dbPass' => 'ojia305',
+  'dbPort' => '3306',
+  'dbType' => 'mysqli',
+  'dbUser' => 'ojiatest',
+  'enable' => 'true',
+);
 if (!isset($GLOBALS['dbInfo']['dw_sy_data'])) { $GLOBALS['dbInfo']['dw_sy_data'] = []; }
 $GLOBALS['dbInfo']['dw_sy_data'] += array (
   'dbHost' => '61.160.36.225',
@@ -384,6 +447,16 @@ if (!isset($GLOBALS['dbInfo']['dw_sy_old'])) { $GLOBALS['dbInfo']['dw_sy_old'] =
 $GLOBALS['dbInfo']['dw_sy_old'] += array (
   'dbHost' => '61.160.36.225',
   'dbName' => 'dw_sy_old',
+  'dbPass' => 'ojia305',
+  'dbPort' => '3306',
+  'dbType' => 'mysqli',
+  'dbUser' => 'ojiatest',
+  'enable' => 'true',
+);
+if (!isset($GLOBALS['dbInfo']['dw_t2'])) { $GLOBALS['dbInfo']['dw_t2'] = []; }
+$GLOBALS['dbInfo']['dw_t2'] += array (
+  'dbHost' => '61.160.36.225',
+  'dbName' => 'dw_t2',
   'dbPass' => 'ojia305',
   'dbPort' => '3306',
   'dbType' => 'mysqli',
@@ -600,6 +673,16 @@ $GLOBALS['dbInfo']['miniworld_home'] += array (
   'dbUser' => 'ojiatest',
   'enable' => 'true',
 );
+if (!isset($GLOBALS['dbInfo']['ms'])) { $GLOBALS['dbInfo']['ms'] = []; }
+$GLOBALS['dbInfo']['ms'] += array (
+  'dbHost' => '127.0.0.1',
+  'dbName' => 'ms',
+  'dbPass' => 'root',
+  'dbPort' => '6301',
+  'dbType' => 'mysqli',
+  'dbUser' => 'root',
+  'enable' => '1',
+);
 if (!isset($GLOBALS['dbInfo']['nation_hiyd_cms'])) { $GLOBALS['dbInfo']['nation_hiyd_cms'] = []; }
 $GLOBALS['dbInfo']['nation_hiyd_cms'] += array (
   'dbHost' => '61.160.36.225',
@@ -765,6 +848,22 @@ $GLOBALS['redisInfo']['data_report'] += array (
 if (!isset($GLOBALS['redisInfo']['default'])) { $GLOBALS['redisInfo']['default'] = []; }
 $GLOBALS['redisInfo']['default'] += array (
 );
+if (!isset($GLOBALS['redisInfo']['dw_bnx'])) { $GLOBALS['redisInfo']['dw_bnx'] = []; }
+$GLOBALS['redisInfo']['dw_bnx'] += array (
+  'connet_timeout' => '3000',
+  'db' => '1',
+  'host' => '61.160.36.225',
+  'port' => '6379',
+  'pwd' => 'ojia123',
+);
+if (!isset($GLOBALS['redisInfo']['dw_bnx_store'])) { $GLOBALS['redisInfo']['dw_bnx_store'] = []; }
+$GLOBALS['redisInfo']['dw_bnx_store'] += array (
+  'connet_timeout' => '3000',
+  'db' => '1',
+  'host' => '61.160.36.225',
+  'port' => '6379',
+  'pwd' => 'ojia123',
+);
 if (!isset($GLOBALS['redisInfo']['dw_game'])) { $GLOBALS['redisInfo']['dw_game'] = []; }
 $GLOBALS['redisInfo']['dw_game'] += array (
   'connet_timeout' => '0',
@@ -772,6 +871,22 @@ $GLOBALS['redisInfo']['dw_game'] += array (
   'host' => '61.160.36.225',
   'port' => '6407',
   'pwd' => 'ojia123',
+);
+if (!isset($GLOBALS['redisInfo']['dw_gl'])) { $GLOBALS['redisInfo']['dw_gl'] = []; }
+$GLOBALS['redisInfo']['dw_gl'] += array (
+  'connet_timeout' => '0',
+  'db' => '0',
+  'host' => '10.21.32.171',
+  'port' => '6403',
+  'pwd' => '807879a2830d85433cc',
+);
+if (!isset($GLOBALS['redisInfo']['dw_gl_bak'])) { $GLOBALS['redisInfo']['dw_gl_bak'] = []; }
+$GLOBALS['redisInfo']['dw_gl_bak'] += array (
+  'connet_timeout' => '0',
+  'db' => '0',
+  'host' => '61.160.36.19',
+  'port' => '6380',
+  'pwd' => '33fa134e11b',
 );
 if (!isset($GLOBALS['redisInfo']['dw_ka'])) { $GLOBALS['redisInfo']['dw_ka'] = []; }
 $GLOBALS['redisInfo']['dw_ka'] += array (
@@ -835,6 +950,30 @@ $GLOBALS['redisInfo']['dw_shop'] += array (
 );
 if (!isset($GLOBALS['redisInfo']['dw_sy'])) { $GLOBALS['redisInfo']['dw_sy'] = []; }
 $GLOBALS['redisInfo']['dw_sy'] += array (
+  'connet_timeout' => '3000',
+  'db' => '0',
+  'host' => '61.160.36.225',
+  'port' => '6379',
+  'pwd' => 'ojia123',
+);
+if (!isset($GLOBALS['redisInfo']['dw_sysdk'])) { $GLOBALS['redisInfo']['dw_sysdk'] = []; }
+$GLOBALS['redisInfo']['dw_sysdk'] += array (
+  'connet_timeout' => '3000',
+  'db' => '0',
+  'host' => '61.160.36.225',
+  'port' => '6379',
+  'pwd' => 'ojia123',
+);
+if (!isset($GLOBALS['redisInfo']['dw_sysdk_fx'])) { $GLOBALS['redisInfo']['dw_sysdk_fx'] = []; }
+$GLOBALS['redisInfo']['dw_sysdk_fx'] += array (
+  'connet_timeout' => '3000',
+  'db' => '0',
+  'host' => '61.160.36.225',
+  'port' => '6379',
+  'pwd' => 'ojia123',
+);
+if (!isset($GLOBALS['redisInfo']['dw_sysdk_store'])) { $GLOBALS['redisInfo']['dw_sysdk_store'] = []; }
+$GLOBALS['redisInfo']['dw_sysdk_store'] += array (
   'connet_timeout' => '3000',
   'db' => '0',
   'host' => '61.160.36.225',
@@ -910,6 +1049,10 @@ $GLOBALS['redisInfo']['glance_home'] += array (
   'host' => '61.160.36.225',
   'port' => '6407',
   'pwd' => 'ojia123',
+);
+if (!isset($GLOBALS['redisInfo']['glance_online'])) { $GLOBALS['redisInfo']['glance_online'] = []; }
+$GLOBALS['redisInfo']['glance_online'] += array (
+  'connet_timeout' => '0',
 );
 if (!isset($GLOBALS['redisInfo']['hiyd_cms'])) { $GLOBALS['redisInfo']['hiyd_cms'] = []; }
 $GLOBALS['redisInfo']['hiyd_cms'] += array (
@@ -1046,6 +1189,14 @@ $GLOBALS['redisInfo']['svideo_home'] += array (
   'port' => '6407',
   'pwd' => 'ojia123',
 );
+if (!isset($GLOBALS['redisInfo']['udbinfo_store'])) { $GLOBALS['redisInfo']['udbinfo_store'] = []; }
+$GLOBALS['redisInfo']['udbinfo_store'] += array (
+  'connet_timeout' => '0',
+  'db' => '12',
+  'host' => '61.160.36.225',
+  'port' => '6407',
+  'pwd' => 'ojia123',
+);
 if (!isset($GLOBALS['redisInfo']['user_token'])) { $GLOBALS['redisInfo']['user_token'] = []; }
 $GLOBALS['redisInfo']['user_token'] += array (
   'connet_timeout' => '0',
@@ -1155,6 +1306,30 @@ $GLOBALS['wxInfo']['21'] += array (
   'appId' => 'wxfe35364d1802db47',
   'appSecret' => '0feb180a9fe7ba3c5abe06682ba37336',
   'remark' => '单机频道H5',
+);
+if (!isset($GLOBALS['wxInfo']['22'])) { $GLOBALS['wxInfo']['22'] = []; }
+$GLOBALS['wxInfo']['22'] += array (
+  'appId' => 'wx9a3a8627214dfe61',
+  'appSecret' => '726210de9acc820d6c4f452ffeb69894',
+  'remark' => '峡谷小助手',
+);
+if (!isset($GLOBALS['wxInfo']['23'])) { $GLOBALS['wxInfo']['23'] = []; }
+$GLOBALS['wxInfo']['23'] += array (
+  'appId' => 'wxcfcfcfce03cea1a9',
+  'appSecret' => '6d86ebf3c3bf931fb20523146862668e',
+  'remark' => '包你笑哈哈',
+);
+if (!isset($GLOBALS['wxInfo']['24'])) { $GLOBALS['wxInfo']['24'] = []; }
+$GLOBALS['wxInfo']['24'] += array (
+  'appId' => 'wxad6a78f59bcb3d6a',
+  'appSecret' => '241113c718e34412c39878243889cc2f',
+  'remark' => '多玩联盟资讯',
+);
+if (!isset($GLOBALS['wxInfo']['25'])) { $GLOBALS['wxInfo']['25'] = []; }
+$GLOBALS['wxInfo']['25'] += array (
+  'appId' => 'wx350259233c19e0cf',
+  'appSecret' => 'f77d5bdc68f9e88609afe261de7444b2',
+  'remark' => '微剧院小程序',
 );
 if (!isset($GLOBALS['wxInfo']['6'])) { $GLOBALS['wxInfo']['6'] = []; }
 $GLOBALS['wxInfo']['6'] += array (

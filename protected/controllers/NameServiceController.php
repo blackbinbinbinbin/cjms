@@ -6,6 +6,79 @@
  */
 class NameServiceController extends Controller {
 
+    // public function actionNsConfigEnv($args) {
+    //     $rule = [
+    //         'node_name' => ['string', 'desc' => '节点名称'],
+    //         'env' => ['int', 'enum' => [1, 2, 4, 6, 7], 'desc' => '环境：1:测试环境,2:预发布环境,4:正式环境,6:预发布+正式环境,7:所有环境'],
+    //         'targetEnv' => ['string', 'desc' => '目标环境'],
+    //     ];
+    //     Param::checkParam2($rule, $args);
+
+    //     $targetEnv = $args['targetEnv'];
+    //     if ($targetEnv == 'new') {
+    //         $targetEnv = 2;
+    //         $site_ip = "http://" .CJMS_IP_NEW;
+    //         $site_host = CJMS_HOST_NEW;
+    //     } elseif ($targetEnv == 'formal') {
+    //         $targetEnv = 4;
+    //         $site_ip = "http://" .CJMS_IP_FORM;
+    //         $site_host = CJMS_HOST_FORM;
+    //     } else {
+    //         $targetEnv = 1;
+    //         $site_ip = "http://" . CJMS_IP_DEV;
+    //         $site_host = CJMS_HOST_DEV;
+    //     }
+
+    //     $objNsNode = new TableHelper('ns_node', 'Web');
+    //     $where = [
+    //         'node_name' => $args['node_name'],
+    //         'env' => $args['env'],
+    //     ];
+    //     $nodeInfo = $objNsNode->getRow($where);
+    //     if (!$nodeInfo) {
+    //         Response::error(CODE_NORMAL_ERROR, "节点：{$args['node_name']}, env：{$args['env']} 没有数据");
+    //     }
+
+    //     $nodeInfo['env'] = $targetEnv;
+    //     $url = $site_ip . "/nameService/nsNodeConfig";
+    //     $header = "HOST:" . $site_host;
+
+    //     $dwHttp = new dwHttp();
+    //     $json = $dwHttp->post($url, $nodeInfo, 5, $header);
+
+    //     $result = [];
+    //     $result['ns_node']['result'] = $json;
+    //     $result['ns_node']['data'] = $nodeInfo;
+    //     if ($json) {
+    //         $json = json_decode($json, true);
+    //         if ($json['code'] == 0 && $nodeInfo['node_type'] == 'hash_table') {
+    //             $objNsTable = new TableHelper('ns_hash_table', 'Web');
+    //             $nsTables = $objNsTable->getAll($where);
+    //             if ($nsTables) {
+    //                 $data = [
+    //                     'node_name' => $args['node_name'],
+    //                     'env' => $targetEnv,
+    //                     'datas' => $nsTables,
+    //                 ];
+
+    //                 $url = $site_ip . "/nameService/nsHashTable";
+    //                 $json = $dwHttp->post($url, $data, 5, $header);
+    //                 $result['ns_hash_table']['result'] = $json;
+    //                 $result['ns_hash_table']['data'] = $data;
+    //                 if ($json) {
+    //                     $json = json_decode($json, true);
+    //                     if ($json['code'] != 0) {
+    //                         Response::error(CODE_NORMAL_ERROR, $json['msg']);
+    //                     }
+    //                 }
+    //             }
+    //         }else{
+    //             Response::error(CODE_NORMAL_ERROR, $json['msg']);
+    //         }
+    //     }
+    //     return $result;
+    // }
+
     public function actionNsConfigEnv($args) {
         $rule = [
             'node_name' => ['string', 'desc' => '节点名称'],
@@ -16,19 +89,12 @@ class NameServiceController extends Controller {
 
         $targetEnv = $args['targetEnv'];
         if ($targetEnv == 'new') {
-            $targetEnv = 2;
-            $site_ip = "http://" .CJMS_IP_NEW;
-            $site_host = CJMS_HOST_NEW;
+            Response::error(CODE_NORMAL_ERROR, '暂时不支持预发布环境');
         } elseif ($targetEnv == 'formal') {
-            $targetEnv = 4;
-            $site_ip = "http://" .CJMS_IP_FORM;
-            $site_host = CJMS_HOST_FORM;
-        } else {
-            $targetEnv = 1;
-            $site_ip = "http://" . CJMS_IP_DEV;
-            $site_host = CJMS_HOST_DEV;
+            Response::error(CODE_NORMAL_ERROR, '暂时不支持正式环境');
         }
 
+        //直接在本机更新名字服务 conf
         $objNsNode = new TableHelper('ns_node', 'Web');
         $where = [
             'node_name' => $args['node_name'],
@@ -38,49 +104,136 @@ class NameServiceController extends Controller {
         if (!$nodeInfo) {
             Response::error(CODE_NORMAL_ERROR, "节点：{$args['node_name']}, env：{$args['env']} 没有数据");
         }
+        
+        $this->_writeConfigFile($args['env'], $nodeInfo);
+    }
 
-        $nodeInfo['env'] = $targetEnv;
-        $url = $site_ip . "/nameService/nsNodeConfig";
-        $header = "HOST:" . $site_host;
+    private function _writeConfigFile($env, $nsNodes) {
+        if ($this->_fileMakeDir(CONF_PATH)) {
+            return false;
+        }
+        $name = $nsNodes['dir_1'];
+        $objNode = new TableHelper('ns_node', 'Web');
+        $_field = 'node_name, node_type, value_type, node_value, node_tips';
+        $where1 = [
+            'dir_1' => $name,
+            'env' => [$env, 7],
+            'enable' => 1
+        ];
+        $datas = $objNode->getAll($where1, compact('_field'));
+        if (!$datas) {
+            Response::error(CODE_PARAM_ERROR, '没有数据');
+        }
 
-        $dwHttp = new dwHttp();
-        $json = $dwHttp->post($url, $nodeInfo, 5, $header);
-
-        $result = [];
-        $result['ns_node']['result'] = $json;
-        $result['ns_node']['data'] = $nodeInfo;
-        if ($json) {
-            $json = json_decode($json, true);
-            if ($json['code'] == 0 && $nodeInfo['node_type'] == 'hash_table') {
-                $objNsTable = new TableHelper('ns_hash_table', 'Web');
-                $nsTables = $objNsTable->getAll($where);
-                if ($nsTables) {
-                    $data = [
-                        'node_name' => $args['node_name'],
-                        'env' => $targetEnv,
-                        'datas' => $nsTables,
-                    ];
-
-                    $url = $site_ip . "/nameService/nsHashTable";
-                    $json = $dwHttp->post($url, $data, 5, $header);
-                    $result['ns_hash_table']['result'] = $json;
-                    $result['ns_hash_table']['data'] = $data;
-                    if ($json) {
-                        $json = json_decode($json, true);
-                        if ($json['code'] != 0) {
-                            Response::error(CODE_NORMAL_ERROR, $json['msg']);
-                        }
-                    }
-                }
-            }else{
-                Response::error(CODE_NORMAL_ERROR, $json['msg']);
+        $hashKeys = [];
+        foreach ($datas as $data) {
+            if ($data['node_type'] == 'hash_table') {
+                $hashKeys[] = $data['node_name'];
             }
         }
-        return $result;
+
+        $objHashTable = new TableHelper('ns_hash_table', 'Web');
+        $where2 = [
+            'node_name' => $hashKeys,
+            'env' => [$env, 7],
+            'enable' => 1
+        ];
+        $_field = 'node_name,key_name,key_value,value_type';
+        $hashDatas = $objHashTable->getAll($where2, compact('_field'));
+        $hashDatas = arrayFormatKey2($hashDatas, 'node_name');
+
+        foreach ($datas as $i => $data) {
+            if ($data['node_type'] == 'hash_table') {
+                $datas[$i]['items'] = $hashDatas[$data['node_name']];
+            }
+        }
+
+        $nsNodes = $datas;
+        // 特殊的一级目录
+        //    if ($name == 'code') {
+        $items = [];
+        foreach ($nsNodes as $info) {
+            if ($info['node_type'] == 'code') {
+                $items[] = [
+                    'key_name' => $info['node_value'],
+                    'key_value' => $info['node_tips'],
+                    'value_type' => "number",
+                ];
+            }
+        }
+
+        if (count($items) > 0) {
+            $nsNodes[] = [
+                'node_name' => "{$name}:code_map",
+                'node_type' => 'hash_table',
+                'items' => $items,
+            ];
+        }
+        //    }
+
+        $configs = [];
+        foreach ($nsNodes as $info) {
+            $info_name = $info['node_name'];
+            $info_name = explode(':', $info_name);
+            if ($info['node_type'] == 'hash_table') {
+                $keyName = $this->getArrayKey($info['node_name']);
+                $hashTables = $info['items'];
+                $value = [];
+                foreach ($hashTables as $table) {
+                    $value[$table['key_name']] = $table['key_value'];
+                }
+                $configs['hash'][$keyName] = $value;
+            } else {
+                $configs['string'][$info_name[1]] = $info['node_value'];
+            }
+        }
+
+        $template = Template::init();
+        $template->assign(compact('configs'));
+        //    $tmpl = 'php';
+        $tmpls = ['js', 'php'];
+
+
+        $result = 1;
+        $log_msg = '';
+        foreach ($tmpls as $tmpl) {
+            $strConfig = $template->fetch("name_server/{$tmpl}");
+            $path = CONF_PATH . "config.{$name}.inc.{$tmpl}";
+            if (file_put_contents($path, $strConfig)) {
+                $log_msg .= " path:{$path} 生成配置成功 ";
+            } else {
+                $result = -1;
+                $log_msg .= " path:{$path} 生成配置失败 ";
+            }
+            ob_flush();
+        }
+        Response::success($log_msg);
+    }
+
+    private function getArrayKey($keyName) {
+        $keyName = explode(':', $keyName);
+        array_shift($keyName);
+        $str = "['" . join("']['", $keyName) . "']";
+
+        return $str;
+    }
+
+    private function _fileMakeDir($path) {
+        $extend = "/";
+        $dirs = explode($extend, $path);
+        $dirs = array_filter($dirs);
+        $path = $extend;
+        foreach ($dirs as $key => $value) {
+            $path .= $value;
+            if (!is_dir($path)) {
+                mkdir($path, 0777, true);
+            }
+            $path .= $extend;
+        }
     }
 
     /**
-     * 名字服务节点数据同步
+     * 名字服务节点数据同步-同步不同环境时用，暂时不用
      * @param $args
      */
     public function actionNsNodeConfig($args) {
@@ -121,7 +274,7 @@ class NameServiceController extends Controller {
     }
 
     /**
-     * 名字服务节点hash table 同步
+     * 名字服务节点hash table -同步不同环境时用，暂时不用
      * @param $args
      */
     public function actionNsHashTable($args){
@@ -165,7 +318,7 @@ class NameServiceController extends Controller {
                 $data['create_time'] = NOW;
                 $NsTables[] = $data;
             }
-//            $cols = ['node_name', 'env', 'key_name', 'key_value', 'value_type', 'enable', 'creator', 'create_time', 'update_time'];
+            //$cols = ['node_name', 'env', 'key_name', 'key_value', 'value_type', 'enable', 'creator', 'create_time', 'update_time'];
             try{
                 $objNsTable->replaceObjects2($NsTables);
             }catch (Exception  $ex){
@@ -447,7 +600,7 @@ class NameServiceController extends Controller {
         $keyWords = [
             '_where' => "log_time > '{$last_week}'",
             '_field' => 'version_id, creator, log_time',
-//            '_debug' => 1
+            //'_debug' => 1
         ];
         $objPubVersion = new TableHelper('ns_pub_version', 'Web');
         $datas = $objPubVersion->getAll($_where, $keyWords);
@@ -493,7 +646,7 @@ class NameServiceController extends Controller {
                     $nsTables[$k]['create_time'] = NOW;
                     $nsTables[$k]['update_time'] = NOW;
                 }
-//                $cols = ['node_name', 'env', 'key_name', 'key_value', 'value_type', 'enable', 'creator', 'create_time', 'update_time'];
+            //$cols = ['node_name', 'env', 'key_name', 'key_value', 'value_type', 'enable', 'creator', 'create_time', 'update_time'];
                 try {
                     $objNsTable->replaceObjects2($nsTables);
                 } catch (Exception  $ex) {
