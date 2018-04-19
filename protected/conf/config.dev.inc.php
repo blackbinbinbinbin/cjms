@@ -1,7 +1,7 @@
 <?php
 
 define('DEBUG', true);
-
+// 本地开发的时候不需要redis通知名字服务器发布配置，直接生成文件了，其他环境的需要配置
 // $GLOBALS['redisInfo']['name_serv'] = array(
 //   'host' => '127.0.0.1',
 //   'port' => 6405,
@@ -10,6 +10,7 @@ define('DEBUG', true);
 //   'connect_timeout' => 0,
 // );
 
+//默认的两张表
 $GLOBALS['dbInfo']['Web'] = array (
     'enable' => 'true',
     'dbType' => 'mysqli',

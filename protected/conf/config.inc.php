@@ -49,13 +49,19 @@ $GLOBALS['rewrite'] = array(
 $GLOBALS['defaultKey'] = 'Web';
 define("CALL_LOG_KEY", "logstash:dw#1");
 
-define("CJMS_IP_NEW", "61.160.36.226");
-define("CJMS_HOST_NEW", "new.admin.duowan.com");
-define("CJMS_IP_FORM", "61.160.36.226");
-define("CJMS_HOST_FORM", "admin.duowan.com");
-define("CJMS_IP_DEV", "61.160.36.225");
-define("CJMS_HOST_DEV", "test.admin.duowan.com");
+//名字服务中需要发布到不同环境的服务器配置
+//在本地开发环境中默认是生成文件到 /conf/conf_ns 下
+//预发布环境
+// define("CJMS_IP_NEW", "new ip");
+// define("CJMS_HOST_NEW", "new domain");
+//正式环境
+// define("CJMS_IP_FORM", "form ip");
+// define("CJMS_HOST_FORM", "form domain");
+//测试环境
+// define("CJMS_IP_DEV", "dev ip");
+// define("CJMS_HOST_DEV", "dev domain");
 
+// 爬虫配置
 // 代理爬虫，http://fs3.daili666.com 帐号密码
 define("SPIDER_USER", "dwpcgame@163.com");
 define("SPIDER_PASSWORD", "Duowanpc2017");
