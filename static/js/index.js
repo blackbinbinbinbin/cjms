@@ -95,8 +95,9 @@ define(function(require, exports, module) {
     		
     		return url;
     	},
+        // 点击展现数据
         bindNavEvent : function() {
-        	 // 点击展现数据
+             //在这里做 iframe 的url绑定
             $('body').on(BDY.click, "[nodeId]", function() {
          	   var leftUrl = $(this).attr('leftUrl');
          	   var rightUrl = $(this).attr('rightUrl');
@@ -109,6 +110,7 @@ define(function(require, exports, module) {
                // 校验登录、二次密码
                M.checkAnotherPwd();
                
+               //如果节点没有左右url。默认：左default/menuTree，右default/menuList
          	   leftUrl = C.formatUrl(leftUrl, nodeId);
          	   if (!leftUrl) {
          		   leftUrl = SITE_URL + 'default/menuTree?nodeId=' + nodeId;
@@ -142,8 +144,9 @@ define(function(require, exports, module) {
             });
 
         },
-        bindBarEvent : function() {
-        	 //侧边栏拖动事件
+
+        //侧边栏拖动事件
+        bindBarEvent : function() {	 
             $("#bar").draggable({
                 stop: function(event, ui) {
                     $("#treeDiv").css("width", $("#bar").offset().left);

@@ -26,6 +26,7 @@ class VMenuNode extends Model {
         return $this->objTable->getAll($where, array('_sortKey' => 'sortPos ASC'));
     }
     
+    //当前节点下一级节点的数据
     function getDirectSubNode($pId, $display = 1) {
         $pId = (int) $pId;
         $menuDatas = $this->getChildData($pId, $display);
@@ -131,9 +132,7 @@ class VMenuNode extends Model {
     private function _checkDomain($node) {
         // 过滤域名
         if ($node['domain']) {
-            if ($node['domain'] == 'duowan.com' && !IS_DUOWAN) {
-                return false;
-            } else if ($node['domain'] == 'ouj.com' && !IS_OUJ) {
+            if ($node['domain'] == 'funkstyle.com' && !IS_CJMS) {
                 return false;
             }
         }

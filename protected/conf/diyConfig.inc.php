@@ -117,15 +117,7 @@ $GLOBALS['diy']['pageSizes'] = array(
 
 //白名单
 $GLOBALS['diy']['whiteList'] = array(
-  '13501489295',
-  'dw_zhanchaojiang',
-  'dw_linxianda',
-  'dw_luwenbing',
-  'dw_chenjunqiang',
-  'dw_sushaoyong',
-  'dw_xubin1',
-	'dw_panxinghuan',
-	'dw_liyanjie',
+    'admin',
 );
 
 //end of script

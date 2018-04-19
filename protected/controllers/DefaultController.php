@@ -157,7 +157,7 @@ class DefaultController extends BaseController {
 //            $mapKey = "{$mapData['nameDb']}:{$mapData['sourceTable']}:{$mapData['keyName']}:{$mapData['valueName']}";
 //            if (!$mapData['mapKey']) {
 //                $mapId = $mapData['mapId'];
-//                $objMap->updateObject(compact('mapKey'), compact('mapId'));
+//                $ob jMap->updateObject(compact('mapKey'), compact('mapId'));
 //                $mapIds[] = $mapId;
 //            }
 //        }
@@ -183,4 +183,9 @@ class DefaultController extends BaseController {
 //
 //        return $mapIds;
 //    }
+
+
+    public function actionDelNode() {
+
+    }
 }

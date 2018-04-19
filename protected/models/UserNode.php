@@ -11,6 +11,7 @@ class UserNode extends Model {
         return $userIds;
     }
     
+    //取这个节点上一级父节点，和下一级子节点，包括自己，的有权限用户
     function getAllUserIds($nodeId) {
         // 计算父节点
         $objRMenu = new RMenuNode();

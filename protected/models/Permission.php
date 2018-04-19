@@ -64,13 +64,13 @@ class Permission {
 	 * @return boolean
 	 */
 	public static function checkRight($nodeId, $userId = null) {
-		return true;
 	    $userId || $userId = $_SESSION['username'];
+	    //现在白名单内查找
 	    if (self::isAdmin3($userId)) {
 	        return true;
 	    }
 
-
+	    //再在节点内查找是否有该用户
 	    $objUserNode = new UserNode();
 	    $allUserIds = $objUserNode->getAllUserIds($nodeId);
 //	    var_dump($userId, $allUserIds);exit;
