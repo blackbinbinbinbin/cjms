@@ -58,8 +58,8 @@ define("CALL_LOG_KEY", "logstash:dw#1");
 // define("CJMS_IP_FORM", "form ip");
 // define("CJMS_HOST_FORM", "form domain");
 //测试环境
-// define("CJMS_IP_DEV", "dev ip");
-// define("CJMS_HOST_DEV", "dev domain");
+define("CJMS_IP_DEV", "127.0.0.1");
+define("CJMS_HOST_DEV", "cjms.funkstyle.com");
 
 // 爬虫配置
 // 代理爬虫，http://fs3.daili666.com 帐号密码

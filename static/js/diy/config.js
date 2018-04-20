@@ -35,6 +35,7 @@ define(function(require, exports, module) {
         },
         getTables : function() {
 			var url = lib.url + "diyConfig/getTables";
+            console.log('in');
             var data = M.getDbData();
             data.sourceDb = data.sourceDb || $('#sourceDb').attr('defaultValue');
             
@@ -78,6 +79,7 @@ define(function(require, exports, module) {
             });
         },
         getDbData : function() {
+            alert('in');
             var data = {};
             data.tableId = $('#tableId').val() || lib.getParam('tableId');
             var args = ['nameDb', 'dbId', 'sourceHost', 'sourcePort', 'sourceUser', 'sourcePass', 'sourceDb', 'sourceTable', 'templateField'];

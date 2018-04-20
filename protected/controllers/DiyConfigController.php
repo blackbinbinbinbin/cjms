@@ -129,7 +129,7 @@ class DiyConfigController extends BaseController {
             'nameDb' => array('string', 'nullable' => true),
         );
         Param::checkParam($rules, $args);
-    
+
         $oConfig= new Diy_Config();
         $datas = $oConfig->getTables($args);
         $tData = [];

@@ -32,6 +32,7 @@ class Diy_Config {
 	
 	public function getTables($args) {
 	    $db = $this->_getDb($args);
+
 	    $args = $db->escape($args);
 
 		if ($args['nameDb']) {
@@ -41,7 +42,6 @@ class Diy_Config {
             $row = $objDiyDb->objTable->getRow(['dbId' => $args['dbId']]);
             $args = array_merge($args, $row);
         }
-
 	    $sql = "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = '{$args['sourceDb']}'";
 	    return $db->getCol($sql);
 	}
