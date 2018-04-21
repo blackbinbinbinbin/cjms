@@ -79,7 +79,6 @@ define(function(require, exports, module) {
             });
         },
         getDbData : function() {
-            alert('in');
             var data = {};
             data.tableId = $('#tableId').val() || lib.getParam('tableId');
             var args = ['nameDb', 'dbId', 'sourceHost', 'sourcePort', 'sourceUser', 'sourcePass', 'sourceDb', 'sourceTable', 'templateField'];
