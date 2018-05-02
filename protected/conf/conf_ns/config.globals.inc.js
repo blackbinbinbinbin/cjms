@@ -13,8 +13,8 @@ global["BS2_VIDEO_BUCKET"] = 'ojiastorevideos';
 // 数组
  
 var dbInfo = {};
-dbInfo["crawl"] = {"dbHost":"61.160.36.225","dbName":"crawl","dbPass":"ojia305","dbPort":"3306","dbType":"mysqli","dbUser":"ojiatest","enable":"true"}; 
+dbInfo["crawl"] = {"dbHost":"127.0.0.1","dbName":"crawl","dbPass":"root","dbPort":"3306","dbType":"mysqli","dbUser":"root","enable":"true"}; 
 dbInfo["ms"] = {"dbHost":"127.0.0.1","dbName":"ms","dbPass":"root","dbPort":"3306","dbType":"mysqli","dbUser":"root","enable":"1"}; 
-dbInfo["Report"] = {"dbHost":"61.160.36.225","dbName":"Report","dbPass":"root","dbPort":"3306","dbType":"mysqli","dbUser":"root","enable":"true"}; 
+dbInfo["Report"] = {"dbHost":"127.0.0.1","dbName":"Report","dbPass":"root","dbPort":"3306","dbType":"mysqli","dbUser":"root","enable":"true"}; 
 dbInfo["Web"] = {"dbHost":"127.0.0.1","dbName":"Web","dbPass":"root","dbPort":"3306","dbType":"mysqli","dbUser":"root","enable":"true"};
 exports["dbInfo"] = dbInfo;

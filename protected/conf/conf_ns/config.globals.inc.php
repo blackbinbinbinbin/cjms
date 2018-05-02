@@ -15,12 +15,12 @@ defined('BS2_VIDEO_BUCKET') || define('BS2_VIDEO_BUCKET', 'ojiastorevideos');
 //数组
 if (!isset($GLOBALS['dbInfo']['crawl'])) { $GLOBALS['dbInfo']['crawl'] = []; }
 $GLOBALS['dbInfo']['crawl'] += array (
-  'dbHost' => '61.160.36.225',
+  'dbHost' => '127.0.0.1',
   'dbName' => 'crawl',
-  'dbPass' => 'ojia305',
+  'dbPass' => 'root',
   'dbPort' => '3306',
   'dbType' => 'mysqli',
-  'dbUser' => 'ojiatest',
+  'dbUser' => 'root',
   'enable' => 'true',
 );
 if (!isset($GLOBALS['dbInfo']['ms'])) { $GLOBALS['dbInfo']['ms'] = []; }
@@ -35,7 +35,7 @@ $GLOBALS['dbInfo']['ms'] += array (
 );
 if (!isset($GLOBALS['dbInfo']['Report'])) { $GLOBALS['dbInfo']['Report'] = []; }
 $GLOBALS['dbInfo']['Report'] += array (
-  'dbHost' => '61.160.36.225',
+  'dbHost' => '127.0.0.1',
   'dbName' => 'Report',
   'dbPass' => 'root',
   'dbPort' => '3306',
