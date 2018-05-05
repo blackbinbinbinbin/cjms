@@ -1,29 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 2018-04-21 06:29:59
--- 服务器版本： 5.7.14
--- PHP Version: 7.0.10
+-- Host: localhost:3306
+-- Generation Time: May 05, 2018 at 04:32 AM
+-- Server version: 5.6.38
+-- PHP Version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
--- Database: `web`
+-- Database: `Web`
 --
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `chapter_data_static`
+-- Table structure for table `chapter_data_static`
 --
 
 CREATE TABLE `chapter_data_static` (
@@ -37,7 +31,7 @@ CREATE TABLE `chapter_data_static` (
 -- --------------------------------------------------------
 
 --
--- 表的结构 `cmenunode`
+-- Table structure for table `cmenunode`
 --
 
 CREATE TABLE `cmenunode` (
@@ -56,7 +50,7 @@ CREATE TABLE `cmenunode` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='节点表';
 
 --
--- 转存表中的数据 `cmenunode`
+-- Dumping data for table `cmenunode`
 --
 
 INSERT INTO `cmenunode` (`nodeId`, `nodeName`, `leftUrl`, `rightUrl`, `leftTableId`, `rightTableId`, `appid`, `moduleName`, `needAnotherPwd`, `domain`, `display`, `openNewWindow`) VALUES
@@ -205,7 +199,7 @@ INSERT INTO `cmenunode` (`nodeId`, `nodeName`, `leftUrl`, `rightUrl`, `leftTable
 (155, '热门话题', '', '/DiyData/report?tableId=cd37dd4f-6fbe-3c0c-fcbe-98544fb2607d', '', 'cd37dd4f-6fbe-3c0c-fcbe-98544fb2607d', '', '', 0, NULL, 1, 0),
 (156, '新闻关键字', '', '/DiyData/report?tableId=e9d05b54-e2fa-6017-a8ed-8c7510f8c54e', '', 'e9d05b54-e2fa-6017-a8ed-8c7510f8c54e', '', '', 0, NULL, 1, 0),
 (157, '帖子管理', '', '/DiyData/report?tableId=d36af468-4f38-fa39-10ee-2318156a4949', '', 'd36af468-4f38-fa39-10ee-2318156a4949', '2', 'app', 0, NULL, 1, 0),
-(158, '推荐帖子', '', '/DiyData/report?tableId=d36af468-4f38-fa39-10ee-2318156a4949&_nodeId=158#!where=[["adminType","=","1"]]', '', 'd36af468-4f38-fa39-10ee-2318156a4949', '', '', 0, NULL, 1, 0),
+(158, '推荐帖子', '', '/DiyData/report?tableId=d36af468-4f38-fa39-10ee-2318156a4949&_nodeId=158#!where=[[\"adminType\",\"=\",\"1\"]]', '', 'd36af468-4f38-fa39-10ee-2318156a4949', '', '', 0, NULL, 1, 0),
 (159, '用户管理', '', '/DiyData/report?tableId=216db5b6-ebd5-61eb-beb7-3b8d965e2ff2', '', '216db5b6-ebd5-61eb-beb7-3b8d965e2ff2', '', '', 0, NULL, 1, 0),
 (160, '本周达人', '', '/DiyData/report?tableId=7a1ec7d2-e040-29ad-4468-831efd9b1dbd', '', '7a1ec7d2-e040-29ad-4468-831efd9b1dbd', '', '', 0, NULL, 1, 0),
 (161, '增加达人', '', 'http://test.hicms.admin.ouj.com/snsUser/addUserRecommend', '', '', '2', 'snsUser', 0, NULL, 1, 0),
@@ -235,7 +229,7 @@ INSERT INTO `cmenunode` (`nodeId`, `nodeName`, `leftUrl`, `rightUrl`, `leftTable
 (185, '勋章管理', '', '/DiyData/report?tableId=2181bd71-be02-5a71-d502-499a64a4c81d', '', '2181bd71-be02-5a71-d502-499a64a4c81d', '', '', 0, NULL, 1, 0),
 (186, '课程组', '', '/DiyData/report?tableId=7384ec24-2e9e-3950-ffb8-f62ce7229b7e', '', '7384ec24-2e9e-3950-ffb8-f62ce7229b7e', '1', '1', 0, NULL, 1, 0),
 (187, '超级组管理', '', '/DiyData/report?tableId=8aa27258-c7e9-3f13-091d-ff90385c541d', '', '8aa27258-c7e9-3f13-091d-ff90385c541d', '', '', 0, NULL, 1, 0),
-(188, '超级组动作', '', '/DiyData/report?tableId=78b7747a-1aca-131c-da9d-3e3f36ffeb73#!where=[["group_id","=","1"]]&_page=3&_sortKey=bb_cid ASC,day ASC,workout_type ASC,sequence ASC&_pageSize=100', '', '78b7747a-1aca-131c-da9d-3e3f36ffeb73', '', '', 0, NULL, 1, 0),
+(188, '超级组动作', '', '/DiyData/report?tableId=78b7747a-1aca-131c-da9d-3e3f36ffeb73#!where=[[\"group_id\",\"=\",\"1\"]]&_page=3&_sortKey=bb_cid ASC,day ASC,workout_type ASC,sequence ASC&_pageSize=100', '', '78b7747a-1aca-131c-da9d-3e3f36ffeb73', '', '', 0, NULL, 1, 0),
 (189, 'BB课程', '', '', '', '', '', '', 0, NULL, 1, 0),
 (190, '课程管理', '', '/DiyData/report?tableId=afb986bf-0e73-8e67-d595-0fb55e0bbfbc', '', 'afb986bf-0e73-8e67-d595-0fb55e0bbfbc', '', '', 0, NULL, 1, 0),
 (191, '动作管理', '', '/DiyData/report?tableId=78b7747a-1aca-131c-da9d-3e3f36ffeb73&_sortKey=bb_cid ASC,day ASC,workout_type ASC,sequence ASC&_pageSize=100', '', '78b7747a-1aca-131c-da9d-3e3f36ffeb73', '', '', 0, NULL, 1, 0),
@@ -252,13 +246,13 @@ INSERT INTO `cmenunode` (`nodeId`, `nodeName`, `leftUrl`, `rightUrl`, `leftTable
 (202, '课程分组', '', '/DiyData/report?tableId=0bbc682e-068d-d497-31b0-15a5e049d9f8', '', '0bbc682e-068d-d497-31b0-15a5e049d9f8', '', '', 0, NULL, 1, 0),
 (203, '课程分类', '', '/DiyData/report?tableId=38ab159b-ffaa-cafd-e163-6caf20112fea#!where=[]', '', '38ab159b-ffaa-cafd-e163-6caf20112fea', '1', '1', 0, NULL, 1, 0),
 (204, '导入CSV', '', 'http://test.hicms.admin.ouj.com/bbCourse/importDayInfo', '', '', '2', 'bbCourse', 0, NULL, 1, 0),
-(205, '新收录动作', '', '/DiyData/report?tableId=ac06f389-96c5-abdc-53e0-438c9593cbaa#!where=[["is_new","=","1"]]&_sortKey=bb_cid asc,day asc,workout_type asc,sequence asc', '', 'ac06f389-96c5-abdc-53e0-438c9593cbaa', '', '', 0, NULL, 1, 0),
+(205, '新收录动作', '', '/DiyData/report?tableId=ac06f389-96c5-abdc-53e0-438c9593cbaa#!where=[[\"is_new\",\"=\",\"1\"]]&_sortKey=bb_cid asc,day asc,workout_type asc,sequence asc', '', 'ac06f389-96c5-abdc-53e0-438c9593cbaa', '', '', 0, NULL, 1, 0),
 (206, '已删除帖子', '', '/DiyData/report?tableId=aee5a1ab-66f5-7f99-3849-f921dfd90b72', '', 'aee5a1ab-66f5-7f99-3849-f921dfd90b72', '', '', 0, NULL, 1, 0),
 (207, '用户举报', '', '/DiyData/report?tableId=497791be-af07-681f-3cb3-c2e155b663f1', '', '497791be-af07-681f-3cb3-c2e155b663f1', '', '', 0, NULL, 1, 0),
 (208, '动作组描述', '', '/DiyData/report?tableId=a6ae8dc3-e04f-a901-046d-a33c6963b5ae#!where=[]', '', 'a6ae8dc3-e04f-a901-046d-a33c6963b5ae', '', '', 0, NULL, 1, 0),
 (209, '训练组管理', '', '/DiyData/report?tableId=6aca2866-cfb9-f12b-a53f-bb9a4cd4fd5d', '', '6aca2866-cfb9-f12b-a53f-bb9a4cd4fd5d', '', '', 0, NULL, 1, 0),
 (210, '意见反馈', '', '/DiyData/report?tableId=bf377dbf-d61d-df56-c07b-cf8f68d8237a#!where=[]', '', 'bf377dbf-d61d-df56-c07b-cf8f68d8237a', '', '', 0, NULL, 1, 0),
-(211, '动作要领图排序', '', '/DiyData/report?tableId=134c6886-96ca-0018-73fa-eb8e5f20319f#!where=[["key_type","in","exe_explain_pic\\nexe_explain_pic_f"],["gender","=","exe_explain_pic"],["key_id",">=","220"]]', '', '134c6886-96ca-0018-73fa-eb8e5f20319f', '', '', 0, NULL, 1, 0),
+(211, '动作要领图排序', '', '/DiyData/report?tableId=134c6886-96ca-0018-73fa-eb8e5f20319f#!where=[[\"key_type\",\"in\",\"exe_explain_pic\\nexe_explain_pic_f\"],[\"gender\",\"=\",\"exe_explain_pic\"],[\"key_id\",\">=\",\"220\"]]', '', '134c6886-96ca-0018-73fa-eb8e5f20319f', '', '', 0, NULL, 1, 0),
 (212, '动作导入', '', '/DiyData/report?tableId=561e69f0-c11e-7911-ba3c-f21b794efb3f#!where=[]', '', '561e69f0-c11e-7911-ba3c-f21b794efb3f', '', '', 0, NULL, 1, 0),
 (213, '阶段测试管理', '', 'http://test.hiyd.admin.ouj.com/test/list.do', '', '', '1', '1', 0, NULL, 1, 0),
 (214, '课程属性', '', 'http://test.hicms.admin.ouj.com/bbCourse/attr', '', '', '4', 'bbCourse', 0, NULL, 1, 0),
@@ -325,7 +319,7 @@ INSERT INTO `cmenunode` (`nodeId`, `nodeName`, `leftUrl`, `rightUrl`, `leftTable
 (275, '多玩饭盒', '', '', '', '', '', '', 0, 'duowan.com', 1, 0),
 (276, 'Node 26', '', '', '', '', '', '', 0, NULL, 1, 0),
 (277, '播客号信息设置', '', 'http://test.fanhe.admin.duowan.com/mediaAccount/main', '', '', '2', 'mediaAccount', 0, 'duowan.com', 1, 0),
-(278, '播客号审核', '', '/DiyData/report?tableId=13df93e7-4b7c-bceb-e002-d17c922f2fa4#!where=[["status","=","0"]]', '', '13df93e7-4b7c-bceb-e002-d17c922f2fa4', '', '', 0, 'duowan.com', 1, 0),
+(278, '播客号审核', '', '/DiyData/report?tableId=13df93e7-4b7c-bceb-e002-d17c922f2fa4#!where=[[\"status\",\"=\",\"0\"]]', '', '13df93e7-4b7c-bceb-e002-d17c922f2fa4', '', '', 0, 'duowan.com', 1, 0),
 (279, '标签管理', '', 'http://test.fanhe.admin.duowan.com/tag/list', '', '', '2', 'tag', 0, 'duowan.com', 1, 0),
 (280, '公告编辑', '', 'http://test.fanhe.admin.duowan.com/notice/edit', '', '', '2', 'notice', 0, 'duowan.com', 1, 0),
 (281, '多玩广告系统', '', '', '', '', '', '', 0, 'duowan.com', 1, 0),
@@ -391,7 +385,7 @@ INSERT INTO `cmenunode` (`nodeId`, `nodeName`, `leftUrl`, `rightUrl`, `leftTable
 (346, '发号出库', '', 'http://test.ka.admin.duowan.com/gift/addOnlinePage', '', '', '4', 'ka', 0, '', 1, 0),
 (347, '播客号推荐位', '', '', '', '', '', '', 0, 'duowan.com', 1, 0),
 (352, '用户分数记录', '', 'http://test.fanhe.admin.duowan.com/user/scoreRecord', '', '', '2', 'user', 0, 'duowan.com', 1, 0),
-(354, '页游管理', '', '/DiyData/report?tableId=c24f46cb-8349-c92f-b3a4-c9deae0fda44#!where=[["game_platform","=","2"]]', '', 'c24f46cb-8349-c92f-b3a4-c9deae0fda44', '', '', 0, 'duowan.com', 1, 0),
+(354, '页游管理', '', '/DiyData/report?tableId=c24f46cb-8349-c92f-b3a4-c9deae0fda44#!where=[[\"game_platform\",\"=\",\"2\"]]', '', 'c24f46cb-8349-c92f-b3a4-c9deae0fda44', '', '', 0, 'duowan.com', 1, 0),
 (358, 'Node 33', '', '', '', '', '', '', 0, NULL, 1, 0),
 (362, '标签权限管理', '', '/DiyData/report?tableId=58306a65-b35b-3ab1-860c-a3b08b4da979', '', '58306a65-b35b-3ab1-860c-a3b08b4da979', '', '', 0, '', 1, 0),
 (1102, '发布吧活动', '', '/DiyData/report?tableId=af8d22ff-7553-73ec-0625-157675ff4ee8', '', 'af8d22ff-7553-73ec-0625-157675ff4ee8', '', '', 0, '', 1, 0),
@@ -526,7 +520,7 @@ INSERT INTO `cmenunode` (`nodeId`, `nodeName`, `leftUrl`, `rightUrl`, `leftTable
 (7030, '资源更新记录', '', '/DiyData/report?tableId=9114d798-82a8-bf17-c105-3f4638e2cae9', '', '9114d798-82a8-bf17-c105-3f4638e2cae9', '', '', 0, '', 1, 0),
 (7032, 'Andorid资源', '', '/DiyData/report?tableId=83cea83e-7f47-494d-979c-4bf63d8a3068', '', '83cea83e-7f47-494d-979c-4bf63d8a3068', '', '', 0, '', 1, 0),
 (7033, 'iOS资源', '', '/DiyData/report?tableId=59604908-0185-484a-37a1-ecc368530261', '', '59604908-0185-484a-37a1-ecc368530261', '', '', 0, '', 1, 0),
-(7040, 'pc片段管理', '', '/DiyData/report?tableId=587e25e1-6dea-2979-76df-c8a45f600575#!where=[["tpl_id","like","sy:"]]', '', '587e25e1-6dea-2979-76df-c8a45f600575', '', '', 0, '', 1, 0),
+(7040, 'pc片段管理', '', '/DiyData/report?tableId=587e25e1-6dea-2979-76df-c8a45f600575#!where=[[\"tpl_id\",\"like\",\"sy:\"]]', '', '587e25e1-6dea-2979-76df-c8a45f600575', '', '', 0, '', 1, 0),
 (7050, '编辑模板（多玩手游）', '', 'http://hicms.admin.duowan.com/tpl/edit?tpl_id=1', '', '', '2', 'tpl', 0, '', 0, 0),
 (7051, '幻灯片广告', '', '/DiyData/report?tableId=f4124d03-faff-35f9-178a-be3e3f2589c5', '', 'f4124d03-faff-35f9-178a-be3e3f2589c5', '', '', 0, 'duowan.com', 1, 0),
 (7052, '用户相关', '', '', '', '', '', '', 0, '', 1, 0),
@@ -549,15 +543,15 @@ INSERT INTO `cmenunode` (`nodeId`, `nodeName`, `leftUrl`, `rightUrl`, `leftTable
 (7069, '连载专题', '', 'http://test.glance.admin.ouj.com/serialize/list', '', '', '6000', 'serialize', 0, '', 1, 0),
 (7070, '关键字设置', '', '/DiyData/report?tableId=0b9ce289-fff1-2fe9-4863-dfbd1f0c7573', '', '0b9ce289-fff1-2fe9-4863-dfbd1f0c7573', '', '', 0, '', 1, 0),
 (7072, '发布日志', '', '/DiyData/report?tableId=d455da9e-87ec-b965-9844-dfc29d5610a4', '', 'd455da9e-87ec-b965-9844-dfc29d5610a4', '', '', 0, '', 1, 0),
-(7073, '通用爬虫系统', '', '/DiyData/report?tableId=4eecf423-631b-6210-78ee-8c2f45fa9d6d', '', '4eecf423-631b-6210-78ee-8c2f45fa9d6d', '', '', 0, '', 1, 0),
-(7074, '页面分析', '', '/DiyData/report?tableId=4424e428-3ac7-e981-ec28-96592dbd5739', '', '4424e428-3ac7-e981-ec28-96592dbd5739', '', '', 0, '', 1, 0),
-(7075, '爬虫任务', '', '/DiyData/report?tableId=377f0d04-18d7-3c04-a494-0eb3ca9ef157', '', '377f0d04-18d7-3c04-a494-0eb3ca9ef157', '', '', 0, '', 1, 0),
+(7073, '通用爬虫系统', '', '/DiyData/report?tableId=cf0700b3-4a97-2a9c-5970-e8c8e91e449a#!where=[]', '', 'cf0700b3-4a97-2a9c-5970-e8c8e91e449a', '', '', 0, '', 1, 0),
+(7074, '页面分析', '', '/DiyData/report?tableId=6728ff49-7a10-df1e-9721-ba97c0c77257', '', '6728ff49-7a10-df1e-9721-ba97c0c77257', '', '', 0, '', 1, 0),
+(7075, '爬虫任务', '', '/DiyData/report?tableId=911a5181-e858-0696-a836-72516aead598', '', '911a5181-e858-0696-a836-72516aead598', '', '', 0, '', 1, 0),
 (7076, '专题系列', '', '/DiyData/report?tableId=3cc18777-3c5a-b85b-45bd-cde7438c511b', '', '3cc18777-3c5a-b85b-45bd-cde7438c511b', '', '', 0, '', 1, 0),
 (7077, '功能性专题入口', '', '/DiyData/report?tableId=583134dc-7675-d01e-64f3-884cfd456f30#!where=[]', '', '583134dc-7675-d01e-64f3-884cfd456f30', '', '', 0, '', 1, 0),
 (7078, '首页入口', '', '/DiyData/report?tableId=5571527c-7e49-fa9e-fee5-b3a01e005fbf', '', '5571527c-7e49-fa9e-fee5-b3a01e005fbf', '', '', 0, '', 1, 0),
 (7079, '单机频道', '', '/DiyData/report?tableId=01fa570e-6bb4-09e2-42f4-aa0bf7c28fc9', '', '01fa570e-6bb4-09e2-42f4-aa0bf7c28fc9', '', '', 0, '', 1, 0),
 (7080, '自定义区域', '', '/DiyData/report?tableId=c9bdb68a-bcf9-ac74-5565-fb0cdd64a2ba#!where=[]', '', 'c9bdb68a-bcf9-ac74-5565-fb0cdd64a2ba', '', '', 0, '', 1, 0),
-(7081, '爬虫日志', '', '/DiyData/report?tableId=a906cefb-4d8c-39f1-d192-7ce8b777e2d1', '', 'a906cefb-4d8c-39f1-d192-7ce8b777e2d1', '', '', 0, '', 1, 0),
+(7081, '爬虫日志', '', '/DiyData/report?tableId=2a4eecd0-12fc-28ba-fade-84cfd7baecfa', '', '2a4eecd0-12fc-28ba-fade-84cfd7baecfa', '', '', 0, '', 1, 0),
 (7082, 'steam游戏类型', '', '/DiyData/report?tableId=b5254e74-71ce-bba9-527b-41cde3664e66', '', 'b5254e74-71ce-bba9-527b-41cde3664e66', '', '', 0, '', 1, 0),
 (7083, 'steam游戏dlc包', '', '/DiyData/report?tableId=47552757-d8de-e616-0f1a-2a31f5f9e438', '', '47552757-d8de-e616-0f1a-2a31f5f9e438', '', '', 0, '', 1, 0),
 (7084, '爬虫库表', '', '/DiyData/report?tableId=3bc67ae6-5b63-39a2-4416-da6b661c4824', '', '3bc67ae6-5b63-39a2-4416-da6b661c4824', '', '', 0, '', 0, 0),
@@ -601,7 +595,7 @@ INSERT INTO `cmenunode` (`nodeId`, `nodeName`, `leftUrl`, `rightUrl`, `leftTable
 (7122, 'UP主公告', '', '/DiyData/report?tableId=1f221c36-4821-6fab-c5ac-385ee984f5a9#!where=[]', '', '1f221c36-4821-6fab-c5ac-385ee984f5a9', '', '', 0, '', 1, 0),
 (7123, '联运游戏广告', '', '/DiyData/report?tableId=808fec63-23ad-91f5-4e61-b4107cdabf14', '', '808fec63-23ad-91f5-4e61-b4107cdabf14', '', '', 0, '', 1, 0),
 (7124, '模版管理', '', '', '', '', '', '', 0, '', 1, 0),
-(7125, '页面模版', '', '/DiyData/report?tableId=587e25e1-6dea-2979-76df-c8a45f600575#!where=[["tpl_id","like","steam:"]]', '', '587e25e1-6dea-2979-76df-c8a45f600575', '', '', 0, '', 1, 0),
+(7125, '页面模版', '', '/DiyData/report?tableId=587e25e1-6dea-2979-76df-c8a45f600575#!where=[[\"tpl_id\",\"like\",\"steam:\"]]', '', '587e25e1-6dea-2979-76df-c8a45f600575', '', '', 0, '', 1, 0),
 (7126, '专题模版', '', '/DiyData/report?tableId=4964cc99-bc33-c345-3b65-e5484edbcf4c', '', '4964cc99-bc33-c345-3b65-e5484edbcf4c', '', '', 0, '', 1, 0),
 (7127, '专题游戏列表', '', '/DiyData/report?tableId=8310a2ab-d119-284e-3d2a-447dab9743cc', '', '8310a2ab-d119-284e-3d2a-447dab9743cc', '', '', 0, '', 1, 0),
 (7128, '影片合集', '', '/DiyData/report?tableId=14f8c5c6-3f36-c19f-54af-ddcf19b09b16#!where=[]', '', '14f8c5c6-3f36-c19f-54af-ddcf19b09b16', '', '', 0, '', 1, 0),
@@ -652,7 +646,7 @@ INSERT INTO `cmenunode` (`nodeId`, `nodeName`, `leftUrl`, `rightUrl`, `leftTable
 (7173, '答案列表', '', '/DiyData/report?tableId=3a5835c9-17d3-b17c-90f5-d362a36aafc5', '', '3a5835c9-17d3-b17c-90f5-d362a36aafc5', '', '', 0, '', 1, 0),
 (7174, '提现申请', '', '/DiyData/report?tableId=b2f72b31-289e-e287-f39e-89937b59f2b6#!where=[]', '', 'b2f72b31-289e-e287-f39e-89937b59f2b6', '', '', 0, '', 1, 0),
 (7175, 'H5小游戏', '', '', '', '', '', '', 0, '', 1, 0),
-(7176, '模版管理', '', '/DiyData/report?tableId=587e25e1-6dea-2979-76df-c8a45f600575#!where=[["tpl_id","like","sy:pc"]]', '', '587e25e1-6dea-2979-76df-c8a45f600575', '', '', 0, '', 1, 0),
+(7176, '模版管理', '', '/DiyData/report?tableId=587e25e1-6dea-2979-76df-c8a45f600575#!where=[[\"tpl_id\",\"like\",\"sy:pc\"]]', '', '587e25e1-6dea-2979-76df-c8a45f600575', '', '', 0, '', 1, 0),
 (7177, 'H5小游戏列表', '', '/DiyData/report?tableId=0184482f-45cd-ec68-8b4d-f1733dba85ef', '', '0184482f-45cd-ec68-8b4d-f1733dba85ef', '', '', 0, '', 1, 0),
 (7178, '包你笑', '', '', '', '', '', '', 0, 'duowan.com', 1, 0),
 (7179, '表情管理', '', '/DiyData/report?tableId=7deeeb70-b5d7-46f4-7a5e-23a241712eda', '', '7deeeb70-b5d7-46f4-7a5e-23a241712eda', '', '', 0, 'duowan.com', 1, 0),
@@ -662,42 +656,42 @@ INSERT INTO `cmenunode` (`nodeId`, `nodeName`, `leftUrl`, `rightUrl`, `leftTable
 (7183, '上传素材', '', '/DiyData/report?tableId=8f4f489a-a519-91cc-e022-6a11d84577e2', '', '8f4f489a-a519-91cc-e022-6a11d84577e2', '', '', 0, 'duowan.com', 1, 0),
 (7184, '用户黑名单', '', '/DiyData/report?tableId=3c25efe8-6da3-e83f-c90f-95ca1e111d1e', '', '3c25efe8-6da3-e83f-c90f-95ca1e111d1e', '', '', 0, 'duowan.com', 1, 0),
 (7185, 'ip黑名单', '', '/DiyData/report?tableId=49c558b7-aa72-8930-2f35-13d4254e47d2', '', '49c558b7-aa72-8930-2f35-13d4254e47d2', '', '', 0, 'duowan.com', 1, 0),
-(7186, '统计-发红包数据', '', '/DiyData/report?tableId=c4956d10-8bb6-2d20-0f06-af2b1deb627f#!where=[["pay_state","=","2"],["create_time",":","2018-02-03 00:00",""]]&_showGroupBy=1&_groupby=emotion_type,create_time&_page=1&_sortKey=create_time&_sortDir=ASC&_count=pack_id&_distinctCount=from_user_id&_sum=pack_total_money', '', 'c4956d10-8bb6-2d20-0f06-af2b1deb627f', '', '', 0, 'duowan.com', 1, 0),
+(7186, '统计-发红包数据', '', '/DiyData/report?tableId=c4956d10-8bb6-2d20-0f06-af2b1deb627f#!where=[[\"pay_state\",\"=\",\"2\"],[\"create_time\",\":\",\"2018-02-03 00:00\",\"\"]]&_showGroupBy=1&_groupby=emotion_type,create_time&_page=1&_sortKey=create_time&_sortDir=ASC&_count=pack_id&_distinctCount=from_user_id&_sum=pack_total_money', '', 'c4956d10-8bb6-2d20-0f06-af2b1deb627f', '', '', 0, 'duowan.com', 1, 0),
 (7187, '统计-抢红包总人数', '', '/DiyData/report?tableId=4d91312c-2512-b75c-b24e-beca8c9a193d#!where=[]&_showGroupBy=1&_distinctCount=to_user_id&_groupby=create_time', '', '4d91312c-2512-b75c-b24e-beca8c9a193d', '', '', 0, 'duowan.com', 1, 0),
-(7188, '统计-提现', '', '/DiyData/report?tableId=2ab74405-454d-be95-1579-26c865f8d247#!where=[["change_type","=","4"]]&_showGroupBy=1&_groupby=create_time&_distinctCount=user_id&_sum=change_money,cash_service_charge', '', '2ab74405-454d-be95-1579-26c865f8d247', '', '', 0, 'duowan.com', 1, 0),
+(7188, '统计-提现', '', '/DiyData/report?tableId=2ab74405-454d-be95-1579-26c865f8d247#!where=[[\"change_type\",\"=\",\"4\"]]&_showGroupBy=1&_groupby=create_time&_distinctCount=user_id&_sum=change_money,cash_service_charge', '', '2ab74405-454d-be95-1579-26c865f8d247', '', '', 0, 'duowan.com', 1, 0),
 (7189, '统计-官方红包新用户名单', '', '/DiyData/report?tableId=cb56091c-f2c5-b58e-e0e7-263ae460a8df#!where=[]&_showGroupBy=1&_save=pack_id,to_user_id,service_charge,create_time,user_pack_create_time', '', 'cb56091c-f2c5-b58e-e0e7-263ae460a8df', '', '', 0, 'duowan.com', 1, 0),
 (7190, '统计-官方红包收益', '', '/DiyData/report?tableId=12416018-7c72-f836-1a70-1678b1b440ec#!where=[]&_groupby=pack_id&_showGroupBy=1&_distinctCount=to_user_id&_sum=service_charge&_save=create_time,LTV1,LTV2,LTV3,LTV5,LTV7,LTV15,LTV30', '', '12416018-7c72-f836-1a70-1678b1b440ec', '', '', 0, 'duowan.com', 1, 0),
 (7191, '场次数据', '', '', '', '', '', '', 0, '', 1, 0),
-(7192, '最终分钱人数', '', '/DiyData/report?tableId=d376a342-b709-7c4b-712e-bcf0ea8b3359#!where=[["showId","=","5"]]&_showGroupBy=1&_count=uid', '', 'd376a342-b709-7c4b-712e-bcf0ea8b3359', '', '', 0, '', 1, 0),
+(7192, '最终分钱人数', '', '/DiyData/report?tableId=d376a342-b709-7c4b-712e-bcf0ea8b3359#!where=[[\"showId\",\"=\",\"5\"]]&_showGroupBy=1&_count=uid', '', 'd376a342-b709-7c4b-712e-bcf0ea8b3359', '', '', 0, '', 1, 0),
 (7193, '真实在线人数', '', 'http://test.glance.admin.ouj.com/default/online', '', '', '6000', 'default', 0, '', 1, 0),
 (7194, '数据统计', '', '', '', '', '', '', 0, 'duowan.com', 1, 0),
-(7195, '概要', '', '/DiyData/report?tableId=a61b48f5-1528-1f67-2771-f25f7ba345c7#!where=[["app_id","=","10000"]]&_showGroupBy=1&_groupby=app_id,os,ch_id,channel,date&_save=new_user_num,user_login_num,1_day_retention,pay_user_num,money,pay_arpu,pay_rate&_sortKey=date&_sortDir=ASC', '', 'a61b48f5-1528-1f67-2771-f25f7ba345c7', '', '', 0, '', 1, 0),
+(7195, '概要', '', '/DiyData/report?tableId=a61b48f5-1528-1f67-2771-f25f7ba345c7#!where=[[\"app_id\",\"=\",\"10000\"]]&_showGroupBy=1&_groupby=app_id,os,ch_id,channel,date&_save=new_user_num,user_login_num,1_day_retention,pay_user_num,money,pay_arpu,pay_rate&_sortKey=date&_sortDir=ASC', '', 'a61b48f5-1528-1f67-2771-f25f7ba345c7', '', '', 0, '', 1, 0),
 (7196, '活跃', '', '/DiyData/report?tableId=c9095fa5-1da8-552c-1c10-12a6fb4f9249#!where=[]&_showChart=1&_showGroupBy=1&_groupby=app_id,os,ch_id,channel,event_date&_distinctCount=open_id&_sortKey=event_date&_sortDir=ASC', '', 'c9095fa5-1da8-552c-1c10-12a6fb4f9249', '', '', 0, '', 1, 0),
 (7197, '注册用户', '', '/DiyData/report?tableId=31702a03-b5db-306a-200e-765c4b34f8fb#!where=[]&_showChart=1&_showGroupBy=1&_groupby=app_id,os,ch_id,channel,event_date&_distinctCount=open_id', '', '31702a03-b5db-306a-200e-765c4b34f8fb', '', '', 0, '', 1, 0),
 (7198, '角色', '', '/DiyData/report?tableId=e4b7f436-fd13-27b8-4a91-14409481f271#!where=[]&_showChart=1&_showGroupBy=1&_groupby=app_id,os,ch_id,channel,create_time&_distinctCount=user_roleid', '', 'e4b7f436-fd13-27b8-4a91-14409481f271', '', '', 0, '', 1, 0),
 (7199, '新增', '', '', '', '', '', '', 0, '', 1, 0),
 (7200, '激活用户', '', '/DiyData/report?tableId=5e9cf7cc-e68c-cd90-577a-8edb113b63b6#!where=[]&_showChart=1&_showGroupBy=1&_groupby=app_id,os,ch_id,channel,event_date&_distinctCount=open_id', '', '5e9cf7cc-e68c-cd90-577a-8edb113b63b6', '', '', 0, '', 1, 0),
 (7201, '付费', '', '', '', '', '', '', 0, '', 1, 0),
-(7202, '付费概要', '', '/DiyData/report?tableId=dc262e13-95ac-93db-f47b-fb1534aec321#!where=[["app_id","=","10000"],["os","=","2"],["ch_id","=","10002"]]&_showGroupBy=1&_groupby=app_id,os,ch_id,channel&_sortKey=ch_id&_sortDir=ASC&_sum=real_money&_distinctCount=open_id&_save=pay_arpu,pay_rate', '', 'dc262e13-95ac-93db-f47b-fb1534aec321', '', '', 0, '', 1, 0),
+(7202, '付费概要', '', '/DiyData/report?tableId=dc262e13-95ac-93db-f47b-fb1534aec321#!where=[[\"app_id\",\"=\",\"10000\"],[\"os\",\"=\",\"2\"],[\"ch_id\",\"=\",\"10002\"]]&_showGroupBy=1&_groupby=app_id,os,ch_id,channel&_sortKey=ch_id&_sortDir=ASC&_sum=real_money&_distinctCount=open_id&_save=pay_arpu,pay_rate', '', 'dc262e13-95ac-93db-f47b-fb1534aec321', '', '', 0, '', 1, 0),
 (7203, '搜索关键词统计', '', '/DiyData/report?tableId=d2b56bb7-b71b-fdff-4e9d-0bf3553cd38e', '', 'd2b56bb7-b71b-fdff-4e9d-0bf3553cd38e', '', '', 0, '', 1, 0),
 (7204, '付费情况', '', '/DiyData/report?tableId=17259522-5217-6b13-a3ed-e44ca595f740#!where=[]&_showChart=1&_sortKey=date&_sortDir=ASC', '', '17259522-5217-6b13-a3ed-e44ca595f740', '', '', 0, '', 1, 0),
 (7205, 'LTV', '', '/DiyData/report?tableId=cbdd0507-b9a9-8926-7309-51bb6aaca462#!where=[]&_sortKey=date&_sortDir=ASC', '', 'cbdd0507-b9a9-8926-7309-51bb6aaca462', '', '', 0, '', 1, 0),
 (7206, '留存率', '', '/DiyData/report?tableId=7188ebb8-6a6d-0bcc-c1a8-36c33d9adab4#!where=[]&_showGroupBy=1&_groupby=app_id,os,ch_id,channel,date&_save=new_user_num,1_day_retention,2_day_retention,3_day_retention,4_day_retention,5_day_retention,6_day_retention,7_day_retention,14_day_retention,30_day_retention&_sortKey=date&_sortDir=ASC', '', '7188ebb8-6a6d-0bcc-c1a8-36c33d9adab4', '', '', 0, '', 1, 0),
-(7207, '数据库表', '', '/DiyData/report?tableId=e6591b96-dde5-96bf-9b02-bd42d12704d3', '', 'e6591b96-dde5-96bf-9b02-bd42d12704d3', '', '', 0, '', 1, 0),
-(7208, '规则存储', '', '/DiyData/report?tableId=f7e1a70d-8848-0f2b-aa8b-3fef6de1e3ed', '', 'f7e1a70d-8848-0f2b-aa8b-3fef6de1e3ed', '', '', 0, '', 1, 0),
+(7207, '数据库表', '', '/DiyData/report?tableId=9b52ca60-f3c5-0937-62b8-861dfb203103', '', '9b52ca60-f3c5-0937-62b8-861dfb203103', '', '', 0, '', 1, 0),
+(7208, '规则存储', '', '/DiyData/report?tableId=aad274bb-8276-082b-dd6c-c6bae721c1dd', '', 'aad274bb-8276-082b-dd6c-c6bae721c1dd', '', '', 0, '', 1, 0),
 (7209, '游戏等级', '', '/DiyData/report?tableId=d911881a-983f-d2b6-41d6-9c3d7a35d2a8#!where=[]&_showGroupBy=1&_groupby=app_id,os,ch_id,channel,user_lv,create_time&_distinctCount=open_id&_sortKey=create_time&_sortDir=ASC&_showChart=1', '', 'd911881a-983f-d2b6-41d6-9c3d7a35d2a8', '', '', 0, '', 1, 0),
 (7210, '低端专区', '', '/DiyData/report?tableId=5b0e5aca-cf49-e443-a7ef-67aa2625a63b', '', '5b0e5aca-cf49-e443-a7ef-67aa2625a63b', '', '', 0, 'duowan.com', 1, 0),
 (7211, '数据统计', '', '', '', '', '', '', 0, '', 1, 0),
-(7212, '播放量统计', '', '/DiyData/report?tableId=35f3bdd3-a19e-d725-c6ab-aced096adcd5#!where=[["date",":","2018-02-01","2018-02-28"],["stat_period","=","1"]]&_showGroupBy=1&_groupby=date&_sum=playCount', '', '35f3bdd3-a19e-d725-c6ab-aced096adcd5', '', '', 0, '', 1, 0),
+(7212, '播放量统计', '', '/DiyData/report?tableId=35f3bdd3-a19e-d725-c6ab-aced096adcd5#!where=[[\"date\",\":\",\"2018-02-01\",\"2018-02-28\"],[\"stat_period\",\"=\",\"1\"]]&_showGroupBy=1&_groupby=date&_sum=playCount', '', '35f3bdd3-a19e-d725-c6ab-aced096adcd5', '', '', 0, '', 1, 0),
 (7213, '列表统计', '', '', '', '', '', '', 0, '', 1, 0),
-(7214, '单个影片播放量统计', '', '/DiyData/report?tableId=8199f466-3517-072d-8eed-70c6dbcb8ab7#!where=[["date","=","2018-03-08"]]&_showGroupBy=1&_groupby=aid&_page=1&_sortKey=date&_sortDir=DESC&_sum=yesterdayPlayCount,todayPlayCount,totalPlayCount', '', '8199f466-3517-072d-8eed-70c6dbcb8ab7', '', '', 0, '', 1, 0),
-(7215, '单个视频播放量统计', '', '/DiyData/report?tableId=d1cfb717-1a08-e6d1-11c3-07d0dec8d9ee#!where=[["date","=","2018-02-28"]]&_showGroupBy=1&_sortKey=date&_sortDir=DESC&_groupby=vid&_page=1&_sum=yesterdayPlayCount,todayPlayCount,totalPlayCount', '', 'd1cfb717-1a08-e6d1-11c3-07d0dec8d9ee', '', '', 0, '', 1, 0),
-(7216, '单个预告片播放量统计', '', '/DiyData/report?tableId=93c2ec7a-a075-97e1-62c2-5bbbf5ff061f#!where=[["date","=","2018-03-08"]]&_showGroupBy=1&_groupby=vid&_sortKey=date&_sortDir=DESC&_sum=yesterdayPlayCount,todayPlayCount,totalPlayCount', '', '93c2ec7a-a075-97e1-62c2-5bbbf5ff061f', '', '', 0, '', 1, 0),
-(7217, '普通专题播放量统计', '', '/DiyData/report?tableId=bdb3a7ae-e345-c289-c805-32af7456ccff#!where=[["date","=","2018-03-08"]]&_showGroupBy=1&_groupby=featureId&_sum=yesterdayPlayCount,todayPlayCount,totalPlayCount', '', 'bdb3a7ae-e345-c289-c805-32af7456ccff', '', '', 0, '', 1, 0),
-(7218, '连载专题播放量统计', '', '/DiyData/report?tableId=87f8f5a8-c64d-d8f4-a364-f49321786a32#!where=[["date","=","2018-02-28"]]&_showGroupBy=1&_groupby=serializeId&_sum=yesterdayPlayCount,todayPlayCount,totalPlayCount', '', '87f8f5a8-c64d-d8f4-a364-f49321786a32', '', '', 0, '', 1, 0),
+(7214, '单个影片播放量统计', '', '/DiyData/report?tableId=8199f466-3517-072d-8eed-70c6dbcb8ab7#!where=[[\"date\",\"=\",\"2018-03-08\"]]&_showGroupBy=1&_groupby=aid&_page=1&_sortKey=date&_sortDir=DESC&_sum=yesterdayPlayCount,todayPlayCount,totalPlayCount', '', '8199f466-3517-072d-8eed-70c6dbcb8ab7', '', '', 0, '', 1, 0),
+(7215, '单个视频播放量统计', '', '/DiyData/report?tableId=d1cfb717-1a08-e6d1-11c3-07d0dec8d9ee#!where=[[\"date\",\"=\",\"2018-02-28\"]]&_showGroupBy=1&_sortKey=date&_sortDir=DESC&_groupby=vid&_page=1&_sum=yesterdayPlayCount,todayPlayCount,totalPlayCount', '', 'd1cfb717-1a08-e6d1-11c3-07d0dec8d9ee', '', '', 0, '', 1, 0),
+(7216, '单个预告片播放量统计', '', '/DiyData/report?tableId=93c2ec7a-a075-97e1-62c2-5bbbf5ff061f#!where=[[\"date\",\"=\",\"2018-03-08\"]]&_showGroupBy=1&_groupby=vid&_sortKey=date&_sortDir=DESC&_sum=yesterdayPlayCount,todayPlayCount,totalPlayCount', '', '93c2ec7a-a075-97e1-62c2-5bbbf5ff061f', '', '', 0, '', 1, 0),
+(7217, '普通专题播放量统计', '', '/DiyData/report?tableId=bdb3a7ae-e345-c289-c805-32af7456ccff#!where=[[\"date\",\"=\",\"2018-03-08\"]]&_showGroupBy=1&_groupby=featureId&_sum=yesterdayPlayCount,todayPlayCount,totalPlayCount', '', 'bdb3a7ae-e345-c289-c805-32af7456ccff', '', '', 0, '', 1, 0),
+(7218, '连载专题播放量统计', '', '/DiyData/report?tableId=87f8f5a8-c64d-d8f4-a364-f49321786a32#!where=[[\"date\",\"=\",\"2018-02-28\"]]&_showGroupBy=1&_groupby=serializeId&_sum=yesterdayPlayCount,todayPlayCount,totalPlayCount', '', '87f8f5a8-c64d-d8f4-a364-f49321786a32', '', '', 0, '', 1, 0),
 (7219, '专区文章', '', '/DiyData/report?tableId=d2013338-9248-5788-cd74-7071b5ede01d', '', 'd2013338-9248-5788-cd74-7071b5ede01d', '', '', 0, 'duowan.com', 1, 0),
 (7220, '地图管理', '', '/DiyData/report?tableId=d46302b4-6137-9795-d83b-134a2cdccaa4', '', 'd46302b4-6137-9795-d83b-134a2cdccaa4', '', '', 0, '', 1, 0),
-(7221, '订阅解说排序', '', '/DiyData/report?tableId=e0565852-5d4f-bba8-2764-19a124bee202#!where=[["date","=","2018-03-12"]]&_showGroupBy=1&_save=articleName,dbId,IMDBid,aliasName,commentaryCount,subWeekCount,subTotalCount&_distinctCount=uid&_groupby=articleId', '', 'e0565852-5d4f-bba8-2764-19a124bee202', '', '', 0, '', 1, 0),
+(7221, '订阅解说排序', '', '/DiyData/report?tableId=e0565852-5d4f-bba8-2764-19a124bee202#!where=[[\"date\",\"=\",\"2018-03-12\"]]&_showGroupBy=1&_save=articleName,dbId,IMDBid,aliasName,commentaryCount,subWeekCount,subTotalCount&_distinctCount=uid&_groupby=articleId', '', 'e0565852-5d4f-bba8-2764-19a124bee202', '', '', 0, '', 1, 0),
 (7222, '标签对应情况', '', '/DiyData/report?tableId=11dffaa9-6919-e4f8-9497-3c4f5cf90278', '', '11dffaa9-6919-e4f8-9497-3c4f5cf90278', '', '', 0, '', 1, 0),
 (7223, '礼包管理', '', '/DiyData/report?tableId=2c81b557-26d4-233e-2061-9ec8701d9dc8', '', '2c81b557-26d4-233e-2061-9ec8701d9dc8', '', '', 0, 'duowan.com', 1, 0),
 (7224, '导入兑换码', '', 'http://test.shop.admin.duowan.com/shopGift/importSnView', '', '', '2', 'shopGift', 0, 'duowan.com', 0, 1),
@@ -714,7 +708,7 @@ INSERT INTO `cmenunode` (`nodeId`, `nodeName`, `leftUrl`, `rightUrl`, `leftTable
 -- --------------------------------------------------------
 
 --
--- 表的结构 `cuser`
+-- Table structure for table `cuser`
 --
 
 CREATE TABLE `cuser` (
@@ -729,11 +723,11 @@ CREATE TABLE `cuser` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 --
--- 转存表中的数据 `cuser`
+-- Dumping data for table `cuser`
 --
 
 INSERT INTO `cuser` (`userId`, `userName`, `enable`, `anotherPwd`, `password`, `extraInfo`, `create_time`, `update_time`) VALUES
-('12345', 'MyTest1', 0, 'another', '', '{"from":"wgame"}', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+('12345', 'MyTest1', 0, 'another', '', '{\"from\":\"wgame\"}', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 ('123456', '123456', 1, '123', '', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 ('13168806199', 'dw_shacong', 1, '', '', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 ('13244803836', 'dw_tangweijian', 1, '', '', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
@@ -812,7 +806,7 @@ INSERT INTO `cuser` (`userId`, `userName`, `enable`, `anotherPwd`, `password`, `
 -- --------------------------------------------------------
 
 --
--- 表的结构 `ns_hash_table`
+-- Table structure for table `ns_hash_table`
 --
 
 CREATE TABLE `ns_hash_table` (
@@ -828,7 +822,7 @@ CREATE TABLE `ns_hash_table` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='哈希表内容';
 
 --
--- 转存表中的数据 `ns_hash_table`
+-- Dumping data for table `ns_hash_table`
 --
 
 INSERT INTO `ns_hash_table` (`node_name`, `env`, `key_name`, `key_value`, `value_type`, `enable`, `creator`, `create_time`, `update_time`) VALUES
@@ -864,7 +858,7 @@ INSERT INTO `ns_hash_table` (`node_name`, `env`, `key_name`, `key_value`, `value
 -- --------------------------------------------------------
 
 --
--- 表的结构 `ns_node`
+-- Table structure for table `ns_node`
 --
 
 CREATE TABLE `ns_node` (
@@ -886,7 +880,7 @@ CREATE TABLE `ns_node` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='名字服务节点';
 
 --
--- 转存表中的数据 `ns_node`
+-- Dumping data for table `ns_node`
 --
 
 INSERT INTO `ns_node` (`node_name`, `env`, `node_type`, `object_type`, `dir_1`, `dir_2`, `dir_3`, `node_value`, `node_tips`, `value_type`, `enable`, `creator`, `create_time`, `update_time`, `publish_time`) VALUES
@@ -941,7 +935,7 @@ INSERT INTO `ns_node` (`node_name`, `env`, `node_type`, `object_type`, `dir_1`, 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `ns_pub_version`
+-- Table structure for table `ns_pub_version`
 --
 
 CREATE TABLE `ns_pub_version` (
@@ -956,7 +950,7 @@ CREATE TABLE `ns_pub_version` (
 -- --------------------------------------------------------
 
 --
--- 表的结构 `ns_server`
+-- Table structure for table `ns_server`
 --
 
 CREATE TABLE `ns_server` (
@@ -974,7 +968,7 @@ CREATE TABLE `ns_server` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='名字服务服务器';
 
 --
--- 转存表中的数据 `ns_server`
+-- Dumping data for table `ns_server`
 --
 
 INSERT INTO `ns_server` (`server_ip`, `env`, `keys`, `enable`, `creator`, `create_time`, `update_time`, `last_version_id`, `last_echo_time`, `server_name`, `phpbase2_ver`) VALUES
@@ -985,7 +979,7 @@ INSERT INTO `ns_server` (`server_ip`, `env`, `keys`, `enable`, `creator`, `creat
 -- --------------------------------------------------------
 
 --
--- 表的结构 `rmenunode`
+-- Table structure for table `rmenunode`
 --
 
 CREATE TABLE `rmenunode` (
@@ -995,7 +989,7 @@ CREATE TABLE `rmenunode` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='节点关系表';
 
 --
--- 转存表中的数据 `rmenunode`
+-- Dumping data for table `rmenunode`
 --
 
 INSERT INTO `rmenunode` (`nodeId`, `parentNodeId`, `sortPos`) VALUES
@@ -1043,7 +1037,7 @@ INSERT INTO `rmenunode` (`nodeId`, `parentNodeId`, `sortPos`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `rrusernode`
+-- Table structure for table `rrusernode`
 --
 
 CREATE TABLE `rrusernode` (
@@ -1054,7 +1048,7 @@ CREATE TABLE `rrusernode` (
 -- --------------------------------------------------------
 
 --
--- 表的结构 `rusernode`
+-- Table structure for table `rusernode`
 --
 
 CREATE TABLE `rusernode` (
@@ -1063,7 +1057,7 @@ CREATE TABLE `rusernode` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `rusernode`
+-- Dumping data for table `rusernode`
 --
 
 INSERT INTO `rusernode` (`nodeId`, `userId`) VALUES
@@ -1693,7 +1687,7 @@ INSERT INTO `rusernode` (`nodeId`, `userId`) VALUES
 -- --------------------------------------------------------
 
 --
--- 替换视图以便查看 `vmenunode`
+-- Stand-in structure for view `vmenunode`
 -- (See below for the actual view)
 --
 CREATE TABLE `vmenunode` (
@@ -1713,11 +1707,11 @@ CREATE TABLE `vmenunode` (
 -- --------------------------------------------------------
 
 --
--- 视图结构 `vmenunode`
+-- Structure for view `vmenunode`
 --
 DROP TABLE IF EXISTS `vmenunode`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`ojiatest`@`221.228.83.154` SQL SECURITY DEFINER VIEW `vmenunode`  AS  (select `c`.`nodeId` AS `nodeId`,`c`.`appid` AS `appid`,`c`.`moduleName` AS `moduleName`,`c`.`nodeName` AS `nodeName`,`c`.`leftUrl` AS `leftUrl`,`c`.`needAnotherPwd` AS `needAnotherPwd`,`c`.`rightUrl` AS `rightUrl`,`c`.`domain` AS `domain`,`r`.`parentNodeId` AS `parentNodeId`,`c2`.`nodeName` AS `parentNodeName`,`r`.`sortPos` AS `sortPos` from ((`rmenunode` `r` left join `cmenunode` `c` on((`c`.`nodeId` = `r`.`nodeId`))) left join `cmenunode` `c2` on((`c2`.`nodeId` = `r`.`parentNodeId`)))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`ojiatest`@`221.228.83.154` SQL SECURITY DEFINER VIEW `web`.`vmenunode`  AS  (select `c`.`nodeId` AS `nodeId`,`c`.`appid` AS `appid`,`c`.`moduleName` AS `moduleName`,`c`.`nodeName` AS `nodeName`,`c`.`leftUrl` AS `leftUrl`,`c`.`needAnotherPwd` AS `needAnotherPwd`,`c`.`rightUrl` AS `rightUrl`,`c`.`domain` AS `domain`,`r`.`parentNodeId` AS `parentNodeId`,`c2`.`nodeName` AS `parentNodeName`,`r`.`sortPos` AS `sortPos` from ((`web`.`rmenunode` `r` left join `web`.`cmenunode` `c` on((`c`.`nodeId` = `r`.`nodeId`))) left join `web`.`cmenunode` `c2` on((`c2`.`nodeId` = `r`.`parentNodeId`)))) ;
 
 --
 -- Indexes for dumped tables
@@ -1788,19 +1782,17 @@ ALTER TABLE `rusernode`
   ADD PRIMARY KEY (`nodeId`,`userId`);
 
 --
--- 在导出的表使用AUTO_INCREMENT
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- 使用表AUTO_INCREMENT `cmenunode`
+-- AUTO_INCREMENT for table `cmenunode`
 --
 ALTER TABLE `cmenunode`
   MODIFY `nodeId` int(11) NOT NULL AUTO_INCREMENT COMMENT '节点id', AUTO_INCREMENT=7234;
+
 --
--- 使用表AUTO_INCREMENT `ns_pub_version`
+-- AUTO_INCREMENT for table `ns_pub_version`
 --
 ALTER TABLE `ns_pub_version`
   MODIFY `version_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '版本id';
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
