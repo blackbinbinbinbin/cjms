@@ -10,6 +10,7 @@ class dwRedis extends Redis {
         }
 
         $redisInfo = $GLOBALS['redisInfo'][$key];
+
         if ($redisInfo) {
             $this->redisInfo = $redisInfo;
             $timeout_str = isset($redisInfo['connect_timeout']) ? $redisInfo['connect_timeout'] : $redisInfo['connet_timeout'];
