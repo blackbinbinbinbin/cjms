@@ -69,7 +69,16 @@ class CrawlController extends Controller {
 
 
         if ($rule['data_type'] == 'html') {
-            $iframeHtml = str_replace('location.href', 'location.href2', $iframeHtml);
+            // <script src="http://g.alicdn.com/ku/bigview.runtime/1.1.4/bigview.runtime.min.js"></script>
+            $iframeHtml = str_replace('location.href', 'location.href2', $iframeHtml);        
+            if ($rule['request_mode'] == 'headless') {
+                //如果是浏览器模式下要处理一下 html，因为 puppeteer 模式下已经取回所有的 html 了。所以不需要运行请求页面的js
+                $pattern = '/<script[\s\S]*?>[\s\S]*?<\/script>/i';
+
+                $iframeHtml = preg_replace_callback($pattern, function($matches) {
+                    return '';
+                }, $iframeHtml);
+            }
             Response::exitMsg($iframeHtml);
         } else {
             $this->tpl->assign('json', $iframeHtml);

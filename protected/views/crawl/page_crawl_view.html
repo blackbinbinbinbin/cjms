@@ -62,7 +62,7 @@
                     <% if (item.is_multi) { %>
                     <%     for (var i in item.value) { %>
                         <div class="tableCell">
-                            <%= item.value[i] %>
+                            <pre><%= item.value[i] %></pre>
                             <% if (item.task_key_value) { %>
                             <span style="color: orangered;">【<%= item.task_key_value[i] %>】</span>
                             <% } %>
@@ -70,7 +70,7 @@
                     <%     } %>
                     <% } else { %>
                         <div class="tableCell single">
-                            <%= item.value %>
+                            <pre><%= item.value %></pre>
                             <% if (item.task_key_value) { %>
                             <span style="color: orangered;">【<%= item.task_key_value %>】</span>
                             <% } %>
@@ -145,11 +145,12 @@
 
 <script src="/crawl/ruleJs?rule_id=<?= $rule['rule_id'] ?>" id="rule_js" type="text/javascript"></script>
 <script>
-    seajs.use(['js/crawl/page_crawl_view.js', 'jquery'], function(page) {
+    seajs.use(['js/crawl/page_crawl_view.js', 'jquery', 'md5'], function(page, $, md5) {
         page.init(<?= json_encode($task)?>, <?= json_encode($items)?>, <?= json_encode($rule)?>, <?= json_encode($parent_items)?>, <?= json_encode($parent_rule)?>);
+        JTool.md5 = md5.hex_md5;
     });
 
-    function __rulePreProcess($html, $, page) {
+    function __rulePreProcess($html, $, page, _task) {
 
 <?= $rule['preprocess'] ?>
 

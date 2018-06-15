@@ -30,6 +30,12 @@ class SpiderController extends Controller {
         return $proxyList;
     }
 
+    public function actionIpList2() {
+        $objProxyStatic = new ProxyStatic();
+        $proxyList = $objProxyStatic->getAllProxy();
+        return $proxyList;
+    }
+
     public function actionBestProxy($args) {
         $rule = [
             'domain' => ['string', 'desc' => '域名'],
