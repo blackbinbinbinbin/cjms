@@ -4,19 +4,19 @@ define('DEBUG', true);
 define('ENV', ENV_DEV);
 
 $GLOBALS['redisInfo']['name_serv'] = array(
-  'host' => '61.160.36.225',
-  'port' => 6405,
-  'pwd' => 'ojia123',
+  'host' => '',
+  'port' => '',
+  'pwd' => '',
   'db' => 1,
   'connect_timeout' => 0,
 );
 
 $GLOBALS['dbInfo']['dw_ups'] = array (
-    'dbHost' => '14.17.108.245',
-    'dbPort' => 8011,
-    'dbName' => 'dw_ups',
-    'dbPass' => 'ouj.test',
-    'dbType' => 'clickhouse',
+    'dbHost' => '',
+    'dbPort' => '',
+    'dbName' => '',
+    'dbPass' => '',
+    'dbType' => '',
     'dbUser' => 'test',
     'enable' => 'true',
 );

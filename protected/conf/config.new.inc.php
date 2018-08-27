@@ -3,35 +3,37 @@
 define('DEBUG', true);
 
 $GLOBALS['redisInfo']['name_serv'] = array(
-    'host' => '10.20.164.64',
-    'port' => 6396,
-    'pwd' => 'Fh7fVj8fSsKf',
-    'db' => 1,
+    'host' => '',
+    'port' => '',
+    'pwd' => '',
+    'db' => '',
     'connect_timeout' => 0,
 );
 
 $GLOBALS['dbInfo']['Web'] = array (
     'enable' => 'true',
     'dbType' => 'mysqli',
-    'dbHost' => '10.25.68.139',
-    'dbPort' => '6308',
+    'dbHost' => '',
+    'dbPort' => '',
     'dbName' => 'Web',
-    'dbUser' => 'ojuser',
-    'dbPass' => 'qs45MWKf',
+    'dbUser' => '',
+    'dbPass' => '',
 );
 
 $GLOBALS['dbInfo']['Report'] = array (
     'enable' => 'true',
     'dbType' => 'mysqli',
-    'dbHost' => '10.25.68.139',
-    'dbPort' => '6308',
+    'dbHost' => '',
+    'dbPort' => '',
     'dbName' => 'Report',
-    'dbUser' => 'ojuser',
-    'dbPass' => 'qs45MWKf',
+    'dbUser' => '',
+    'dbPass' => '',
 );
 
 defined('CJMS_HOST_DW') || define('CJMS_HOST_DW', 'new.admin.duowan.com');
 defined('URL_ADMIN_DUOWAN') || define('URL_ADMIN_DUOWAN', 'http://' . CJMS_HOST_DW . '/');
+
+// 爬虫服务器
 defined('CJMS_IP') || define('CJMS_IP', '61.160.36.226');
 defined('URL_SPIDER') || define('URL_SPIDER', 'http://14.17.108.216:10000/');
 

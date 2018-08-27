@@ -4,9 +4,9 @@ define('DEBUG', true);
 define('ENV', ENV_NEW);
 
 $GLOBALS['redisInfo']['name_serv'] = array(
-    'host' => '10.20.164.64',
-    'port' => 6396,
-    'pwd' => 'Fh7fVj8fSsKf',
+    'host' => '',
+    'port' => '',
+    'pwd' => '',
     'db' => 1,
     'connet_timeout' => 0,
 );
